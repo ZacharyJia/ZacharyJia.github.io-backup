@@ -3,17 +3,49 @@
 <head>
   <meta charset="utf-8">
   
-  <title>CodeLife</title>
+  <title>8086汇编开发环境搭建 | CodeLife</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="CodeLife">
-<meta property="og:url" content="http://ZacharyJia.github.io/index.html">
+  <meta name="description" content="本学期开始学习汇编了，但是无奈学的东西都是好久之前的老知识了，在现在的电脑上实践起来略有困难，连debug命令都没法用。最后在参考老师给的资料和网上相关资料的基础上，完成了汇编开发环境的搭建，做下记录，以备后用。
+整个开发环境的搭建主要有以下几步：
+
+Dos模拟器DosBox的安装和本地文件夹的挂载
+masm、link、debug等工具的安装
+环境变量的配置
+自动运行脚本的配置
+
+以上是基本步骤。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="8086汇编开发环境搭建">
+<meta property="og:url" content="http://ZacharyJia.github.io/2015/09/27/assemble-programming-prepare/index.html">
 <meta property="og:site_name" content="CodeLife">
-<meta property="og:description">
+<meta property="og:description" content="本学期开始学习汇编了，但是无奈学的东西都是好久之前的老知识了，在现在的电脑上实践起来略有困难，连debug命令都没法用。最后在参考老师给的资料和网上相关资料的基础上，完成了汇编开发环境的搭建，做下记录，以备后用。
+整个开发环境的搭建主要有以下几步：
+
+Dos模拟器DosBox的安装和本地文件夹的挂载
+masm、link、debug等工具的安装
+环境变量的配置
+自动运行脚本的配置
+
+以上是基本步骤。">
+<meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/imgDosBox.png">
+<meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/img安装.png">
+<meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/img安装2.png">
+<meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/img安装3.png">
+<meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/imgbin.png">
+<meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/imgmasm.png">
+<meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/imgconfig.png">
+<meta property="og:updated_time" content="2015-09-27T03:01:14.982Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CodeLife">
-<meta name="twitter:description">
+<meta name="twitter:title" content="8086汇编开发环境搭建">
+<meta name="twitter:description" content="本学期开始学习汇编了，但是无奈学的东西都是好久之前的老知识了，在现在的电脑上实践起来略有困难，连debug命令都没法用。最后在参考老师给的资料和网上相关资料的基础上，完成了汇编开发环境的搭建，做下记录，以备后用。
+整个开发环境的搭建主要有以下几步：
+
+Dos模拟器DosBox的安装和本地文件夹的挂载
+masm、link、debug等工具的安装
+环境变量的配置
+自动运行脚本的配置
+
+以上是基本步骤。">
   
   
     <link rel="icon" href="css/images/favicon.ico">
@@ -116,8 +148,7 @@
 </aside>
 
       
-      <section id="main">
-      <article id="post-assemble-programming-prepare" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-assemble-programming-prepare" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -125,8 +156,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/27/assemble-programming-prepare/">8086汇编开发环境搭建</a>
+    <h1 class="article-title" itemprop="name">
+      8086汇编开发环境搭建
     </h1>
   
 
@@ -216,68 +247,43 @@
     </footer>
   </div>
   
-</article>
-
+    
+<nav id="article-nav">
   
-
-
-    
-      <article id="post-hello" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/26/hello/">First post</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/09/26/hello/">
-      <time datetime="2015-09-25T16:23:39.000Z" itemprop="datePublished">2015-09-26</time>
+    <a href="/2015/09/26/hello/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">First post</div>
     </a>
-  </div>
+  
+</nav>
 
 
-          
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/life/">life</a>
-  </div>
-
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-                
-        <h1 id="The_fist_post">The fist post</h1><p>This is the <em>first</em> post of my blog.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ZacharyJia.github.io/2015/09/26/hello/" data-id="cif1x6g5p0000asqo0rsos0tq" class="article-share-link">分享到</a>
-      
-        <a href="http://ZacharyJia.github.io/2015/09/26/hello/#ds-thread" class="article-comment-link">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/life/">life</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
 
   
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-assemble-programming-prepare" data-title="8086汇编开发环境搭建" data-url="http://ZacharyJia.github.io/2015/09/27/assemble-programming-prepare/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'zacharyjia'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  
 
-
-    </section>
+</section>
       
         <aside id="sidebar">
   
