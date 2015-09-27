@@ -5,28 +5,12 @@
   
   <title>8086汇编开发环境搭建 | CodeLife</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本学期开始学习汇编了，但是无奈学的东西都是好久之前的老知识了，在现在的电脑上实践起来略有困难，连debug命令都没法用。最后在参考老师给的资料和网上相关资料的基础上，完成了汇编开发环境的搭建，做下记录，以备后用。
-整个开发环境的搭建主要有以下几步：
-
-Dos模拟器DosBox的安装和本地文件夹的挂载
-masm、link、debug等工具的安装
-环境变量的配置
-自动运行脚本的配置
-
-以上是基本步骤。">
+  <meta name="description" content="本学期开始学习汇编了，但是无奈学的东西都是好久之前的老知识了，在现在的电脑上实践起来略有困难，连debug命令都没法用。最后在参考老师给的资料和网上相关资料的基础上，完成了汇编开发环境的搭建，做下记录，以备后用。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="8086汇编开发环境搭建">
 <meta property="og:url" content="http://ZacharyJia.github.io/2015/09/27/assemble-programming-prepare/index.html">
 <meta property="og:site_name" content="CodeLife">
-<meta property="og:description" content="本学期开始学习汇编了，但是无奈学的东西都是好久之前的老知识了，在现在的电脑上实践起来略有困难，连debug命令都没法用。最后在参考老师给的资料和网上相关资料的基础上，完成了汇编开发环境的搭建，做下记录，以备后用。
-整个开发环境的搭建主要有以下几步：
-
-Dos模拟器DosBox的安装和本地文件夹的挂载
-masm、link、debug等工具的安装
-环境变量的配置
-自动运行脚本的配置
-
-以上是基本步骤。">
+<meta property="og:description" content="本学期开始学习汇编了，但是无奈学的东西都是好久之前的老知识了，在现在的电脑上实践起来略有困难，连debug命令都没法用。最后在参考老师给的资料和网上相关资料的基础上，完成了汇编开发环境的搭建，做下记录，以备后用。">
 <meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/imgDosBox.png">
 <meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/img安装.png">
 <meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/img安装2.png">
@@ -34,18 +18,10 @@ masm、link、debug等工具的安装
 <meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/imgbin.png">
 <meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/imgmasm.png">
 <meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/imgconfig.png">
-<meta property="og:updated_time" content="2015-09-27T03:09:20.452Z">
+<meta property="og:updated_time" content="2015-09-27T09:43:11.500Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="8086汇编开发环境搭建">
-<meta name="twitter:description" content="本学期开始学习汇编了，但是无奈学的东西都是好久之前的老知识了，在现在的电脑上实践起来略有困难，连debug命令都没法用。最后在参考老师给的资料和网上相关资料的基础上，完成了汇编开发环境的搭建，做下记录，以备后用。
-整个开发环境的搭建主要有以下几步：
-
-Dos模拟器DosBox的安装和本地文件夹的挂载
-masm、link、debug等工具的安装
-环境变量的配置
-自动运行脚本的配置
-
-以上是基本步骤。">
+<meta name="twitter:description" content="本学期开始学习汇编了，但是无奈学的东西都是好久之前的老知识了，在现在的电脑上实践起来略有困难，连debug命令都没法用。最后在参考老师给的资料和网上相关资料的基础上，完成了汇编开发环境的搭建，做下记录，以备后用。">
   
   
     <link rel="icon" href="css/images/favicon.ico">
@@ -184,6 +160,7 @@ masm、link、debug等工具的安装
       
                 
         <p>本学期开始学习汇编了，但是无奈学的东西都是好久之前的老知识了，在现在的电脑上实践起来略有困难，连<code>debug</code>命令都没法用。<br>最后在参考老师给的资料和网上相关资料的基础上，完成了汇编开发环境的搭建，做下记录，以备后用。</p>
+<a id="more"></a>
 <p>整个开发环境的搭建主要有以下几步：</p>
 <ol>
 <li>Dos模拟器DosBox的安装和本地文件夹的挂载</li>
@@ -213,14 +190,8 @@ masm、link、debug等工具的安装
 <p>这条命令是用来清除磁盘缓存的。</p>
 <p>最后，你的文件夹里应该是这样的：</p>
 <p><img src="http://7xn2d3.com1.z0.glb.clouddn.com/imgbin.png" alt="bin"></p>
-<h3 id="0x2-_环境变量的配置">0x2. 环境变量的配置</h3><p>我们现在已经可以使用使用masm、Link、debug这些命令进行汇编的编程了，但是每次都要输入全路径很麻烦，所以要通过配置环境变量来简化我们的操作。<br>相信学习过java开发的人都了解环境变量的作用了。在dos下设置环境变量只需要一条命令就行：</p>
-<blockquote>
-<p>set PATH=%PATH%;c:\masm611\bin\;</p>
-</blockquote>
-<p>也就是在原来的PATH的基础上，再加入c:\masm611\bin这个路径，也就是我们的masm等文件所在的路径。<br>执行完上面的命令之后，你应该就可以直接在里面输入:</p>
-<blockquote>
-<p>masm</p>
-</blockquote>
+<h3 id="0x2-_环境变量的配置">0x2. 环境变量的配置</h3><p>我们现在已经可以使用使用masm、Link、debug这些命令进行汇编的编程了，但是每次都要输入全路径很麻烦，所以要通过配置环境变量来简化我们的操作。<br>相信学习过java开发的人都了解环境变量的作用了。在dos下设置环境变量只需要一条命令就行：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">set</span> <span class="keyword">PATH</span>=%<span class="keyword">PATH</span>%;</span>c:\masm611\bin\;</span><br></pre></td></tr></table></figure></p>
+<p>也就是在原来的PATH的基础上，再加入c:\masm611\bin这个路径，也就是我们的masm等文件所在的路径。<br>执行完上面的命令之后，你应该就可以直接在里面输入:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">masm</span><br></pre></td></tr></table></figure></p>
 <p>来运行masm程序了。like this:</p>
 <p><img src="http://7xn2d3.com1.z0.glb.clouddn.com/imgmasm.png" alt="masm"></p>
 <p>这样这一步也成功完成了。</p>
@@ -236,7 +207,7 @@ masm、link、debug等工具的安装
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ZacharyJia.github.io/2015/09/27/assemble-programming-prepare/" data-id="cif1xgulv000690qor2nw8z3v" class="article-share-link">分享到</a>
+      <a data-url="http://ZacharyJia.github.io/2015/09/27/assemble-programming-prepare/" data-id="cif2bka4z000678qou0xapf8s" class="article-share-link">分享到</a>
       
         <a href="http://ZacharyJia.github.io/2015/09/27/assemble-programming-prepare/#ds-thread" class="article-comment-link">评论</a>
       
