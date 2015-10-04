@@ -5,26 +5,12 @@
   
   <title>NSCTF2015部分题目解析 | CodeLife</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前段时间做了NSCTF的比赛，做出了其中的几道题目，下面对几道题目的解题过程进行简单的分析。
-##1. Crypto50 神奇的字符串
-###题目：
-###解题过程：观察题目中的字符串，应该是进行了加密之后得到的字符串。利用网上的解密工具进行Base64解密，AES解密等解密工具以后发现，是使用了AES进行了加密。解密后的密文为：
-
-flag{DISJV_Hej_UdShofjyed}
-
-根据NS">
+  <meta name="description" content="前段时间做了NSCTF的比赛，做出了其中的几道题目，下面对几道题目的解题过程进行简单的分析。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NSCTF2015部分题目解析">
 <meta property="og:url" content="http://ZacharyJia.github.io/2015/10/04/NSCTF2015/index.html">
 <meta property="og:site_name" content="CodeLife">
-<meta property="og:description" content="前段时间做了NSCTF的比赛，做出了其中的几道题目，下面对几道题目的解题过程进行简单的分析。
-##1. Crypto50 神奇的字符串
-###题目：
-###解题过程：观察题目中的字符串，应该是进行了加密之后得到的字符串。利用网上的解密工具进行Base64解密，AES解密等解密工具以后发现，是使用了AES进行了加密。解密后的密文为：
-
-flag{DISJV_Hej_UdShofjyed}
-
-根据NS">
+<meta property="og:description" content="前段时间做了NSCTF的比赛，做出了其中的几道题目，下面对几道题目的解题过程进行简单的分析。">
 <meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/imgcrypto50.png">
 <meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/imgweb200Decode.png">
 <meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/imgwireshark.png">
@@ -33,17 +19,10 @@ flag{DISJV_Hej_UdShofjyed}
 <meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/imgcard2.png">
 <meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/imgscore2.png">
 <meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/imgscore.png">
-<meta property="og:updated_time" content="2015-10-04T10:09:35.189Z">
+<meta property="og:updated_time" content="2015-10-04T10:12:32.706Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NSCTF2015部分题目解析">
-<meta name="twitter:description" content="前段时间做了NSCTF的比赛，做出了其中的几道题目，下面对几道题目的解题过程进行简单的分析。
-##1. Crypto50 神奇的字符串
-###题目：
-###解题过程：观察题目中的字符串，应该是进行了加密之后得到的字符串。利用网上的解密工具进行Base64解密，AES解密等解密工具以后发现，是使用了AES进行了加密。解密后的密文为：
-
-flag{DISJV_Hej_UdShofjyed}
-
-根据NS">
+<meta name="twitter:description" content="前段时间做了NSCTF的比赛，做出了其中的几道题目，下面对几道题目的解题过程进行简单的分析。">
   
   
     <link rel="icon" href="css/images/favicon.ico">
@@ -182,22 +161,15 @@ flag{DISJV_Hej_UdShofjyed}
       
                 
         <p>前段时间做了NSCTF的比赛，做出了其中的几道题目，下面对几道题目的解题过程进行简单的分析。</p>
+<a id="more"></a>
 <p>##1. Crypto50 神奇的字符串</p>
 <p>###题目：<br><img src="http://7xn2d3.com1.z0.glb.clouddn.com/imgcrypto50.png" alt="crypto50"></p>
 <p>###解题过程：<br>观察题目中的字符串，应该是进行了加密之后得到的字符串。利用网上的解密工具进行Base64解密，AES解密等解密工具以后发现，是使用了AES进行了加密。解密后的密文为：</p>
 <blockquote>
 <p>flag{DISJV_Hej_UdShofjyed}</p>
 </blockquote>
-<p>根据NSCTF的flag规则，flag应该是以<strong>“NSCTF_”</strong>开头的，而解密后得到的结果的前几位是<strong>“DISJV”</strong>,<br>猜测是否使用了最常见的移位方法进行了加密。<br>于是进行一下验证，首先将DISJV几个字母与NSCTF对应</p>
-<blockquote>
-<p>原：ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
-<p>移：  S  V       D    IJ</p>
-</blockquote>
-<p>进行补全后如下：</p>
-<blockquote>
-<p>原：ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
-<p>移：QRSTUVWXYZABCDEFGHIJKLMNOP</p>
-</blockquote>
+<p>根据NSCTF的flag规则，flag应该是以<strong>“NSCTF_”</strong>开头的，而解密后得到的结果的前几位是<strong>“DISJV”</strong>,<br>猜测是否使用了最常见的移位方法进行了加密。<br>于是进行一下验证，首先将DISJV几个字母与NSCTF对应<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">原：ABCDEFGHIJKLMNOPQRSTUVWXYZ</span><br><span class="line"></span><br><span class="line">移：  S  V       <span class="keyword">D</span>    IJ</span><br></pre></td></tr></table></figure></p>
+<p>进行补全后如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">原：ABCDEFGHIJKLMNOPQRSTUVWXYZ</span><br><span class="line"></span><br><span class="line">移：QRSTUVWXYZABCDEFGHIJKLMNOP</span><br></pre></td></tr></table></figure></p>
 <p>发现能够完全对应。于是将flag中剩下的字母按照大小写进行对应，最终得到最后的flag：</p>
 <blockquote>
 <p>NSCTF_Rot_EnCryption</p>
@@ -243,7 +215,7 @@ flag{DISJV_Hej_UdShofjyed}
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ZacharyJia.github.io/2015/10/04/NSCTF2015/" data-id="cifcckyv800066kqo5yg5puqa" class="article-share-link">分享到</a>
+      <a data-url="http://ZacharyJia.github.io/2015/10/04/NSCTF2015/" data-id="cifccmryd0006swqob54pv4e3" class="article-share-link">分享到</a>
       
         <a href="http://ZacharyJia.github.io/2015/10/04/NSCTF2015/#ds-thread" class="article-comment-link">评论</a>
       
