@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>First post | CodeLife</title>
+  <title>【转载】Git 怎样保证fork出来的project和原project（上游项目）同步更新 | CodeLife</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="The fist postThis is the first post of my blog.">
+  <meta name="description" content="问题描述：当我们  在github上fork出一个项目后，如果原有的项目更新了，怎样保持我们fork出来的项目和原有项目保持同步呢并提交我们的代码更新呢？即怎样保持fork出的项目和上游项目保持更新，怎样创建pull request？关键步骤是使用git 的 rebase 命令。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="First post">
-<meta property="og:url" content="http://ZacharyJia.github.io/2015/09/26/hello/index.html">
+<meta property="og:title" content="【转载】Git 怎样保证fork出来的project和原project（上游项目）同步更新">
+<meta property="og:url" content="http://ZacharyJia.github.io/2015/10/11/git-fork-update/index.html">
 <meta property="og:site_name" content="CodeLife">
-<meta property="og:description" content="The fist postThis is the first post of my blog.">
-<meta property="og:updated_time" content="2015-09-26T01:45:09.658Z">
+<meta property="og:description" content="问题描述：当我们  在github上fork出一个项目后，如果原有的项目更新了，怎样保持我们fork出来的项目和原有项目保持同步呢并提交我们的代码更新呢？即怎样保持fork出的项目和上游项目保持更新，怎样创建pull request？关键步骤是使用git 的 rebase 命令。">
+<meta property="og:updated_time" content="2015-10-11T05:53:05.652Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="First post">
-<meta name="twitter:description" content="The fist postThis is the first post of my blog.">
+<meta name="twitter:title" content="【转载】Git 怎样保证fork出来的project和原project（上游项目）同步更新">
+<meta name="twitter:description" content="问题描述：当我们  在github上fork出一个项目后，如果原有的项目更新了，怎样保持我们fork出来的项目和原有项目保持同步呢并提交我们的代码更新呢？即怎样保持fork出的项目和上游项目保持更新，怎样创建pull request？关键步骤是使用git 的 rebase 命令。">
   
   
     <link rel="icon" href="css/images/favicon.ico">
@@ -117,7 +117,7 @@
 </aside>
 
       
-      <section id="main"><article id="post-hello" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-git-fork-update" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -126,7 +126,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      First post
+      【转载】Git 怎样保证fork出来的project和原project（上游项目）同步更新
     </h1>
   
 
@@ -134,8 +134,8 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/09/26/hello/">
-      <time datetime="2015-09-25T16:23:39.000Z" itemprop="datePublished">2015-09-26</time>
+    <a href="/2015/10/11/git-fork-update/">
+      <time datetime="2015-10-11T05:43:10.000Z" itemprop="datePublished">2015-10-11</time>
     </a>
   </div>
 
@@ -143,7 +143,7 @@
           
   <div class="article-category">
   	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/life/">life</a>
+    <a class="article-category-link" href="/categories/编程/">编程</a>
   </div>
 
         </div>
@@ -152,17 +152,31 @@
     <div class="article-entry" itemprop="articleBody">
       
                 
-        <h1 id="The_fist_post">The fist post</h1><p>This is the <em>first</em> post of my blog.</p>
+        <h2 id="问题描述：">问题描述：</h2><p>当我们  在github上fork出一个项目后，如果原有的项目更新了，怎样保持我们fork出来的项目和原有项目保持同步呢并提交我们的代码更新呢？即怎样保持fork出的项目和上游项目保持更新，怎样创建pull request？关键步骤是使用git 的 rebase 命令。<br><a id="more"></a></p>
+<h2 id="步骤：">步骤：</h2><ol>
+<li><p>在 Fork 的代码库中添加上游代码库的 remote 源，该操作只需操作一次即可。<br>如: 其中# upstream 表示上游代码库名， 可以任意。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote <span class="built_in">add</span> upstream http<span class="variable">s:</span>//github.scm.corp.ebay.<span class="keyword">com</span>/montage/frontend-ui-workspace</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将本地的修改提交 commit</p>
+</li>
+<li><p>在每次 Pull Request 前做如下操作，即可实现和上游版本库的同步。 </p>
+ <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">git</span> remote update upstream </span><br><span class="line">git rebase upstream/&#123;<span class="title">branch</span> name&#125;</span><br></pre></td></tr></table></figure>
+<p> 需要注意的是在操作3.2之前，一定要将checkout到{branch name}所指定的branch, 如: </p>
+ <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">git</span> checkout develop</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Push 代码到 Github</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">push</span></span><br></pre></td></tr></table></figure></li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ZacharyJia.github.io/2015/09/26/hello/" data-id="cifm3cqw90000u4qoclwnx3oz" class="article-share-link">分享到</a>
+      <a data-url="http://ZacharyJia.github.io/2015/10/11/git-fork-update/" data-id="cifm3cqxu0006u4qofab6box4" class="article-share-link">分享到</a>
       
-        <a href="http://ZacharyJia.github.io/2015/09/26/hello/#ds-thread" class="article-comment-link">评论</a>
+        <a href="http://ZacharyJia.github.io/2015/10/11/git-fork-update/#ds-thread" class="article-comment-link">评论</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/life/">life</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fork/">fork</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
 
     </footer>
   </div>
@@ -170,15 +184,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/09/27/assemble-programming-prepare/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">
-        
-          8086汇编开发环境搭建
-        
-      </div>
-    </a>
   
+    <a href="/2015/10/04/NSCTF2015/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">NSCTF2015部分题目解析</div>
+    </a>
   
 </nav>
 
@@ -189,7 +199,7 @@
   
   <section id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="post-hello" data-title="First post" data-url="http://ZacharyJia.github.io/2015/09/26/hello/"></div>
+    <div class="ds-thread" data-thread-key="post-git-fork-update" data-title="【转载】Git 怎样保证fork出来的project和原project（上游项目）同步更新" data-url="http://ZacharyJia.github.io/2015/10/11/git-fork-update/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
