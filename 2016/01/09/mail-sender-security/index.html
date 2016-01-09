@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>你真的知道谁给你发的邮件吗？——邮件发件人伪造 | CodeLife</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一般来说，我们收到一封邮件之后，都会首先看发件人。有些重要的邮件，比如Apple给你发的重置密码邮件，手机丢失邮件等等，我们都会反复查验发件人，确认是真的来自Apple的官方，而不是钓鱼邮件。然而，如果这个发件人信息是可以伪造的，你还能知道是谁给你发的邮件吗？前一段时间，学习SMTP邮件协议的时候，写了个简单的发件程序，却发现了一个很多邮箱都存在的发件人伪造问题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="你真的知道谁给你发的邮件吗？——邮件发件人伪造">
+<meta property="og:url" content="http://ZacharyJia.github.io/2016/01/09/mail-sender-security/index.html">
+<meta property="og:site_name" content="CodeLife">
+<meta property="og:description" content="一般来说，我们收到一封邮件之后，都会首先看发件人。有些重要的邮件，比如Apple给你发的重置密码邮件，手机丢失邮件等等，我们都会反复查验发件人，确认是真的来自Apple的官方，而不是钓鱼邮件。然而，如果这个发件人信息是可以伪造的，你还能知道是谁给你发的邮件吗？前一段时间，学习SMTP邮件协议的时候，写了个简单的发件程序，却发现了一个很多邮箱都存在的发件人伪造问题。">
+<meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/imgSMTP1.png">
+<meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/imgbjtu.png">
+<meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/imgQQ.png">
+<meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/imgQQ2.png">
+<meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/img126.png">
+<meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/img163.png">
+<meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/imgsina.png">
+<meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/imgoutlook.png">
+<meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/imggmail.png">
+<meta property="og:updated_time" content="2016-01-09T06:31:24.733Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="你真的知道谁给你发的邮件吗？——邮件发件人伪造">
+<meta name="twitter:description" content="一般来说，我们收到一封邮件之后，都会首先看发件人。有些重要的邮件，比如Apple给你发的重置密码邮件，手机丢失邮件等等，我们都会反复查验发件人，确认是真的来自Apple的官方，而不是钓鱼邮件。然而，如果这个发件人信息是可以伪造的，你还能知道是谁给你发的邮件吗？前一段时间，学习SMTP邮件协议的时候，写了个简单的发件程序，却发现了一个很多邮箱都存在的发件人伪造问题。">
+  
+  
+    <link rel="icon" href="css/images/favicon.ico">
+  
+  
+ <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+ <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+
+
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  <!--
+
+-->
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">CodeLife</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/.">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/ava.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="http://ZacharyJia.github.io"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/.">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://ZacharyJia.github.io"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/css/images/ava.png">
+      <h2 id="name">Zachary Jia</h2>
+      <h3 id="title">A programmer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Beijing, China</span>
+      <a id="follow" href="https://github.com/ZacharyJia">关注我</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        6
+        <span>文章</span>
+      </div>
+      <div class="article-info-block">
+        11
+        <span>标签</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/zacharyjia" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-mail-sender-security" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      你真的知道谁给你发的邮件吗？——邮件发件人伪造
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/01/09/mail-sender-security/">
+      <time datetime="2016-01-09T05:15:52.000Z" itemprop="datePublished">2016-01-09</time>
+    </a>
+  </div>
+
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p>一般来说，我们收到一封邮件之后，都会首先看发件人。有些重要的邮件，比如Apple给你发的重置密码邮件，手机丢失邮件等等，我们都会反复查验发件人，确认是真的来自Apple的官方，而不是钓鱼邮件。然而，如果这个发件人信息是可以伪造的，你还能知道是谁给你发的邮件吗？<br>前一段时间，学习SMTP邮件协议的时候，写了个简单的发件程序，却发现了一个很多邮箱都存在的发件人伪造问题。<br><a id="more"></a></p>
+<h2 id="0x00_邮件发送流程">0x00 邮件发送流程</h2><p>在谈论问题之前，我们首先要了解邮件到底是怎么发送给对方的。下面这幅图是一个简单的发件流程：<br><img src="http://7xn2d3.com1.z0.glb.clouddn.com/imgSMTP1.png" alt="发件流程"><br>其中的Local Mail Server就是发件人的邮箱服务器，Remote Mail Server就是收件人的邮箱服务器。<br>发件人从Sender Main Client（可以是本地客户端程序, 比如foxmail、outlook，也可以是邮箱网页版）发送邮件之后，会首先通过SMTP协议到达Local Mail Server，然后由Local Mail Server同样通过SMTP协议将邮件投递到Remote Mail Server，之后收件人就可以在任意时间从自己的邮件服务器上收到邮件了。</p>
+<h2 id="0x01_SMTP协议">0x01 SMTP协议</h2><p>SMTP协议也就是简单邮件传输协议，上面我们说到，有两个地方都用到了SMTP协议。<br>那么我们接着就看看SMTP协议是怎么工作的（下面是两个终端之间建立TCP连接后传输的数据，S为接收方，C为发送方）：<br><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">S：220 163.com Anti-spam GT for Coremail System (163com[071018])</span><br><span class="line">C：HELO smtp.163.com</span><br><span class="line">S：250 OK</span><br><span class="line">/<span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span></span><br><span class="line">C：auth login</span><br><span class="line">S：334 dXNlcm5hbWU6</span><br><span class="line">C：USERbase64加密后的用户名</span><br><span class="line">S：334 UGFzc3dvcmQ6</span><br><span class="line">C：PASSbase64加密后的密码</span><br><span class="line">S：235 Authentication successful</span><br><span class="line"><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>/</span><br><span class="line">C：MAIL FROM: <span class="variable">&lt;xxx@163.com&gt;</span></span><br><span class="line">S：250 Mail OK</span><br><span class="line">C：RCPT TO:<span class="variable">&lt;XXX@163 .COM&gt;</span></span><br><span class="line">S：250 Mail OK</span><br><span class="line">C：DATA</span><br><span class="line">S：354 End data with .</span><br><span class="line">C：From: xxx<span class="comment">@163.com</span></span><br><span class="line">C：To: xx<span class="comment">@163.com</span></span><br><span class="line">C：Subject: This is a test mail!</span><br><span class="line">C：.</span><br><span class="line">S：250 Mail OK</span><br><span class="line">S：queued as smtp5,D9GowLArizfIFTpIxFX8AA==.41385S2</span><br></pre></td></tr></table></figure></p>
+<p>以上就是一个发送邮件的简单的例子,其中<code>***</code>之间的部分是从client到Local Mail Server这一步需要的，从Local Mail Server到Remote Mail Server是不需要的。</p>
+<p>经过了上面的步骤，就可以将一封邮件发送到对方的邮箱了。</p>
+<h2 id="0x02_发件人伪造">0x02 发件人伪造</h2><p>知道了原理，我们就可以从这中间找破绽了。从上面的这段数据中，我们可以发现，关于发件人的部分一共有两个部分，一部分是<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C：MAIL FROM: <span class="tag">&lt;<span class="title">xxx@163.com</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>还有一部分在：<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">C：From</span>: <span class="string">xxx@163.com</span></span><br><span class="line"><span class="attribute">C：To</span>: <span class="string">xx@163.com</span></span><br><span class="line"><span class="attribute">C：Subject</span>: <span class="string">This is a test mail!</span></span><br></pre></td></tr></table></figure></p>
+<p>其中，第一部分是通知邮件服务器发件人信息的，第二部分是邮件的具体内容，主要是在邮件的显示过程中，显示给用户看的，这部分可以随意修改，不会有影响。<br>真正有影响的是第一部分。这一部分是真正指示邮件发件人姓名的。有时候，修改了第二部分，邮箱会提示你，<code>该邮件由XXX代发</code>，其中的XXX就是真正的发件人。这说明有的邮箱会验证这两部分是否相同，如果不相同，就会提示用户。<br>而如果修改了第一部分会怎么样呢？</p>
+<h2 id="0x03_邮箱服务商的漏洞">0x03 邮箱服务商的漏洞</h2><p>为了能够伪造第一部分的收件人信息，我们采用的方法是，编写程序，模拟Local Mail Server，直接向对方的邮件服务器发送邮件。<br>这时，你可能会问，我们伪造的话，不会被对方发现吗？这就是部分邮箱服务商的漏洞所在！他们对于邮件的发送服务器并没有进行验证，而是无条件地信任了！也就是说，我说我是苹果的服务器，他就认为我是苹果的服务器！<br>正常来说，我们认为Remote Mail Server 收到邮件时，会进行反向验证，也就是你提供的发件人的邮件域名（@后面的部分）对应的MX记录与发件服务器的IP地址是否匹配，如果匹配的话，那么就认为没有问题，接收邮件；如果不匹配的话，就会拒收邮件。<br>而如果不进行认证的话，就可以随意进行伪造了。<br>我使用的程序是在计算机网络原理课上编写的一个小程序（伪造成本如此之低！）。</p>
+<p>当过给一个有验证的服务器发送邮件的时候，结果是这样的(我交的服务器还不错)：<br><img src="http://7xn2d3.com1.z0.glb.clouddn.com/imgbjtu.png" alt="bjtu"></p>
+<p>而如果我给一个没有验证的服务器发送邮件的时候，结果是这样的（没错，黑的就是你，QQ邮箱！）：<br><img src="http://7xn2d3.com1.z0.glb.clouddn.com/imgQQ.png" alt="qq邮箱"></p>
+<p>然后我就会收到这样的邮件：<br><img src="http://7xn2d3.com1.z0.glb.clouddn.com/imgQQ2.png" alt="QQ"></p>
+<p>嗯，如果把内容好好改一改，一封钓鱼邮件是不是就成功了呢^_^</p>
+<p>当然，我是一个公平的人，怎么能只黑QQ邮箱呢，于是我把国内外几个常用的邮箱都试了一下，然后：<br><img src="http://7xn2d3.com1.z0.glb.clouddn.com/img126.png" alt="126"><br><img src="http://7xn2d3.com1.z0.glb.clouddn.com/img163.png" alt="163"><br><img src="http://7xn2d3.com1.z0.glb.clouddn.com/imgsina.png" alt="sina"><br><img src="http://7xn2d3.com1.z0.glb.clouddn.com/imgoutlook.png" alt="outlook"><br>嗯，看来不光是国内的问题，outlook也沦陷了。虽然有的被放到了垃圾邮件里，但是全部都收到了，而且并没有提示发件人有什么问题哦。</p>
+<p>当然，还有一个没沦陷的，Gmail<br><img src="http://7xn2d3.com1.z0.glb.clouddn.com/imggmail.png" alt="Gmail"><br>这里提示的错误好像跟IPV6有关，但是我关闭IPV6之后，好像也被anti-spam系统拦下了，不知道有没有别的办法能突破，但是起码不是一下子就被突破了啊喂！</p>
+<h2 id="0x04_小结">0x04 小结</h2><p>这只是我在完成一个小作业的时候偶然发现的漏洞，当然，有可能各大邮箱服务商有自己的考虑，（比如兼容别的邮件服务器什么的？我不了解），所以没有进行反向验证。<br>但是伪造发件人的这个漏洞是的的确确存在的，也不排除有人会利用这个漏洞干坏事，大家以后还是要认真识别啊（好像并没有什么有效的方法啊。。。）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ZacharyJia.github.io/2016/01/09/mail-sender-security/" data-id="cij6nxjd10001cwqoyx0xhsh2" class="article-share-link">分享到</a>
+      
+        <a href="http://ZacharyJia.github.io/2016/01/09/mail-sender-security/#ds-thread" class="article-comment-link">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/安全/">安全</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网络/">网络</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/12/27/ml-week1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">机器学习笔记Coursera——Week 1</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+  
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-mail-sender-security" data-title="你真的知道谁给你发的邮件吗？——邮件发件人伪造" data-url="http://ZacharyJia.github.io/2016/01/09/mail-sender-security/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'zacharyjia'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/01/09/mail-sender-security/" class="thumbnail">
+  
+    <span style="background-image:url(http://7xn2d3.com1.z0.glb.clouddn.com/imgSMTP1.png
+)" alt="你真的知道谁给你发的邮件吗？——邮件发件人伪造" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2016/01/09/mail-sender-security/" class="title">你真的知道谁给你发的邮件吗？——邮件发件人伪造</a></p>
+              <p class="item-date"><time datetime="2016-01-09T05:15:52.000Z" itemprop="datePublished">2016-01-09</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2015/12/27/ml-week1/" class="thumbnail">
+  
+    <span style="background-image:url(http://latex.codecogs.com/gif.download?h_%7B%5Ctheta%7D%28x%29%20%3D%20%5Ctheta_0%20+%20%5Ctheta_1%20%5Ctimes%20x
+)" alt="机器学习笔记Coursera——Week 1" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2015/12/27/ml-week1/" class="title">机器学习笔记Coursera——Week 1</a></p>
+              <p class="item-date"><time datetime="2015-12-27T14:19:48.000Z" itemprop="datePublished">2015-12-27</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2015/11/30/floyd-ring/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2015/11/30/floyd-ring/" class="title">Floyd判圈算法（龟兔赛跑算法）</a></p>
+              <p class="item-date"><time datetime="2015-11-30T11:24:35.000Z" itemprop="datePublished">2015-11-30</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2015/10/11/git-fork-update/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/编程/">编程</a></p>
+              <p class="item-title"><a href="/2015/10/11/git-fork-update/" class="title">【转载】Git 怎样保证fork出来的project和原project（上游项目）同步更新</a></p>
+              <p class="item-date"><time datetime="2015-10-11T05:43:10.000Z" itemprop="datePublished">2015-10-11</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2015/10/04/NSCTF2015/" class="thumbnail">
+  
+    <span style="background-image:url(http://7xn2d3.com1.z0.glb.clouddn.com/imgcrypto50.png
+)" alt="NSCTF2015部分题目解析" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/安全/">安全</a></p>
+              <p class="item-title"><a href="/2015/10/04/NSCTF2015/" class="title">NSCTF2015部分题目解析</a></p>
+              <p class="item-date"><time datetime="2015-10-04T10:07:50.000Z" itemprop="datePublished">2015-10-04</time></p>
+            </div>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/安全/">安全</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程/">编程</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Floyd判圈算法/">Floyd判圈算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSCTF/">NSCTF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fork/">fork</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发环境/">开发环境</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/汇编/">汇编</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络/">网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链表/">链表</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://blog.zacharyjia.me">乱七八糟的想法</a>
+          </li>
+        
+          <li>
+            <a href="http://www.icodeyou.com/">牛逼的学长</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 - 2016 Zachary Jia<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"zacharyjia"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+ <script src="http://libs.baidu.com/jquery/2.1.3/jquery.min.js"></script>
+
+
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
