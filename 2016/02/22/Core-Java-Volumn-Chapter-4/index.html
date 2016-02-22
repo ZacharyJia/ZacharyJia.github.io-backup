@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives | CodeLife</title>
+  <title>《Java核心技术卷I》笔记——第四章 | CodeLife</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="CodeLife">
-<meta property="og:url" content="http://ZacharyJia.github.io/archives/index.html">
+  <meta name="description" content="本文为《Java核心技术卷I》的第四章的读书笔记，因为为Java的基础部分，因此大部分知识都已经掌握，主要对需要进一步理解和之前没有掌握的知识进行了摘录总结。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《Java核心技术卷I》笔记——第四章">
+<meta property="og:url" content="http://ZacharyJia.github.io/2016/02/22/Core-Java-Volumn-Chapter-4/index.html">
 <meta property="og:site_name" content="CodeLife">
-<meta property="og:description">
+<meta property="og:description" content="本文为《Java核心技术卷I》的第四章的读书笔记，因为为Java的基础部分，因此大部分知识都已经掌握，主要对需要进一步理解和之前没有掌握的知识进行了摘录总结。">
+<meta property="og:updated_time" content="2016-02-22T06:44:07.980Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CodeLife">
-<meta name="twitter:description">
+<meta name="twitter:title" content="《Java核心技术卷I》笔记——第四章">
+<meta name="twitter:description" content="本文为《Java核心技术卷I》的第四章的读书笔记，因为为Java的基础部分，因此大部分知识都已经掌握，主要对需要进一步理解和之前没有掌握的知识进行了摘录总结。">
   
   
     <link rel="icon" href="css/images/favicon.ico">
@@ -116,299 +117,122 @@
 </aside>
 
       
-      <section id="main">
-      <div class="archive-year-wrap">
-        <a href="/archives/2016" class="archive-year">2016</a>
-      </div>
-      <section class="archives-wrap">
-        <div class="archives">
+      <section id="main"><article id="post-Core-Java-Volumn-Chapter-4" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
     
-    <div class="archive-article-thumbnail">
-      <a href="/2016/02/22/Core-Java-Volumn-Chapter-4/" class="thumbnail">
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
-    </div>
     
-    <header class="archive-article-header">
-      
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/22/Core-Java-Volumn-Chapter-4/">《Java核心技术卷I》笔记——第四章</a>
+    <h1 class="article-title" itemprop="name">
+      《Java核心技术卷I》笔记——第四章
     </h1>
   
 
-      
-        
-  <div class="archive-article-date">
+        <div class="article-meta">
+          
+  <div class="article-date">
     <i class="fa fa-calendar"></i>
     <a href="/2016/02/22/Core-Java-Volumn-Chapter-4/">
-      <time datetime="2016-02-22T06:10:33.000Z" itemprop="datePublished">2月 22</time>
+      <time datetime="2016-02-22T06:10:33.000Z" itemprop="datePublished">2016-02-22</time>
     </a>
   </div>
 
 
-      
-    </header>
-  </div>
-</article>
-  
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
+          
+        </div>
+      </header>
     
-    <div class="archive-article-thumbnail">
-      <a href="/2016/01/14/2015-conclusion/" class="thumbnail">
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p>本文为《Java核心技术卷I》的第四章的读书笔记，因为为Java的基础部分，因此大部分知识都已经掌握，主要对需要<strong>进一步理解</strong>和<strong>之前没有掌握</strong>的知识进行了摘录总结。</p>
+<a id="more"></a>
+<h2 id="一、_对面向对象思想的理解">一、 对面向对象思想的理解</h2><h3 id="对象的三个主要特性：">　对象的三个主要特性：</h3><ol>
+<li>对象的行为（behaviour） —— 能够对对象施加哪些操作</li>
+<li>对象的状态（state） —— 施加方法的时候，对象应该如何响应</li>
+<li>对象的标识（identity） —— 如何辨别具有相同行为和状态的不同对象</li>
+</ol>
+<p>对象状态的改变必须通过调用方法实现， 如果不经过方法调用就可以改变对象状态，说明封装性遭到了破坏。</p>
+<p>每个对象的标识永远是不同的， 状态常常存在差异。</p>
+<p>对象的这些关键特征彼此相互影响。</p>
+<h2 id="二、_日期的处理">二、 日期的处理</h2><p>不推荐使用Date类，而推荐使用GregorianCalendar类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> GregorianCalendar(<span class="number">1991</span>, Calendar.DECEMBER, <span class="number">31</span>, <span class="number">23</span>, <span class="number">29</span>, <span class="number">29</span>);</span><br></pre></td></tr></table></figure>
+<p>之前不知道有GregorianCalendar这个类，在处理日期的时候，用的一直是Date类，因此用了很多被标记为已经过期的API，如<code>getYear()</code>, <code>getMonth()</code>等。这次学习之后，了解到，<strong>当用到记录时间点的时候，使用Date类</strong>， 而<strong>处理日期的时候，使用GregorianCalendar类</strong>。</p>
+<h2 id="三、getter的返回值">三、getter的返回值</h2><p>在返回可变对象的引用的时候，不能直接返回，因为其引用的对象是同一个，这样做会破坏其封装性。应该返回其克隆对象。</p>
+<p>eg：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> date.clone();</span><br></pre></td></tr></table></figure>
+<h2 id="四、Java的函数传递使用值传递">四、Java的函数传递使用值传递</h2><p><strong>Java中只有值传递</strong></p>
+<p>方法参数的使用情况：</p>
+<ul>
+<li>一个方法不能修改一个基本数据类型的参数（数值型和布尔型）</li>
+<li>一个方法可以改变一个对象参数的状态</li>
+<li>一个方法不能让对象参数引用给一个新的对象</li>
+</ul>
+<h2 id="五、类的初始化步骤">五、类的初始化步骤</h2><ol>
+<li>所有数据域被初始化为默认值（0， false，null）</li>
+<li>按照在类生命中出现的次序，依次执行所有域初始化语句和初始化块</li>
+<li>如果构造器第一行调用了第二个构造器，则执行第二个构造器主体</li>
+<li>执行这个构造器的主体</li>
+</ol>
+<p>也就是说，如果一个数据域（成员变量）的初始化语句（直接写在变量定义之后的）调用了一个类的方法的话，这个方法可以先于构造器执行。</p>
+<p>一个简单的例子如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"This is a initial block of Foo!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> a = assign();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Foo</span><span class="params">()</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"This is the construction method of Foo!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">assign</span><span class="params">()</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"this is the assign method of Foo!"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">5</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个类在创建新的实例的过程中，打印出的语句如下：</p>
+<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">This</span> <span class="keyword">is</span> a initial <span class="keyword">block</span> <span class="keyword">of</span> <span class="type">Foo</span>!</span><br><span class="line">this <span class="keyword">is</span> the assign <span class="keyword">method</span> <span class="keyword">of</span> <span class="type">Foo</span>!</span><br><span class="line"><span class="type">This</span> <span class="keyword">is</span> the construction <span class="keyword">method</span> <span class="keyword">of</span> <span class="type">Foo</span>!</span><br></pre></td></tr></table></figure>
+<p>其中，第一句和第二句的顺序，与初始化语句块和成员变量a的定义顺序相对应。</p>
+
+      
     </div>
-    
-    <header class="archive-article-header">
+    <footer class="article-footer">
+      <a data-url="http://ZacharyJia.github.io/2016/02/22/Core-Java-Volumn-Chapter-4/" data-id="cikxl7mgg000100qohmwy6eat" class="article-share-link">分享到</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/01/14/2015-conclusion/">2015の总结&amp;&amp;2016の计划</a>
-    </h1>
-  
+        <a href="http://ZacharyJia.github.io/2016/02/22/Core-Java-Volumn-Chapter-4/#ds-thread" class="article-comment-link">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/笔记/">笔记</a></li></ul>
 
-      
-        
-  <div class="archive-article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2016/01/14/2015-conclusion/">
-      <time datetime="2016-01-14T12:12:21.000Z" itemprop="datePublished">1月 14</time>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/01/14/2015-conclusion/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">2015の总结&amp;&amp;2016の计划</div>
     </a>
-  </div>
+  
+</nav>
 
 
-      
-    </header>
-  </div>
+  
 </article>
-  
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    
-    <div class="archive-article-thumbnail">
-      <a href="/2016/01/09/mail-sender-security/" class="thumbnail">
-  
-    <span style="background-image:url(http://7xn2d3.com1.z0.glb.clouddn.com/imgSMTP1.png
-)" alt="你真的知道谁给你发的邮件吗？——邮件发件人伪造" class="thumbnail-image"></span>
-  
-</a>
-    </div>
-    
-    <header class="archive-article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/01/09/mail-sender-security/">你真的知道谁给你发的邮件吗？——邮件发件人伪造</a>
-    </h1>
-  
 
-      
-        
-  <div class="archive-article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2016/01/09/mail-sender-security/">
-      <time datetime="2016-01-09T05:15:52.000Z" itemprop="datePublished">1月 9</time>
-    </a>
-  </div>
-
-
-      
-    </header>
-  </div>
-</article>
   
-        </div></section>
-      
-      <div class="archive-year-wrap">
-        <a href="/archives/2015" class="archive-year">2015</a>
-      </div>
-      <section class="archives-wrap">
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    
-    <div class="archive-article-thumbnail">
-      <a href="/2015/12/27/ml-week1/" class="thumbnail">
-  
-    <span style="background-image:url(http://latex.codecogs.com/gif.download?h_%7B%5Ctheta%7D%28x%29%20%3D%20%5Ctheta_0%20+%20%5Ctheta_1%20%5Ctimes%20x
-)" alt="机器学习笔记Coursera——Week 1" class="thumbnail-image"></span>
-  
-</a>
-    </div>
-    
-    <header class="archive-article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/27/ml-week1/">机器学习笔记Coursera——Week 1</a>
-    </h1>
-  
-
-      
-        
-  <div class="archive-article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/12/27/ml-week1/">
-      <time datetime="2015-12-27T14:19:48.000Z" itemprop="datePublished">12月 27</time>
-    </a>
-  </div>
-
-
-      
-    </header>
-  </div>
-</article>
-  
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    
-    <div class="archive-article-thumbnail">
-      <a href="/2015/11/30/floyd-ring/" class="thumbnail">
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
-    </div>
-    
-    <header class="archive-article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/11/30/floyd-ring/">Floyd判圈算法（龟兔赛跑算法）</a>
-    </h1>
-  
-
-      
-        
-  <div class="archive-article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/11/30/floyd-ring/">
-      <time datetime="2015-11-30T11:24:35.000Z" itemprop="datePublished">11月 30</time>
-    </a>
-  </div>
-
-
-      
-    </header>
-  </div>
-</article>
-  
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    
-    <div class="archive-article-thumbnail">
-      <a href="/2015/10/11/git-fork-update/" class="thumbnail">
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
-    </div>
-    
-    <header class="archive-article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/10/11/git-fork-update/">【转载】Git 怎样保证fork出来的project和原project（上游项目）同步更新</a>
-    </h1>
-  
-
-      
-        
-  <div class="archive-article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/10/11/git-fork-update/">
-      <time datetime="2015-10-11T05:43:10.000Z" itemprop="datePublished">10月 11</time>
-    </a>
-  </div>
-
-
-      
-    </header>
-  </div>
-</article>
-  
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    
-    <div class="archive-article-thumbnail">
-      <a href="/2015/10/04/NSCTF2015/" class="thumbnail">
-  
-    <span style="background-image:url(http://7xn2d3.com1.z0.glb.clouddn.com/imgcrypto50.png
-)" alt="NSCTF2015部分题目解析" class="thumbnail-image"></span>
-  
-</a>
-    </div>
-    
-    <header class="archive-article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/10/04/NSCTF2015/">NSCTF2015部分题目解析</a>
-    </h1>
-  
-
-      
-        
-  <div class="archive-article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/10/04/NSCTF2015/">
-      <time datetime="2015-10-04T10:07:50.000Z" itemprop="datePublished">10月 4</time>
-    </a>
-  </div>
-
-
-      
-    </header>
-  </div>
-</article>
-  
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    
-    <div class="archive-article-thumbnail">
-      <a href="/2015/09/27/assemble-programming-prepare/" class="thumbnail">
-  
-    <span style="background-image:url(http://7xn2d3.com1.z0.glb.clouddn.com/imgDosBox.png
-)" alt="8086汇编开发环境搭建" class="thumbnail-image"></span>
-  
-</a>
-    </div>
-    
-    <header class="archive-article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/09/27/assemble-programming-prepare/">8086汇编开发环境搭建</a>
-    </h1>
-  
-
-      
-        
-  <div class="archive-article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2015/09/27/assemble-programming-prepare/">
-      <time datetime="2015-09-27T01:47:09.000Z" itemprop="datePublished">9月 27</time>
-    </a>
-  </div>
-
-
-      
-    </header>
-  </div>
-</article>
-  
-    </div></section>
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-Core-Java-Volumn-Chapter-4" data-title="《Java核心技术卷I》笔记——第四章" data-url="http://ZacharyJia.github.io/2016/02/22/Core-Java-Volumn-Chapter-4/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'zacharyjia'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
   </section>
+  
+
+</section>
       
         <aside id="sidebar">
   
