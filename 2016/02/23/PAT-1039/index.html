@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>PAT 1039 Course List for Student(25) | CodeLife</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="题目要求Zhejiang University has 40000 students and provides 2500 courses. Now given the student name lists of all the courses, you are supposed to output the registered course list for each student who co">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PAT 1039 Course List for Student(25)">
+<meta property="og:url" content="http://ZacharyJia.github.io/2016/02/23/PAT-1039/index.html">
+<meta property="og:site_name" content="CodeLife">
+<meta property="og:description" content="题目要求Zhejiang University has 40000 students and provides 2500 courses. Now given the student name lists of all the courses, you are supposed to output the registered course list for each student who co">
+<meta property="og:updated_time" content="2016-02-23T03:15:14.838Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PAT 1039 Course List for Student(25)">
+<meta name="twitter:description" content="题目要求Zhejiang University has 40000 students and provides 2500 courses. Now given the student name lists of all the courses, you are supposed to output the registered course list for each student who co">
+  
+  
+    <link rel="icon" href="css/images/favicon.ico">
+  
+  
+ <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+ <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+
+
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  <!--
+
+-->
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">CodeLife</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/.">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/ava.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="http://ZacharyJia.github.io"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/.">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://ZacharyJia.github.io"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/css/images/ava.png">
+      <h2 id="name">Zachary Jia</h2>
+      <h3 id="title">A programmer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Beijing, China</span>
+      <a id="follow" href="https://github.com/ZacharyJia">关注我</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        9
+        <span>文章</span>
+      </div>
+      <div class="article-info-block">
+        10
+        <span>标签</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/zacharyjia" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-PAT-1039" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      PAT 1039 Course List for Student(25)
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/02/23/PAT-1039/">
+      <time datetime="2016-02-23T02:56:37.000Z" itemprop="datePublished">2016-02-23</time>
+    </a>
+  </div>
+
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <h2 id="题目要求">题目要求</h2><p>Zhejiang University has 40000 students and provides 2500 courses. Now given the student name lists of all the courses, you are supposed to output the registered course list for each student who comes for a query.</p>
+<a id="more"></a>
+<h4 id="Input_Specification:">Input Specification:</h4><p>Each input file contains one test case. For each case, the first line contains 2 positive integers: N (&lt;=40000), the number of students who look for their course lists, and K (&lt;=2500), the total number of courses. Then the student name lists are given for the courses (numbered from 1 to K) in the following format: for each course i, first the course index i and the number of registered students Ni (&lt;= 200) are given in a line. Then in the next line, Ni student names are given. A student name consists of 3 capital English letters plus a one-digit number. Finally the last line contains the N names of students who come for a query. All the names and numbers in a line are separated by a space.</p>
+<h4 id="Output_Specification:">Output Specification:</h4><p>For each test case, print your results in N lines. Each line corresponds to one student, in the following format: first print the student’s name, then the total number of registered courses of that student, and finally the indices of the courses in increasing order. The query results must be printed in the same order as input. All the data in a line must be separated by a space, with no extra space at the end of the line.</p>
+<h4 id="Sample_Input:">Sample Input:</h4><p>11 5</p>
+<p>4 7</p>
+<p>BOB5 DON2 FRA8 JAY9 KAT3 LOR6 ZOE1</p>
+<p>1 4</p>
+<p>ANN0 BOB5 JAY9 LOR6</p>
+<p>2 7</p>
+<p>ANN0 BOB5 FRA8 JAY9 JOE4 KAT3 LOR6</p>
+<p>3 1</p>
+<p>BOB5</p>
+<p>5 9</p>
+<p>AMY7 ANN0 BOB5 DON2 FRA8 JAY9 KAT3 LOR6 ZOE1</p>
+<p>ZOE1 ANN0 BOB5 JOE4 JAY9 FRA8 DON2 AMY7 KAT3 LOR6 NON9</p>
+<h4 id="Sample_Output:">Sample Output:</h4><p>ZOE1 2 4 5</p>
+<p>ANN0 3 1 2 5</p>
+<p>BOB5 5 1 2 3 4 5</p>
+<p>JOE4 1 2</p>
+<p>JAY9 4 1 2 4 5</p>
+<p>FRA8 3 2 4 5</p>
+<p>DON2 2 4 5</p>
+<p>AMY7 1 5</p>
+<p>KAT3 3 2 4 5</p>
+<p>LOR6 4 1 2 4 5</p>
+<p>NON9 0</p>
+<h2 id="时间要求">时间要求</h2><p>200ms</p>
+<h2 id="解题过程">解题过程</h2><p>一开始做的时候，我感觉这个题应该很简单，只要使用map将学生的名字和一个<code>vector&lt;int&gt;</code> 匹配起来，在读入数据的时候，向名称所对应的vector中不断push_back就可以了。最后输出的时候，先对vector排个序，然后按照题目要求输出就可以了。</p>
+<p>在写完之后，一遍就通过了样例。然后我马上将代码提交的到了oj里，最后发现最后一组数据超时了。</p>
+<p>思考之后，我觉得有可能是最后进行排序的时候超时了，所以又将vector改成了set，并且去掉了sort方法，因为set会默认进行升序排列。提交之后，发现还是超时。</p>
+<p>我继续读题发现，题目中特别提到了学生姓名的规则为<code>前三个字符为大写字母，第四位是一个数字</code>，这应该是非常适合进行哈希的。就考虑到会不会是不断生成string，造成了效率过低。于是我将map修改为一个大小为<code>26 * 26 * 26 * 10 + 1</code>的数组，然后对学生的名字进行哈希，将哈希后的值作为index进行存储。</p>
+<p>提交之后，成功过掉了，最后一个case耗时113ms。</p>
+<p>代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line">pass</span><br><span class="line">2016年2月23日 10:52:14</span><br><span class="line">注意：需要对学生名字做hash，否则最后一组数据会超时</span><br><span class="line">*/</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">26</span> * <span class="number">26</span> * <span class="number">26</span> * <span class="number">10</span> + <span class="number">1</span>;</span><br><span class="line"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">list</span>[MAXN];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">hashName</span><span class="params">(<span class="keyword">char</span> * buf)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (buf[<span class="number">0</span>] - <span class="string">'A'</span>) * <span class="number">26</span> * <span class="number">26</span> * <span class="number">10</span> +</span><br><span class="line">		(buf[<span class="number">1</span>] - <span class="string">'A'</span>) * <span class="number">26</span> * <span class="number">10</span> +</span><br><span class="line">		(buf[<span class="number">2</span>] - <span class="string">'A'</span>) * <span class="number">10</span> +</span><br><span class="line">		(buf[<span class="number">3</span>] - <span class="string">'0'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> buf[<span class="number">5</span>];</span><br><span class="line">	<span class="keyword">int</span> N, K;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;N, &amp;K);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; K; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> index, n;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;index, &amp;n);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%s"</span>, buf);</span><br><span class="line">			<span class="built_in">list</span>[hashName(buf)].insert(index);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%s"</span>, buf);</span><br><span class="line">		<span class="keyword">int</span> hname = hashName(buf);</span><br><span class="line">		<span class="keyword">int</span> len = <span class="built_in">list</span>[hname].size();</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%s %d"</span>, buf, len);</span><br><span class="line">		<span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;::iterator it = <span class="built_in">list</span>[hname].begin();</span><br><span class="line">		<span class="keyword">for</span> (; it != <span class="built_in">list</span>[hname].end(); it++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">" %d"</span>, *it);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ZacharyJia.github.io/2016/02/23/PAT-1039/" data-id="cikytnw8e0001nwqoo950nd5v" class="article-share-link">分享到</a>
+      
+        <a href="http://ZacharyJia.github.io/2016/02/23/PAT-1039/#ds-thread" class="article-comment-link">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PAT/">PAT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/02/22/Core-Java-Volumn-Chapter-4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">《Java核心技术卷I》笔记——第四章</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+  
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-PAT-1039" data-title="PAT 1039 Course List for Student(25)" data-url="http://ZacharyJia.github.io/2016/02/23/PAT-1039/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'zacharyjia'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/02/23/PAT-1039/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2016/02/23/PAT-1039/" class="title">PAT 1039 Course List for Student(25)</a></p>
+              <p class="item-date"><time datetime="2016-02-23T02:56:37.000Z" itemprop="datePublished">2016-02-23</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/02/22/Core-Java-Volumn-Chapter-4/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2016/02/22/Core-Java-Volumn-Chapter-4/" class="title">《Java核心技术卷I》笔记——第四章</a></p>
+              <p class="item-date"><time datetime="2016-02-22T06:10:33.000Z" itemprop="datePublished">2016-02-22</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/01/14/2015-conclusion/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2016/01/14/2015-conclusion/" class="title">2015の总结&amp;&amp;2016の计划</a></p>
+              <p class="item-date"><time datetime="2016-01-14T12:12:21.000Z" itemprop="datePublished">2016-01-14</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/01/09/mail-sender-security/" class="thumbnail">
+  
+    <span style="background-image:url(http://7xn2d3.com1.z0.glb.clouddn.com/imgSMTP1.png
+)" alt="你真的知道谁给你发的邮件吗？——邮件发件人伪造" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2016/01/09/mail-sender-security/" class="title">你真的知道谁给你发的邮件吗？——邮件发件人伪造</a></p>
+              <p class="item-date"><time datetime="2016-01-09T05:15:52.000Z" itemprop="datePublished">2016-01-09</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2015/12/27/ml-week1/" class="thumbnail">
+  
+    <span style="background-image:url(http://latex.codecogs.com/gif.download?h_%7B%5Ctheta%7D%28x%29%20%3D%20%5Ctheta_0%20+%20%5Ctheta_1%20%5Ctimes%20x
+)" alt="机器学习笔记Coursera——Week 1" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2015/12/27/ml-week1/" class="title">机器学习笔记Coursera——Week 1</a></p>
+              <p class="item-date"><time datetime="2015-12-27T14:19:48.000Z" itemprop="datePublished">2015-12-27</time></p>
+            </div>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/安全/">安全</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程/">编程</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSCTF/">NSCTF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAT/">PAT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/汇编/">汇编</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://blog.zacharyjia.me">乱七八糟的想法</a>
+          </li>
+        
+          <li>
+            <a href="http://www.icodeyou.com/">牛逼的学长</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 - 2016 Zachary Jia<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"zacharyjia"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+ <script src="http://libs.baidu.com/jquery/2.1.3/jquery.min.js"></script>
+
+
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
