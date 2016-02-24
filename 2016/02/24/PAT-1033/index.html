@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>PAT 1033 To Fill or Not to Fill (25) | CodeLife</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="题目要求With highways available, driving a car from Hangzhou to any other city is easy. But since the tank capacity of a car is limited, we have to find gas stations on the way from time to time. Differen">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PAT 1033 To Fill or Not to Fill (25)">
+<meta property="og:url" content="http://ZacharyJia.github.io/2016/02/24/PAT-1033/index.html">
+<meta property="og:site_name" content="CodeLife">
+<meta property="og:description" content="题目要求With highways available, driving a car from Hangzhou to any other city is easy. But since the tank capacity of a car is limited, we have to find gas stations on the way from time to time. Differen">
+<meta property="og:updated_time" content="2016-02-24T13:42:33.607Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PAT 1033 To Fill or Not to Fill (25)">
+<meta name="twitter:description" content="题目要求With highways available, driving a car from Hangzhou to any other city is easy. But since the tank capacity of a car is limited, we have to find gas stations on the way from time to time. Differen">
+  
+  
+    <link rel="icon" href="css/images/favicon.ico">
+  
+  
+ <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+ <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+
+
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  <!--
+
+-->
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">CodeLife</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/.">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/ava.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="http://ZacharyJia.github.io"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/.">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://ZacharyJia.github.io"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/css/images/ava.png">
+      <h2 id="name">Zachary Jia</h2>
+      <h3 id="title">A programmer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Beijing, China</span>
+      <a id="follow" href="https://github.com/ZacharyJia">关注我</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        10
+        <span>文章</span>
+      </div>
+      <div class="article-info-block">
+        10
+        <span>标签</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/zacharyjia" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-PAT-1033" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      PAT 1033 To Fill or Not to Fill (25)
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/02/24/PAT-1033/">
+      <time datetime="2016-02-24T13:24:13.000Z" itemprop="datePublished">2016-02-24</time>
+    </a>
+  </div>
+
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <h2 id="题目要求">题目要求</h2><p>With highways available, driving a car from Hangzhou to any other city is easy. But since the tank capacity of a car is limited, we have to find gas stations on the way from time to time. Different gas station may give different price. You are asked to carefully design the cheapest route to go.</p>
+<a id="more"></a>
+<h4 id="Input_Specification:">Input Specification:</h4><p>Each input file contains one test case. For each case, the first line contains 4 positive numbers: Cmax (&lt;= 100), the maximum capacity of the tank; D (&lt;=30000), the distance between Hangzhou and the destination city; Davg (&lt;=20), the average distance per unit gas that the car can run; and N (&lt;= 500), the total number of gas stations. Then N lines follow, each contains a pair of non-negative numbers: Pi, the unit gas price, and Di (&lt;=D), the distance between this station and Hangzhou, for i=1,…N. All the numbers in a line are separated by a space.</p>
+<h4 id="Output_Specification:">Output Specification:</h4><p>For each test case, print the cheapest price in a line, accurate up to 2 decimal places. It is assumed that the tank is empty at the beginning. If it is impossible to reach the destination, print “The maximum travel distance = X” where X is the maximum possible distance the car can run, accurate up to 2 decimal places.</p>
+<h4 id="Sample_Input_1:">Sample Input 1:</h4><p>50 1300 12 8</p>
+<p>6.00 1250</p>
+<p>7.00 600</p>
+<p>7.00 150</p>
+<p>7.10 0</p>
+<p>7.20 200</p>
+<p>7.50 400</p>
+<p>7.30 1000</p>
+<p>6.85 300</p>
+<h4 id="Sample_Output_1:">Sample Output 1:</h4><p>749.17</p>
+<h4 id="Sample_Input_2:">Sample Input 2:</h4><p>50 1300 12 2</p>
+<p>7.10 0</p>
+<p>7.00 600</p>
+<h4 id="Sample_Output_2:">Sample Output 2:</h4><p>The maximum travel distance = 1200.00</p>
+<h2 id="时间要求">时间要求</h2><p>10ms</p>
+<h2 id="解题过程">解题过程</h2><p>刚开始看到这道题，没有什么思路。看到时间限制这么小，考虑到会不会是使用动归，不过也没有想到应该怎么办。查了网上的资料后，发现是使用贪心算法进行解决。具体的思路如下：</p>
+<p>首先要对所有的加油站按照距离升序排列，记加满之后的最大距离为max，从A加油站向后搜索。搜索的情况有以下几种：</p>
+<ol>
+<li>若搜索到一个油价比A小的加油站，则在A点加油到刚好能到该加油站</li>
+<li>若不满足1， 但搜索到终点，则直接加油到终点</li>
+<li>若不满足1、2, 则<strong>加满油</strong>到能够行驶到所有能到达的加油站里的油价最低的加油站</li>
+<li>若不满足1、2、3，则最大距离里没有任何加油站，则最大行驶距离为A+max</li>
+</ol>
+<p>需要注意的地方有两点：</p>
+<ol>
+<li>因为情况3向后继续行驶时，油箱会有剩余油，所以需要记录油箱剩余的油量，而且可能为小数。</li>
+<li>有可能没有距离为0的加油站，此时无法行驶。</li>
+</ol>
+<p>代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> Station</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">double</span> price;</span><br><span class="line">    <span class="keyword">int</span> d;</span><br><span class="line">&#125;Station;</span><br><span class="line"></span><br><span class="line">Station s[<span class="number">550</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">const</span> Station &amp;a, <span class="keyword">const</span> Station &amp;b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.d &lt; b.d;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">double</span> c;</span><br><span class="line">    <span class="keyword">int</span> distance, d, n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lf%d%d%d"</span>, &amp;c, &amp;distance, &amp;d, &amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lf%d"</span>, &amp;s[i].price, &amp;s[i].d);</span><br><span class="line">    &#125;</span><br><span class="line">    sort(s, s + n, cmp);</span><br><span class="line">    <span class="keyword">int</span> max = c * d;</span><br><span class="line">    <span class="keyword">if</span> (s[<span class="number">0</span>].d != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"The maximum travel distance = 0.00\n"</span>);</span><br><span class="line">        system(<span class="string">"pause"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">double</span> left = <span class="number">0</span>, fee = <span class="number">0</span>, maxDistance = -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> cur = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (cur &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> lowerStation = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = cur + <span class="number">1</span>; i &lt; n &amp;&amp; s[i].d &lt;= s[cur].d + max; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[cur].price &gt; s[i].price) &#123;</span><br><span class="line">                lowerStation = i;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (lowerStation != -<span class="number">1</span>) &#123;</span><br><span class="line">            fee += ((s[lowerStation].d - s[cur].d) / (<span class="number">0.0</span> + d) - left) * s[cur].price;</span><br><span class="line">            left = <span class="number">0</span>;</span><br><span class="line">            cur = lowerStation;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[cur].d + max &gt;= distance) &#123;</span><br><span class="line">                fee += ((distance - s[cur].d) / (<span class="number">0.0</span> + d) - left) * s[cur].price;</span><br><span class="line">                left = <span class="number">0</span>;</span><br><span class="line">                cur = -<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">int</span> minStation = -<span class="number">1</span>;</span><br><span class="line">                <span class="keyword">double</span> minPrice = <span class="number">100000000</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = cur + <span class="number">1</span>; i &lt; n &amp;&amp; s[i].d &lt;= s[cur].d + max; i++) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (s[i].price &lt; minPrice) &#123;</span><br><span class="line">                        minStation = i;</span><br><span class="line">                        minPrice = s[i].price;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (minStation != -<span class="number">1</span>) &#123;</span><br><span class="line">                    fee += (c - left) * s[cur].price;</span><br><span class="line">                    left = c - (s[minStation].d - s[cur].d) / (<span class="number">0.0</span> + d);</span><br><span class="line">                    cur = minStation;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    maxDistance = s[cur].d + max;</span><br><span class="line">                    cur = -<span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (maxDistance &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"The maximum travel distance = %.2lf\n"</span>, maxDistance);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%.2lf\n"</span>, fee);</span><br><span class="line">    &#125;</span><br><span class="line">    system(<span class="string">"pause"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ZacharyJia.github.io/2016/02/24/PAT-1033/" data-id="cil0vloxt000144qo79egj91y" class="article-share-link">分享到</a>
+      
+        <a href="http://ZacharyJia.github.io/2016/02/24/PAT-1033/#ds-thread" class="article-comment-link">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PAT/">PAT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/02/23/PAT-1039/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">PAT 1039 Course List for Student(25)</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+  
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-PAT-1033" data-title="PAT 1033 To Fill or Not to Fill (25)" data-url="http://ZacharyJia.github.io/2016/02/24/PAT-1033/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'zacharyjia'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/02/24/PAT-1033/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2016/02/24/PAT-1033/" class="title">PAT 1033 To Fill or Not to Fill (25)</a></p>
+              <p class="item-date"><time datetime="2016-02-24T13:24:13.000Z" itemprop="datePublished">2016-02-24</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/02/23/PAT-1039/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2016/02/23/PAT-1039/" class="title">PAT 1039 Course List for Student(25)</a></p>
+              <p class="item-date"><time datetime="2016-02-23T02:56:37.000Z" itemprop="datePublished">2016-02-23</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/02/22/Core-Java-Volumn-Chapter-4/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2016/02/22/Core-Java-Volumn-Chapter-4/" class="title">《Java核心技术卷I》笔记——第四章</a></p>
+              <p class="item-date"><time datetime="2016-02-22T06:10:33.000Z" itemprop="datePublished">2016-02-22</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/01/14/2015-conclusion/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2016/01/14/2015-conclusion/" class="title">2015の总结&amp;&amp;2016の计划</a></p>
+              <p class="item-date"><time datetime="2016-01-14T12:12:21.000Z" itemprop="datePublished">2016-01-14</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/01/09/mail-sender-security/" class="thumbnail">
+  
+    <span style="background-image:url(http://7xn2d3.com1.z0.glb.clouddn.com/imgSMTP1.png
+)" alt="你真的知道谁给你发的邮件吗？——邮件发件人伪造" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2016/01/09/mail-sender-security/" class="title">你真的知道谁给你发的邮件吗？——邮件发件人伪造</a></p>
+              <p class="item-date"><time datetime="2016-01-09T05:15:52.000Z" itemprop="datePublished">2016-01-09</time></p>
+            </div>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/安全/">安全</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程/">编程</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSCTF/">NSCTF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAT/">PAT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/汇编/">汇编</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://blog.zacharyjia.me">乱七八糟的想法</a>
+          </li>
+        
+          <li>
+            <a href="http://www.icodeyou.com/">牛逼的学长</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 - 2016 Zachary Jia<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"zacharyjia"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+ <script src="http://libs.baidu.com/jquery/2.1.3/jquery.min.js"></script>
+
+
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
