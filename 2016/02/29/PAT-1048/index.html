@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>【转载】Git 怎样保证fork出来的project和原project（上游项目）同步更新 | CodeLife</title>
+  <title>PAT 1048 Find Coins (25) | CodeLife</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="问题描述：当我们  在github上fork出一个项目后，如果原有的项目更新了，怎样保持我们fork出来的项目和原有项目保持同步呢并提交我们的代码更新呢？即怎样保持fork出的项目和上游项目保持更新，怎样创建pull request？关键步骤是使用git 的 rebase 命令。">
+  <meta name="description" content="题目要求Eva loves to collect coins from all over the universe, including some other planets like Mars. One day she visited a universal shopping mall which could accept all kinds of coins as payments. Howe">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【转载】Git 怎样保证fork出来的project和原project（上游项目）同步更新">
-<meta property="og:url" content="http://ZacharyJia.github.io/2015/10/11/git-fork-update/index.html">
+<meta property="og:title" content="PAT 1048 Find Coins (25)">
+<meta property="og:url" content="http://ZacharyJia.github.io/2016/02/29/PAT-1048/index.html">
 <meta property="og:site_name" content="CodeLife">
-<meta property="og:description" content="问题描述：当我们  在github上fork出一个项目后，如果原有的项目更新了，怎样保持我们fork出来的项目和原有项目保持同步呢并提交我们的代码更新呢？即怎样保持fork出的项目和上游项目保持更新，怎样创建pull request？关键步骤是使用git 的 rebase 命令。">
-<meta property="og:updated_time" content="2016-02-22T08:35:32.959Z">
+<meta property="og:description" content="题目要求Eva loves to collect coins from all over the universe, including some other planets like Mars. One day she visited a universal shopping mall which could accept all kinds of coins as payments. Howe">
+<meta property="og:updated_time" content="2016-02-29T12:33:59.843Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【转载】Git 怎样保证fork出来的project和原project（上游项目）同步更新">
-<meta name="twitter:description" content="问题描述：当我们  在github上fork出一个项目后，如果原有的项目更新了，怎样保持我们fork出来的项目和原有项目保持同步呢并提交我们的代码更新呢？即怎样保持fork出的项目和上游项目保持更新，怎样创建pull request？关键步骤是使用git 的 rebase 命令。">
+<meta name="twitter:title" content="PAT 1048 Find Coins (25)">
+<meta name="twitter:description" content="题目要求Eva loves to collect coins from all over the universe, including some other planets like Mars. One day she visited a universal shopping mall which could accept all kinds of coins as payments. Howe">
   
   
     <link rel="icon" href="css/images/favicon.ico">
@@ -117,7 +117,7 @@
 </aside>
 
       
-      <section id="main"><article id="post-git-fork-update" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-PAT-1048" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -126,7 +126,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      【转载】Git 怎样保证fork出来的project和原project（上游项目）同步更新
+      PAT 1048 Find Coins (25)
     </h1>
   
 
@@ -134,49 +134,39 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/10/11/git-fork-update/">
-      <time datetime="2015-10-11T05:43:10.000Z" itemprop="datePublished">2015-10-11</time>
+    <a href="/2016/02/29/PAT-1048/">
+      <time datetime="2016-02-29T12:20:58.000Z" itemprop="datePublished">2016-02-29</time>
     </a>
   </div>
 
 
           
-  <div class="article-category">
-  	<i class="fa fa-folder"></i>
-    <a class="article-category-link" href="/categories/编程/">编程</a>
-  </div>
-
         </div>
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
                 
-        <h2 id="问题描述：">问题描述：</h2><p>当我们  在github上fork出一个项目后，如果原有的项目更新了，怎样保持我们fork出来的项目和原有项目保持同步呢并提交我们的代码更新呢？即怎样保持fork出的项目和上游项目保持更新，怎样创建pull request？关键步骤是使用git 的 rebase 命令。<br><a id="more"></a></p>
-<h2 id="步骤：">步骤：</h2><ol>
-<li><p>在 Fork 的代码库中添加上游代码库的 remote 源，该操作只需操作一次即可。<br>如: 其中# upstream 表示上游代码库名， 可以任意。</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote <span class="built_in">add</span> upstream http<span class="variable">s:</span>//github.scm.corp.ebay.<span class="keyword">com</span>/montage/frontend-ui-workspace</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>将本地的修改提交 commit</p>
-</li>
-<li><p>在每次 Pull Request 前做如下操作，即可实现和上游版本库的同步。 </p>
- <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">git</span> remote update upstream </span><br><span class="line">git rebase upstream/&#123;<span class="title">branch</span> name&#125;</span><br></pre></td></tr></table></figure>
-<p> 需要注意的是在操作3.2之前，一定要将checkout到{branch name}所指定的branch, 如: </p>
- <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">git</span> checkout develop</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Push 代码到 Github</p>
-<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">push</span></span><br></pre></td></tr></table></figure></li>
-</ol>
-
+        <h2 id="题目要求">题目要求</h2><p>Eva loves to collect coins from all over the universe, including some other planets like Mars. One day she visited a universal shopping mall which could accept all kinds of coins as payments. However, there was a special requirement of the payment: for each bill, she could only use exactly two coins to pay the exact amount. Since she has as many as 105 coins with her, she definitely needs your help. You are supposed to tell her, for any given amount of money, whether or not she can find two coins to pay for it.</p>
+<a id="more"></a>
+<h4 id="Input_Specification:">Input Specification:</h4><p>Each input file contains one test case. For each case, the first line contains 2 positive numbers: N (&lt;=105, the total number of coins) and M(&lt;=103, the amount of money Eva has to pay). The second line contains N face values of the coins, which are all positive numbers no more than 500. All the numbers in a line are separated by a space.</p>
+<h4 id="Output_Specification:">Output Specification:</h4><p>For each test case, print in one line the two face values V1 and V2 (separated by a space) such that V1 + V2 = M and V1 &lt;= V2. If such a solution is not unique, output the one with the smallest V1. If there is no solution, output “No Solution” instead.</p>
+<h4 id="Sample_Input_1:">Sample Input 1:</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">8</span> <span class="number">15</span></span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">8</span> <span class="number">7</span> <span class="number">2</span> <span class="number">4</span> <span class="number">11</span> <span class="number">15</span></span><br></pre></td></tr></table></figure>
+<h4 id="Sample_Output_1:">Sample Output 1:</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4</span> <span class="number">11</span></span><br></pre></td></tr></table></figure>
+<h4 id="Sample_Input_2:">Sample Input 2:</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">7</span> <span class="number">14</span></span><br><span class="line"><span class="number">1</span> <span class="number">8</span> <span class="number">7</span> <span class="number">2</span> <span class="number">4</span> <span class="number">11</span> <span class="number">15</span></span><br></pre></td></tr></table></figure>
+<h4 id="Sample_Output_2:">Sample Output 2:</h4><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">No</span> Solution</span><br></pre></td></tr></table></figure>
+<h2 id="解题思路">解题思路</h2><p>读完题目之后，首先想到的解法就是先对整个的coin数组进行排序，然后开始遍历整个数组，以当前元素为V1，与后面的元素相加，比较与M的大小，直到找到第一个结果。这样做的时间复杂度是O(N^2)，但是看到题目的时间要求是50ms，我就觉得应该会卡时间，直接用O(n^2)的算法肯定会超时。</p>
+<p>接着，我就想到前几天看网上1044的题解的时候，有人用来降低复杂度的方法是二分法，而这道题用二分法也非常合适！所以只保留之前的外循环，内层循环使用二分法实现，最终一遍通过！</p>
+<h2 id="代码">代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> coins[<span class="number">100000</span> + <span class="number">10</span>];</span><br><span class="line"><span class="keyword">int</span> m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, coins + i);</span><br><span class="line">	&#125;</span><br><span class="line">	sort(coins, coins + n);</span><br><span class="line">	<span class="keyword">int</span> start, end, mid;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		start = i + <span class="number">1</span>;</span><br><span class="line">		end = n - <span class="number">1</span>;</span><br><span class="line">		mid = (start + end) / <span class="number">2</span>;</span><br><span class="line">		<span class="keyword">while</span> (coins[i] + coins[mid] != m &amp;&amp; end &gt;= start &amp;&amp; start &gt;= i + <span class="number">1</span> &amp;&amp; end &lt;= n - <span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (coins[i] + coins[mid] &lt; m)</span><br><span class="line">			&#123;</span><br><span class="line">				start = mid + <span class="number">1</span>;</span><br><span class="line">				mid = (start + end) / <span class="number">2</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				end = mid - <span class="number">1</span>;</span><br><span class="line">				mid = (start + end) / <span class="number">2</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (coins[i] + coins[mid] == m &amp;&amp; mid &gt; i &amp;&amp; mid &lt; n)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>, coins[i], coins[mid]);</span><br><span class="line">			system(<span class="string">"pause"</span>);</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"No Solution\n"</span>);</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ZacharyJia.github.io/2015/10/11/git-fork-update/" data-id="cil7ytoiz000wz0qojz6f8w89" class="article-share-link">分享到</a>
+      <a data-url="http://ZacharyJia.github.io/2016/02/29/PAT-1048/" data-id="cil7ytohb0001z0qo2c0zyd6p" class="article-share-link">分享到</a>
       
-        <a href="http://ZacharyJia.github.io/2015/10/11/git-fork-update/#ds-thread" class="article-comment-link">评论</a>
+        <a href="http://ZacharyJia.github.io/2016/02/29/PAT-1048/#ds-thread" class="article-comment-link">评论</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PAT/">PAT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
 
     </footer>
   </div>
@@ -184,19 +174,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/11/30/floyd-ring/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">
-        
-          Floyd判圈算法（龟兔赛跑算法）
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/10/04/NSCTF2015/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/02/28/PAT-1047/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">NSCTF2015部分题目解析</div>
+      <div class="article-nav-title">PAT-1047 Student List for Course (25)</div>
     </a>
   
 </nav>
@@ -208,7 +189,7 @@
   
   <section id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="post-git-fork-update" data-title="【转载】Git 怎样保证fork出来的project和原project（上游项目）同步更新" data-url="http://ZacharyJia.github.io/2015/10/11/git-fork-update/"></div>
+    <div class="ds-thread" data-thread-key="post-PAT-1048" data-title="PAT 1048 Find Coins (25)" data-url="http://ZacharyJia.github.io/2016/02/29/PAT-1048/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
