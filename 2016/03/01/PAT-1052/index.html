@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>《Java核心技术卷I》笔记——第四章 | CodeLife</title>
+  <title>PAT 1052 Linked List Sorting (25) | CodeLife</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文为《Java核心技术卷I》的第四章的读书笔记，因为为Java的基础部分，因此大部分知识都已经掌握，主要对需要进一步理解和之前没有掌握的知识进行了摘录总结。">
+  <meta name="description" content="题目要求A linked list consists of a series of structures, which are not necessarily adjacent in memory. We assume that each structure contains an integer key and a Next pointer to the next structure. Now">
 <meta property="og:type" content="article">
-<meta property="og:title" content="《Java核心技术卷I》笔记——第四章">
-<meta property="og:url" content="http://ZacharyJia.github.io/2016/02/22/Core-Java-Volumn-Chapter-4/index.html">
+<meta property="og:title" content="PAT 1052 Linked List Sorting (25)">
+<meta property="og:url" content="http://ZacharyJia.github.io/2016/03/01/PAT-1052/index.html">
 <meta property="og:site_name" content="CodeLife">
-<meta property="og:description" content="本文为《Java核心技术卷I》的第四章的读书笔记，因为为Java的基础部分，因此大部分知识都已经掌握，主要对需要进一步理解和之前没有掌握的知识进行了摘录总结。">
-<meta property="og:updated_time" content="2016-02-22T06:44:07.980Z">
+<meta property="og:description" content="题目要求A linked list consists of a series of structures, which are not necessarily adjacent in memory. We assume that each structure contains an integer key and a Next pointer to the next structure. Now">
+<meta property="og:updated_time" content="2016-03-01T15:57:11.984Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="《Java核心技术卷I》笔记——第四章">
-<meta name="twitter:description" content="本文为《Java核心技术卷I》的第四章的读书笔记，因为为Java的基础部分，因此大部分知识都已经掌握，主要对需要进一步理解和之前没有掌握的知识进行了摘录总结。">
+<meta name="twitter:title" content="PAT 1052 Linked List Sorting (25)">
+<meta name="twitter:description" content="题目要求A linked list consists of a series of structures, which are not necessarily adjacent in memory. We assume that each structure contains an integer key and a Next pointer to the next structure. Now">
   
   
     <link rel="icon" href="css/images/favicon.ico">
@@ -117,7 +117,7 @@
 </aside>
 
       
-      <section id="main"><article id="post-Core-Java-Volumn-Chapter-4" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-PAT-1052" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -126,7 +126,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      《Java核心技术卷I》笔记——第四章
+      PAT 1052 Linked List Sorting (25)
     </h1>
   
 
@@ -134,8 +134,8 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2016/02/22/Core-Java-Volumn-Chapter-4/">
-      <time datetime="2016-02-22T06:10:33.000Z" itemprop="datePublished">2016-02-22</time>
+    <a href="/2016/03/01/PAT-1052/">
+      <time datetime="2016-03-01T15:50:02.000Z" itemprop="datePublished">2016-03-01</time>
     </a>
   </div>
 
@@ -147,51 +147,39 @@
     <div class="article-entry" itemprop="articleBody">
       
                 
-        <p>本文为《Java核心技术卷I》的第四章的读书笔记，因为为Java的基础部分，因此大部分知识都已经掌握，主要对需要<strong>进一步理解</strong>和<strong>之前没有掌握</strong>的知识进行了摘录总结。</p>
+        <h2 id="题目要求">题目要求</h2><p>A linked list consists of a series of structures, which are not necessarily adjacent in memory. We assume that each structure contains an integer key and a Next pointer to the next structure. Now given a linked list, you are supposed to sort the structures according to their key values in increasing order.</p>
 <a id="more"></a>
-<h2 id="一、_对面向对象思想的理解">一、 对面向对象思想的理解</h2><h3 id="对象的三个主要特性：">　对象的三个主要特性：</h3><ol>
-<li>对象的行为（behaviour） —— 能够对对象施加哪些操作</li>
-<li>对象的状态（state） —— 施加方法的时候，对象应该如何响应</li>
-<li>对象的标识（identity） —— 如何辨别具有相同行为和状态的不同对象</li>
-</ol>
-<p>对象状态的改变必须通过调用方法实现， 如果不经过方法调用就可以改变对象状态，说明封装性遭到了破坏。</p>
-<p>每个对象的标识永远是不同的， 状态常常存在差异。</p>
-<p>对象的这些关键特征彼此相互影响。</p>
-<h2 id="二、_日期的处理">二、 日期的处理</h2><p>不推荐使用Date类，而推荐使用GregorianCalendar类。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> GregorianCalendar(<span class="number">1991</span>, Calendar.DECEMBER, <span class="number">31</span>, <span class="number">23</span>, <span class="number">29</span>, <span class="number">29</span>);</span><br></pre></td></tr></table></figure>
-<p>之前不知道有GregorianCalendar这个类，在处理日期的时候，用的一直是Date类，因此用了很多被标记为已经过期的API，如<code>getYear()</code>, <code>getMonth()</code>等。这次学习之后，了解到，<strong>当用到记录时间点的时候，使用Date类</strong>， 而<strong>处理日期的时候，使用GregorianCalendar类</strong>。</p>
-<h2 id="三、getter的返回值">三、getter的返回值</h2><p>在返回可变对象的引用的时候，不能直接返回，因为其引用的对象是同一个，这样做会破坏其封装性。应该返回其克隆对象。</p>
-<p>eg：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> date.clone();</span><br></pre></td></tr></table></figure>
-<h2 id="四、Java的函数传递使用值传递">四、Java的函数传递使用值传递</h2><p><strong>Java中只有值传递</strong></p>
-<p>方法参数的使用情况：</p>
-<ul>
-<li>一个方法不能修改一个基本数据类型的参数（数值型和布尔型）</li>
-<li>一个方法可以改变一个对象参数的状态</li>
-<li>一个方法不能让对象参数引用给一个新的对象</li>
-</ul>
-<h2 id="五、类的初始化步骤">五、类的初始化步骤</h2><ol>
-<li>所有数据域被初始化为默认值（0， false，null）</li>
-<li>按照在类生命中出现的次序，依次执行所有域初始化语句和初始化块</li>
-<li>如果构造器第一行调用了第二个构造器，则执行第二个构造器主体</li>
-<li>执行这个构造器的主体</li>
-</ol>
-<p>也就是说，如果一个数据域（成员变量）的初始化语句（直接写在变量定义之后的）调用了一个类的方法的话，这个方法可以先于构造器执行。</p>
-<p>一个简单的例子如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"This is a initial block of Foo!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> a = assign();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Foo</span><span class="params">()</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"This is the construction method of Foo!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">assign</span><span class="params">()</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"this is the assign method of Foo!"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">5</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这个类在创建新的实例的过程中，打印出的语句如下：</p>
-<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">This</span> <span class="keyword">is</span> a initial <span class="keyword">block</span> <span class="keyword">of</span> <span class="type">Foo</span>!</span><br><span class="line">this <span class="keyword">is</span> the assign <span class="keyword">method</span> <span class="keyword">of</span> <span class="type">Foo</span>!</span><br><span class="line"><span class="type">This</span> <span class="keyword">is</span> the construction <span class="keyword">method</span> <span class="keyword">of</span> <span class="type">Foo</span>!</span><br></pre></td></tr></table></figure>
-<p>其中，第一句和第二句的顺序，与初始化语句块和成员变量a的定义顺序相对应。</p>
+<h4 id="Input_Specification:">Input Specification:</h4><p>Each input file contains one test case. For each case, the first line contains a positive N (&lt; 105) and an address of the head node, where N is the total number of nodes in memory and the address of a node is a 5-digit positive integer. NULL is represented by -1.</p>
+<p>Then N lines follow, each describes a node in the format:</p>
+<p>Address Key Next</p>
+<p>where Address is the address of the node in memory, Key is an integer in [-105, 105], and Next is the address of the next node. It is guaranteed that all the keys are distinct and there is no cycle in the linked list starting from the head node.</p>
+<h4 id="Output_Specification:">Output Specification:</h4><p>For each test case, the output format is the same as that of the input, where N is the total number of nodes in the list and all the nodes must be sorted order.</p>
+<h4 id="Sample_Input:">Sample Input:</h4><p>5 00001</p>
+<p>11111 100 -1</p>
+<p>00001 0 22222</p>
+<p>33333 100000 11111</p>
+<p>12345 -1 33333</p>
+<p>22222 1000 12345</p>
+<h4 id="Sample_Output:">Sample Output:</h4><p>5 12345</p>
+<p>12345 -1 00001</p>
+<p>00001 0 11111</p>
+<p>11111 100 22222</p>
+<p>22222 1000 33333</p>
+<p>33333 100000 -1</p>
+<h2 id="解题思路">解题思路</h2><p>首先想到的是通过按照key对所有的node进行排序，然后在输出的时候确定其next地址。</p>
+<p>编写完成之后，发现只通过了两组数据，还有三组数据没有通过。再结合之前做过的相关问题，想到不是所有的node都在该Linked List上。于是开辟另一个数组，用于存储在该Linked List上的所有的节点，再排序输出。</p>
+<p>继续提交后发现，最后一组数据没有通过，而且时间只有1ms。遂想到，有可能是最后一组数据可能是Linked List长度为0的数据。于是对其进行特殊的处理，其head node的地址是-1.</p>
+<h2 id="代码">代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> Node</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int</span> addr, key, next;</span><br><span class="line">&#125;Node;</span><br><span class="line"></span><br><span class="line">Node node[<span class="number">100000</span> + <span class="number">10</span>];</span><br><span class="line">Node nodes[<span class="number">100000</span> + <span class="number">10</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">const</span> Node &amp;a, <span class="keyword">const</span> Node &amp;b)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a.key &lt; b.key;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n = <span class="number">0</span>, start;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;start);</span><br><span class="line">	<span class="keyword">int</span> addr, key, next;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;addr, &amp;key, &amp;next);</span><br><span class="line">		node[addr].addr = addr;</span><br><span class="line">		node[addr].key = key;</span><br><span class="line">		node[addr].next = next;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> cur = start;</span><br><span class="line">	<span class="keyword">while</span> (cur != -<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		nodes[cnt] = node[cur];</span><br><span class="line">		cur = node[cur].next;</span><br><span class="line">		cnt++;</span><br><span class="line">	&#125;</span><br><span class="line">	n = cnt;</span><br><span class="line">	sort(nodes, nodes + n, cmp);</span><br><span class="line">	<span class="keyword">if</span> (cnt == <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d -1\n"</span>, n);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d %05d\n"</span>, n, nodes[<span class="number">0</span>].addr);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%05d %d %05d\n"</span>, nodes[i].addr, nodes[i].key, nodes[i + <span class="number">1</span>].addr);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%05d %d -1\n"</span>, nodes[n - <span class="number">1</span>].addr, nodes[n - <span class="number">1</span>].key);</span><br><span class="line">	</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ZacharyJia.github.io/2016/02/22/Core-Java-Volumn-Chapter-4/" data-id="cil9lkvsz000ligqogrfx8uyw" class="article-share-link">分享到</a>
+      <a data-url="http://ZacharyJia.github.io/2016/03/01/PAT-1052/" data-id="cil9lkvr50001igqo6mbfd2s0" class="article-share-link">分享到</a>
       
-        <a href="http://ZacharyJia.github.io/2016/02/22/Core-Java-Volumn-Chapter-4/#ds-thread" class="article-comment-link">评论</a>
+        <a href="http://ZacharyJia.github.io/2016/03/01/PAT-1052/#ds-thread" class="article-comment-link">评论</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/笔记/">笔记</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PAT/">PAT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
 
     </footer>
   </div>
@@ -199,19 +187,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/02/23/PAT-1039/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">
-        
-          PAT 1039 Course List for Student(25)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/01/14/2015-conclusion/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/02/29/PAT-1051/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">2015の总结&amp;&amp;2016の计划</div>
+      <div class="article-nav-title">PAT 1051 Pop Sequence (25)</div>
     </a>
   
 </nav>
@@ -223,7 +202,7 @@
   
   <section id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="post-Core-Java-Volumn-Chapter-4" data-title="《Java核心技术卷I》笔记——第四章" data-url="http://ZacharyJia.github.io/2016/02/22/Core-Java-Volumn-Chapter-4/"></div>
+    <div class="ds-thread" data-thread-key="post-PAT-1052" data-title="PAT 1052 Linked List Sorting (25)" data-url="http://ZacharyJia.github.io/2016/03/01/PAT-1052/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
