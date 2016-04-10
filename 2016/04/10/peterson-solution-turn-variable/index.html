@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Peterson算法中turn（will_wait)变量的作用 | CodeLife</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近在操作系统上学习了Peterson算法，其使用了3个变量就实现了纯软件的线程同步，即两个线程的标记变量c1, c2以及一个turn变量。但是对于其为什么要使用第三个变量还不是很了解，今天特意研究了一下，终于发现了第三个变量的作用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Peterson算法中turn（will_wait)变量的作用">
+<meta property="og:url" content="http://ZacharyJia.github.io/2016/04/10/peterson-solution-turn-variable/index.html">
+<meta property="og:site_name" content="CodeLife">
+<meta property="og:description" content="最近在操作系统上学习了Peterson算法，其使用了3个变量就实现了纯软件的线程同步，即两个线程的标记变量c1, c2以及一个turn变量。但是对于其为什么要使用第三个变量还不是很了解，今天特意研究了一下，终于发现了第三个变量的作用。">
+<meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/no_turn.png">
+<meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/with_turn.png">
+<meta property="og:updated_time" content="2016-04-10T16:17:25.354Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Peterson算法中turn（will_wait)变量的作用">
+<meta name="twitter:description" content="最近在操作系统上学习了Peterson算法，其使用了3个变量就实现了纯软件的线程同步，即两个线程的标记变量c1, c2以及一个turn变量。但是对于其为什么要使用第三个变量还不是很了解，今天特意研究了一下，终于发现了第三个变量的作用。">
+  
+  
+    <link rel="icon" href="css/images/favicon.ico">
+  
+  
+ <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+ <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+
+
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  <!--
+
+-->
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo" style="background-image: url(/css/images/logo.png)"></i><span class="site-title">CodeLife</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/.">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;"><img class="avatar" src="/css/images/ava.png"><i class="fa fa-caret-down"></i></a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="http://ZacharyJia.github.io"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/.">Home</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">Archives</a></td>
+        
+          <td><a class="main-nav-link" href="/about">About</a></td>
+        
+        <td>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://ZacharyJia.github.io"></form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        <aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/css/images/ava.png">
+      <h2 id="name">Zachary Jia</h2>
+      <h3 id="title">A programmer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Beijing, China</span>
+      <a id="follow" href="https://github.com/ZacharyJia">关注我</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        15
+        <span>文章</span>
+      </div>
+      <div class="article-info-block">
+        11
+        <span>标签</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+          
+          <td><a href="http://github.com/zacharyjia" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+          
+          <td><a href="/atom.xml" target="_blank" title="rss"><i class="fa fa-rss"></i></a></td>
+          
+        </tr>
+      </table>
+    </div>
+    
+    
+  </div>
+</aside>
+
+      
+      <section id="main"><article id="post-peterson-solution-turn-variable" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Peterson算法中turn（will_wait)变量的作用
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/04/10/peterson-solution-turn-variable/">
+      <time datetime="2016-04-09T16:00:00.000Z" itemprop="datePublished">2016-04-10</time>
+    </a>
+  </div>
+
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p>最近在操作系统上学习了Peterson算法，其使用了3个变量就实现了纯软件的线程同步，即两个线程的标记变量<code>c1</code>, <code>c2</code>以及一个<code>turn</code>变量。<br>但是对于其为什么要使用第三个变量还不是很了解，今天特意研究了一下，终于发现了第三个变量的作用。<br><a id="more"></a></p>
+<h2 id="0x0_Peterson算法的实现">0x0 Peterson算法的实现</h2><p>以下给出Peterson算法在windows下的一种简单实现：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> c1 = <span class="number">0</span>, c2 = <span class="number">0</span>, will_wait;</span><br><span class="line"></span><br><span class="line"><span class="function">DWORD WINAPI <span class="title">p1</span><span class="params">(LPVOID p)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> counter = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> tmp1, tmp2, r;</span><br><span class="line">	<span class="keyword">do</span>&#123;</span><br><span class="line">		<span class="comment">//加锁</span></span><br><span class="line">		c1 = <span class="number">1</span>;</span><br><span class="line">		will_wait = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span>(c2 &amp;&amp; (will_wait == <span class="number">1</span>));</span><br><span class="line">		tmp1 = accnt1;</span><br><span class="line">		tmp2 = accnt2;</span><br><span class="line">		r = rand();</span><br><span class="line">		accnt1 = tmp1 + r;</span><br><span class="line">		accnt2 = tmp2 - r;</span><br><span class="line">		counter++;</span><br><span class="line">		</span><br><span class="line">	&#125;<span class="keyword">while</span>(accnt1 + accnt2 == <span class="number">0</span> &amp;&amp; (c1 = <span class="number">0</span>) == <span class="number">0</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, counter);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">DWORD WINAPI <span class="title">p2</span><span class="params">(LPVOID p)</span></span><br><span class="line"></span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> counter = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> tmp1, tmp2, r;</span><br><span class="line">	<span class="keyword">do</span>&#123;</span><br><span class="line">		<span class="comment">//加锁</span></span><br><span class="line">		c2 = <span class="number">1</span>;</span><br><span class="line">		will_wait = <span class="number">2</span>;</span><br><span class="line">		<span class="keyword">while</span>(c1 &amp;&amp; (will_wait == <span class="number">2</span>));</span><br><span class="line">		</span><br><span class="line">		tmp1 = accnt1;</span><br><span class="line">		tmp2 = accnt2;</span><br><span class="line">		r = rand();</span><br><span class="line">		accnt1 = tmp1 + r;</span><br><span class="line">		accnt2 = tmp2 - r;</span><br><span class="line">		counter++;</span><br><span class="line">		</span><br><span class="line">	&#125;<span class="keyword">while</span>(accnt1 + accnt2 == <span class="number">0</span> &amp;&amp; (c2 = <span class="number">0</span>) == <span class="number">0</span> );</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, counter);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	HANDLE hFirst = CreateThread(<span class="literal">NULL</span>, <span class="number">0</span>, p1, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">	HANDLE hSecond = CreateThread(<span class="literal">NULL</span>, <span class="number">0</span>, p2, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	WaitForSingleObject(hFirst, INFINITE);</span><br><span class="line">	WaitForSingleObject(hSecond, INFINITE);</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在该程序中，主程序开辟两个新的线程p1和p2，如果程序运行出现问题，则accnt1和accnt2的值相加不为0，则该线程退出。</p>
+<h2 id="0x0_简单的情况">0x0 简单的情况</h2><p>从最简单的情况思考，当线程1首先进入临界区(Critical section)时，其值设为1，而当线程2准备进入临界区时，会判断c1是否为1，若为1，则会进入循环等待。当线程1退出后，c1=0，线程2得以进入临界区。<br>通过这种方式，实现了两个线程之间的同步。</p>
+<p>那么，为什么还需要一个turn变量呢？</p>
+<h2 id="0x1_另一种情况">0x1 另一种情况</h2><p>要理解turn变量的作用，需要考虑另外一种情况。</p>
+<p>假设两个线程几乎同时加锁，则其在加锁时的代码可以认为是混杂执行的。c1,c2都被设为1，然后两个线程先后进入阻塞循环当中。此时，如果阻塞循环如下：<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span><span class="comment">(c2)</span>; <span class="comment">//p1进程</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span><span class="comment">(c1)</span>; <span class="comment">//p2进程</span></span><br></pre></td></tr></table></figure></p>
+<p>则两个进程都会进入阻塞状态，互相阻塞，无法继续进行。</p>
+<h2 id="0x2_引入turn（will_wait）变量">0x2 引入turn（will_wait）变量</h2><p>下面考虑存在turn变量的情况。<br>两个线程分别将c1,c2设为1，然后继续执行，都将turn设为自己对应的序号（1或2）。但是由于其执行顺序必然有先后，因此先赋值的会被覆盖掉，最终的值变为另一个线程的值。假设p1先执行<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">will_wait = <span class="number">1</span>;  <span class="comment">// p1</span></span><br></pre></td></tr></table></figure></p>
+<p>然后p2执行：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">will_wait = <span class="number">2</span>; <span class="comment">// p2</span></span><br></pre></td></tr></table></figure></p>
+<p>最终，will_wait变量的值将变为2。</p>
+<p>而当两个线程进入到阻塞循环当中去时，由于判断条件如下：<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">while<span class="list">(<span class="keyword">c2</span> <span class="keyword">&amp;&amp;</span> <span class="list">(<span class="keyword">will_wait</span> == <span class="number">1</span>)</span>)</span><span class="comment">; //p1</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">while<span class="list">(<span class="keyword">c1</span> <span class="keyword">&amp;&amp;</span> <span class="list">(<span class="keyword">will_wait</span> == <span class="number">2</span>)</span>)</span><span class="comment">; //p2</span></span><br></pre></td></tr></table></figure>
+<p>对于线程1来说，不满足循环条件（will_wait不等于1），则程序会继续运行，进入临界区。<br>而对于线程2来说，满足阻塞循环的条件，会阻塞在该循环中，直到p1释放锁。</p>
+<h1 id="0x3_实验验证">0x3 实验验证</h1><p>为了验证不使用turn变量时，程序会进入互相阻塞状态。可以将两个线程改为如下代码：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//p1代码，p2类似</span></span><br><span class="line"><span class="function">DWORD WINAPI <span class="title">p1</span><span class="params">(LPVOID p)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> counter = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> tmp1, tmp2, r;</span><br><span class="line">    <span class="keyword">do</span>&#123;</span><br><span class="line">        <span class="comment">//加锁</span></span><br><span class="line">        c1 = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(c2);</span><br><span class="line">        tmp1 = accnt1;</span><br><span class="line">        tmp2 = accnt2;</span><br><span class="line">        r = rand();</span><br><span class="line">        accnt1 = tmp1 + r;</span><br><span class="line">        accnt2 = tmp2 - r;</span><br><span class="line">        counter++;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"1: running\n"</span>);</span><br><span class="line">    &#125;<span class="keyword">while</span>(accnt1 + accnt2 == <span class="number">0</span> &amp;&amp; (c1 = <span class="number">0</span>) == <span class="number">0</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, counter);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以看出，如果程序能够正常进入临界区，则会不断循环输出<code>1: running</code>。<br>另外，需要注意的是，Peterson算法只能在单核系统下生效，如果要在多核系统下生效，需要进行以下操作。</p>
+<ol>
+<li>首先在main函数的开始位置，添加一行<code>system(&quot;pause&quot;);</code></li>
+<li>运行程序，程序会等待用户按任意键继续运行。</li>
+<li>在任务管理器中找到该程序，点右键（win10下需要转到详细信息页点右键），选择<code>设置相关性</code>，然后只选中一个CPU核心。</li>
+<li>回到编写的程序，按任意键继续运行。</li>
+</ol>
+<p>程序运行结果如下：<br><img src="http://7xn2d3.com1.z0.glb.clouddn.com/no_turn.png" alt="no_turn"></p>
+<p>而添加will_wait变量之后，程序的运行结果如下：<br><img src="http://7xn2d3.com1.z0.glb.clouddn.com/with_turn.png" alt="with_turn"></p>
+<p>可以看出，在没有加turn变量时，线程1执行了两次之后，就进入了相互阻塞状态，两个线程都不继续运行。而加了turn变量之后，程序则会持续运行下去，不断输出，同时也没有出现同步问题导致进程被终止的情况。</p>
+<h1 id="0x4">0x4</h1><p>由此证明，turn变量在Peterson算法中是为了保证程序不会出现相互阻塞而产生的，不可缺少。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ZacharyJia.github.io/2016/04/10/peterson-solution-turn-variable/" data-id="cimurzeeo0001sgqowvnfwxya" class="article-share-link">分享到</a>
+      
+        <a href="http://ZacharyJia.github.io/2016/04/10/peterson-solution-turn-variable/#ds-thread" class="article-comment-link">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多线程/">多线程</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/03/01/PAT-1052/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">PAT 1052 Linked List Sorting (25)</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+  
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-peterson-solution-turn-variable" data-title="Peterson算法中turn（will_wait)变量的作用" data-url="http://ZacharyJia.github.io/2016/04/10/peterson-solution-turn-variable/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'zacharyjia'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  
+
+</section>
+      
+        <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/04/10/peterson-solution-turn-variable/" class="thumbnail">
+  
+    <span style="background-image:url(http://7xn2d3.com1.z0.glb.clouddn.com/no_turn.png
+)" alt="Peterson算法中turn（will_wait)变量的作用" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2016/04/10/peterson-solution-turn-variable/" class="title">Peterson算法中turn（will_wait)变量的作用</a></p>
+              <p class="item-date"><time datetime="2016-04-09T16:00:00.000Z" itemprop="datePublished">2016-04-10</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/03/01/PAT-1052/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2016/03/01/PAT-1052/" class="title">PAT 1052 Linked List Sorting (25)</a></p>
+              <p class="item-date"><time datetime="2016-03-01T15:50:02.000Z" itemprop="datePublished">2016-03-01</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/02/29/PAT-1051/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2016/02/29/PAT-1051/" class="title">PAT 1051 Pop Sequence (25)</a></p>
+              <p class="item-date"><time datetime="2016-02-29T12:55:35.000Z" itemprop="datePublished">2016-02-29</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/02/29/PAT-1048/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2016/02/29/PAT-1048/" class="title">PAT 1048 Find Coins (25)</a></p>
+              <p class="item-date"><time datetime="2016-02-29T12:20:58.000Z" itemprop="datePublished">2016-02-29</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/02/28/PAT-1047/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2016/02/28/PAT-1047/" class="title">PAT-1047 Student List for Course (25)</a></p>
+              <p class="item-date"><time datetime="2016-02-28T15:32:43.000Z" itemprop="datePublished">2016-02-28</time></p>
+            </div>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/安全/">安全</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程/">编程</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSCTF/">NSCTF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAT/">PAT</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/汇编/">汇编</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://blog.zacharyjia.me">乱七八糟的想法</a>
+          </li>
+        
+          <li>
+            <a href="http://www.icodeyou.com/">牛逼的学长</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+  <div id="toTop" class="fa fa-chevron-up"></div>
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 - 2016 Zachary Jia<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"zacharyjia"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+
+
+
+ <script src="http://libs.baidu.com/jquery/2.1.3/jquery.min.js"></script>
+
+
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
