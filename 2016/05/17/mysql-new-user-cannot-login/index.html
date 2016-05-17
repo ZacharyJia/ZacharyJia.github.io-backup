@@ -3,18 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>PAT 1048 Find Coins (25) | CodeLife</title>
+  <title>解决MySQL新建用户后无法登录问题 | CodeLife</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="题目要求Eva loves to collect coins from all over the universe, including some other planets like Mars. One day she visited a universal shopping mall which could accept all kinds of coins as payments. Howe">
+  <meta name="description" content="今天在给一台电脑配置XAMPP的时候，在上面的PHPMyAdmin里创建了一个新的用户，并且创建了密码，但是却一直无法使用这个账户登录到MySQL里。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PAT 1048 Find Coins (25)">
-<meta property="og:url" content="http://ZacharyJia.github.io/2016/02/29/PAT-1048/index.html">
+<meta property="og:title" content="解决MySQL新建用户后无法登录问题">
+<meta property="og:url" content="http://ZacharyJia.github.io/2016/05/17/mysql-new-user-cannot-login/index.html">
 <meta property="og:site_name" content="CodeLife">
-<meta property="og:description" content="题目要求Eva loves to collect coins from all over the universe, including some other planets like Mars. One day she visited a universal shopping mall which could accept all kinds of coins as payments. Howe">
-<meta property="og:updated_time" content="2016-02-29T12:33:59.000Z">
+<meta property="og:description" content="今天在给一台电脑配置XAMPP的时候，在上面的PHPMyAdmin里创建了一个新的用户，并且创建了密码，但是却一直无法使用这个账户登录到MySQL里。">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/66827-5ae20874020ae351.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/66827-0163d9ddfd2768fe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/66827-aa94079279c41891.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-05-17T11:42:27.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PAT 1048 Find Coins (25)">
-<meta name="twitter:description" content="题目要求Eva loves to collect coins from all over the universe, including some other planets like Mars. One day she visited a universal shopping mall which could accept all kinds of coins as payments. Howe">
+<meta name="twitter:title" content="解决MySQL新建用户后无法登录问题">
+<meta name="twitter:description" content="今天在给一台电脑配置XAMPP的时候，在上面的PHPMyAdmin里创建了一个新的用户，并且创建了密码，但是却一直无法使用这个账户登录到MySQL里。">
   
   
     <link rel="icon" href="css/images/favicon.ico">
@@ -117,7 +120,7 @@
 </aside>
 
       
-      <section id="main"><article id="post-PAT-1048" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-mysql-new-user-cannot-login" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -126,7 +129,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      PAT 1048 Find Coins (25)
+      解决MySQL新建用户后无法登录问题
     </h1>
   
 
@@ -134,8 +137,8 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2016/02/29/PAT-1048/">
-      <time datetime="2016-02-29T12:20:58.000Z" itemprop="datePublished">2016-02-29</time>
+    <a href="/2016/05/17/mysql-new-user-cannot-login/">
+      <time datetime="2016-05-17T11:40:15.000Z" itemprop="datePublished">2016-05-17</time>
     </a>
   </div>
 
@@ -147,26 +150,26 @@
     <div class="article-entry" itemprop="articleBody">
       
                 
-        <h2 id="题目要求">题目要求</h2><p>Eva loves to collect coins from all over the universe, including some other planets like Mars. One day she visited a universal shopping mall which could accept all kinds of coins as payments. However, there was a special requirement of the payment: for each bill, she could only use exactly two coins to pay the exact amount. Since she has as many as 105 coins with her, she definitely needs your help. You are supposed to tell her, for any given amount of money, whether or not she can find two coins to pay for it.</p>
+        <p>今天在给一台电脑配置XAMPP的时候，在上面的PHPMyAdmin里创建了一个新的用户，并且创建了密码，但是却一直无法使用这个账户登录到MySQL里。</p>
 <a id="more"></a>
-<h4 id="Input_Specification:">Input Specification:</h4><p>Each input file contains one test case. For each case, the first line contains 2 positive numbers: N (&lt;=105, the total number of coins) and M(&lt;=103, the amount of money Eva has to pay). The second line contains N face values of the coins, which are all positive numbers no more than 500. All the numbers in a line are separated by a space.</p>
-<h4 id="Output_Specification:">Output Specification:</h4><p>For each test case, print in one line the two face values V1 and V2 (separated by a space) such that V1 + V2 = M and V1 &lt;= V2. If such a solution is not unique, output the one with the smallest V1. If there is no solution, output “No Solution” instead.</p>
-<h4 id="Sample_Input_1:">Sample Input 1:</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">8</span> <span class="number">15</span></span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">8</span> <span class="number">7</span> <span class="number">2</span> <span class="number">4</span> <span class="number">11</span> <span class="number">15</span></span><br></pre></td></tr></table></figure>
-<h4 id="Sample_Output_1:">Sample Output 1:</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4</span> <span class="number">11</span></span><br></pre></td></tr></table></figure>
-<h4 id="Sample_Input_2:">Sample Input 2:</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">7</span> <span class="number">14</span></span><br><span class="line"><span class="number">1</span> <span class="number">8</span> <span class="number">7</span> <span class="number">2</span> <span class="number">4</span> <span class="number">11</span> <span class="number">15</span></span><br></pre></td></tr></table></figure>
-<h4 id="Sample_Output_2:">Sample Output 2:</h4><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">No</span> Solution</span><br></pre></td></tr></table></figure>
-<h2 id="解题思路">解题思路</h2><p>读完题目之后，首先想到的解法就是先对整个的coin数组进行排序，然后开始遍历整个数组，以当前元素为V1，与后面的元素相加，比较与M的大小，直到找到第一个结果。这样做的时间复杂度是O(N^2)，但是看到题目的时间要求是50ms，我就觉得应该会卡时间，直接用O(n^2)的算法肯定会超时。</p>
-<p>接着，我就想到前几天看网上1044的题解的时候，有人用来降低复杂度的方法是二分法，而这道题用二分法也非常合适！所以只保留之前的外循环，内层循环使用二分法实现，最终一遍通过！</p>
-<h2 id="代码">代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> coins[<span class="number">100000</span> + <span class="number">10</span>];</span><br><span class="line"><span class="keyword">int</span> m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, coins + i);</span><br><span class="line">	&#125;</span><br><span class="line">	sort(coins, coins + n);</span><br><span class="line">	<span class="keyword">int</span> start, end, mid;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		start = i + <span class="number">1</span>;</span><br><span class="line">		end = n - <span class="number">1</span>;</span><br><span class="line">		mid = (start + end) / <span class="number">2</span>;</span><br><span class="line">		<span class="keyword">while</span> (coins[i] + coins[mid] != m &amp;&amp; end &gt;= start &amp;&amp; start &gt;= i + <span class="number">1</span> &amp;&amp; end &lt;= n - <span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (coins[i] + coins[mid] &lt; m)</span><br><span class="line">			&#123;</span><br><span class="line">				start = mid + <span class="number">1</span>;</span><br><span class="line">				mid = (start + end) / <span class="number">2</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				end = mid - <span class="number">1</span>;</span><br><span class="line">				mid = (start + end) / <span class="number">2</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (coins[i] + coins[mid] == m &amp;&amp; mid &gt; i &amp;&amp; mid &lt; n)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>, coins[i], coins[mid]);</span><br><span class="line">			system(<span class="string">"pause"</span>);</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"No Solution\n"</span>);</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用PHPMyAdmin的话，会提示登录失败。而直接在命令行登录的话，会提示<code>ERROR 1045 (28000): Access denied for user &#39;laravel&#39;@&#39;localhost&#39; (using password: YES)</code>。如下图：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/66827-5ae20874020ae351.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="使用命令行登录错误"></p>
+<p>按照网上说的解决方案，我尝试了使用root账户这个laravel账户进行授权，直接把all privileges授权给它，但是还是登录不成功。</p>
+<p>最后，经过多次尝试后，我终于发现了问题所在：MySQL中默认存在一个用户名为空的账户，只要在本地，可以不用输入账号密码即可登录到MySQL中。而因为这个账户的存在，导致了使用密码登录无法正确登录。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/66827-0163d9ddfd2768fe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="不用任何账号密码即可在本机登录进MySQL"></p>
+<p>解决方案：<br>只要通过root账户登录，然后将该账户删除即可：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root   # 以root账户登录MySQL</span><br><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">use</span> mysql   #选择mysql库</span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> <span class="keyword">User</span>=<span class="string">''</span>;</span>  #删除账号为空的行</span><br><span class="line"><span class="operator"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span>  #刷新权限</span><br><span class="line">exit  #退出mysql</span><br></pre></td></tr></table></figure></p>
+<p>现在，就可以使用刚才创建的账户和密码登录了：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/66827-aa94079279c41891.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="登录成功"></p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ZacharyJia.github.io/2016/02/29/PAT-1048/" data-id="ciobdcsxs000fg8qo8ug8zi2y" class="article-share-link">分享到</a>
+      <a data-url="http://ZacharyJia.github.io/2016/05/17/mysql-new-user-cannot-login/" data-id="ciobdcsvd0001g8qolg0o1uhw" class="article-share-link">分享到</a>
       
-        <a href="http://ZacharyJia.github.io/2016/02/29/PAT-1048/#ds-thread" class="article-comment-link">评论</a>
+        <a href="http://ZacharyJia.github.io/2016/05/17/mysql-new-user-cannot-login/#ds-thread" class="article-comment-link">评论</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PAT/">PAT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
 
     </footer>
   </div>
@@ -174,19 +177,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/02/29/PAT-1051/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">
-        
-          PAT 1051 Pop Sequence (25)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/02/28/PAT-1047/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/04/10/peterson-solution-turn-variable/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">PAT-1047 Student List for Course (25)</div>
+      <div class="article-nav-title">Peterson算法中turn(will_wait)变量的作用</div>
     </a>
   
 </nav>
@@ -198,7 +192,7 @@
   
   <section id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="post-PAT-1048" data-title="PAT 1048 Find Coins (25)" data-url="http://ZacharyJia.github.io/2016/02/29/PAT-1048/"></div>
+    <div class="ds-thread" data-thread-key="post-mysql-new-user-cannot-login" data-title="解决MySQL新建用户后无法登录问题" data-url="http://ZacharyJia.github.io/2016/05/17/mysql-new-user-cannot-login/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
