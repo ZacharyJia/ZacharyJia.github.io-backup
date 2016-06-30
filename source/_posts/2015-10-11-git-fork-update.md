@@ -1,7 +1,7 @@
 title: 【转载】Git 怎样保证fork出来的project和原project（上游项目）同步更新
 date: 2015-10-11 13:43:10
 categories: 编程
-tags: [git, fork]
+tags: [git]
 ---
 
 ## 问题描述： 
