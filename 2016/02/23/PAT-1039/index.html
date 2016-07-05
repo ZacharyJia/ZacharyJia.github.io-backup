@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://ZacharyJia.github.io/2016/02/23/PAT-1039/index.html">
 <meta property="og:site_name" content="CodeLife">
 <meta property="og:description" content="题目要求Zhejiang University has 40000 students and provides 2500 courses. Now given the student name lists of all the courses, you are supposed to output the registered course list for each student who co">
-<meta property="og:updated_time" content="2016-02-23T03:15:14.838Z">
+<meta property="og:updated_time" content="2016-02-23T03:15:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PAT 1039 Course List for Student(25)">
 <meta name="twitter:description" content="题目要求Zhejiang University has 40000 students and provides 2500 courses. Now given the student name lists of all the courses, you are supposed to output the registered course list for each student who co">
@@ -24,8 +24,8 @@
  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
 
 
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
-  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
   
 
   <!--
@@ -91,11 +91,11 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        17
+        18
         <span>文章</span>
       </div>
       <div class="article-info-block">
-        13
+        14
         <span>标签</span>
       </div>
     </div>
@@ -147,11 +147,11 @@
     <div class="article-entry" itemprop="articleBody">
       
                 
-        <h2 id="题目要求">题目要求</h2><p>Zhejiang University has 40000 students and provides 2500 courses. Now given the student name lists of all the courses, you are supposed to output the registered course list for each student who comes for a query.</p>
+        <h2 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h2><p>Zhejiang University has 40000 students and provides 2500 courses. Now given the student name lists of all the courses, you are supposed to output the registered course list for each student who comes for a query.</p>
 <a id="more"></a>
-<h4 id="Input_Specification:">Input Specification:</h4><p>Each input file contains one test case. For each case, the first line contains 2 positive integers: N (&lt;=40000), the number of students who look for their course lists, and K (&lt;=2500), the total number of courses. Then the student name lists are given for the courses (numbered from 1 to K) in the following format: for each course i, first the course index i and the number of registered students Ni (&lt;= 200) are given in a line. Then in the next line, Ni student names are given. A student name consists of 3 capital English letters plus a one-digit number. Finally the last line contains the N names of students who come for a query. All the names and numbers in a line are separated by a space.</p>
-<h4 id="Output_Specification:">Output Specification:</h4><p>For each test case, print your results in N lines. Each line corresponds to one student, in the following format: first print the student’s name, then the total number of registered courses of that student, and finally the indices of the courses in increasing order. The query results must be printed in the same order as input. All the data in a line must be separated by a space, with no extra space at the end of the line.</p>
-<h4 id="Sample_Input:">Sample Input:</h4><p>11 5</p>
+<h4 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h4><p>Each input file contains one test case. For each case, the first line contains 2 positive integers: N (&lt;=40000), the number of students who look for their course lists, and K (&lt;=2500), the total number of courses. Then the student name lists are given for the courses (numbered from 1 to K) in the following format: for each course i, first the course index i and the number of registered students Ni (&lt;= 200) are given in a line. Then in the next line, Ni student names are given. A student name consists of 3 capital English letters plus a one-digit number. Finally the last line contains the N names of students who come for a query. All the names and numbers in a line are separated by a space.</p>
+<h4 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h4><p>For each test case, print your results in N lines. Each line corresponds to one student, in the following format: first print the student’s name, then the total number of registered courses of that student, and finally the indices of the courses in increasing order. The query results must be printed in the same order as input. All the data in a line must be separated by a space, with no extra space at the end of the line.</p>
+<h4 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h4><p>11 5</p>
 <p>4 7</p>
 <p>BOB5 DON2 FRA8 JAY9 KAT3 LOR6 ZOE1</p>
 <p>1 4</p>
@@ -163,7 +163,7 @@
 <p>5 9</p>
 <p>AMY7 ANN0 BOB5 DON2 FRA8 JAY9 KAT3 LOR6 ZOE1</p>
 <p>ZOE1 ANN0 BOB5 JOE4 JAY9 FRA8 DON2 AMY7 KAT3 LOR6 NON9</p>
-<h4 id="Sample_Output:">Sample Output:</h4><p>ZOE1 2 4 5</p>
+<h4 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h4><p>ZOE1 2 4 5</p>
 <p>ANN0 3 1 2 5</p>
 <p>BOB5 5 1 2 3 4 5</p>
 <p>JOE4 1 2</p>
@@ -174,18 +174,18 @@
 <p>KAT3 3 2 4 5</p>
 <p>LOR6 4 1 2 4 5</p>
 <p>NON9 0</p>
-<h2 id="时间要求">时间要求</h2><p>200ms</p>
-<h2 id="解题过程">解题过程</h2><p>一开始做的时候，我感觉这个题应该很简单，只要使用map将学生的名字和一个<code>vector&lt;int&gt;</code> 匹配起来，在读入数据的时候，向名称所对应的vector中不断push_back就可以了。最后输出的时候，先对vector排个序，然后按照题目要求输出就可以了。</p>
+<h2 id="时间要求"><a href="#时间要求" class="headerlink" title="时间要求"></a>时间要求</h2><p>200ms</p>
+<h2 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h2><p>一开始做的时候，我感觉这个题应该很简单，只要使用map将学生的名字和一个<code>vector&lt;int&gt;</code> 匹配起来，在读入数据的时候，向名称所对应的vector中不断push_back就可以了。最后输出的时候，先对vector排个序，然后按照题目要求输出就可以了。</p>
 <p>在写完之后，一遍就通过了样例。然后我马上将代码提交的到了oj里，最后发现最后一组数据超时了。</p>
 <p>思考之后，我觉得有可能是最后进行排序的时候超时了，所以又将vector改成了set，并且去掉了sort方法，因为set会默认进行升序排列。提交之后，发现还是超时。</p>
 <p>我继续读题发现，题目中特别提到了学生姓名的规则为<code>前三个字符为大写字母，第四位是一个数字</code>，这应该是非常适合进行哈希的。就考虑到会不会是不断生成string，造成了效率过低。于是我将map修改为一个大小为<code>26 * 26 * 26 * 10 + 1</code>的数组，然后对学生的名字进行哈希，将哈希后的值作为index进行存储。</p>
 <p>提交之后，成功过掉了，最后一个case耗时113ms。</p>
 <p>代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line">pass</span><br><span class="line">2016年2月23日 10:52:14</span><br><span class="line">注意：需要对学生名字做hash，否则最后一组数据会超时</span><br><span class="line">*/</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">26</span> * <span class="number">26</span> * <span class="number">26</span> * <span class="number">10</span> + <span class="number">1</span>;</span><br><span class="line"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">list</span>[MAXN];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">hashName</span><span class="params">(<span class="keyword">char</span> * buf)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (buf[<span class="number">0</span>] - <span class="string">'A'</span>) * <span class="number">26</span> * <span class="number">26</span> * <span class="number">10</span> +</span><br><span class="line">		(buf[<span class="number">1</span>] - <span class="string">'A'</span>) * <span class="number">26</span> * <span class="number">10</span> +</span><br><span class="line">		(buf[<span class="number">2</span>] - <span class="string">'A'</span>) * <span class="number">10</span> +</span><br><span class="line">		(buf[<span class="number">3</span>] - <span class="string">'0'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> buf[<span class="number">5</span>];</span><br><span class="line">	<span class="keyword">int</span> N, K;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;N, &amp;K);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; K; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> index, n;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;index, &amp;n);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%s"</span>, buf);</span><br><span class="line">			<span class="built_in">list</span>[hashName(buf)].insert(index);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%s"</span>, buf);</span><br><span class="line">		<span class="keyword">int</span> hname = hashName(buf);</span><br><span class="line">		<span class="keyword">int</span> len = <span class="built_in">list</span>[hname].size();</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%s %d"</span>, buf, len);</span><br><span class="line">		<span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;::iterator it = <span class="built_in">list</span>[hname].begin();</span><br><span class="line">		<span class="keyword">for</span> (; it != <span class="built_in">list</span>[hname].end(); it++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">" %d"</span>, *it);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">pass</div><div class="line">2016年2月23日 10:52:14</div><div class="line">注意：需要对学生名字做hash，否则最后一组数据会超时</div><div class="line">*/</div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">26</span> * <span class="number">26</span> * <span class="number">26</span> * <span class="number">10</span> + <span class="number">1</span>;</div><div class="line"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">list</span>[MAXN];</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">hashName</span><span class="params">(<span class="keyword">char</span> * buf)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span> (buf[<span class="number">0</span>] - <span class="string">'A'</span>) * <span class="number">26</span> * <span class="number">26</span> * <span class="number">10</span> +</div><div class="line">		(buf[<span class="number">1</span>] - <span class="string">'A'</span>) * <span class="number">26</span> * <span class="number">10</span> +</div><div class="line">		(buf[<span class="number">2</span>] - <span class="string">'A'</span>) * <span class="number">10</span> +</div><div class="line">		(buf[<span class="number">3</span>] - <span class="string">'0'</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">char</span> buf[<span class="number">5</span>];</div><div class="line">	<span class="keyword">int</span> N, K;</div><div class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;N, &amp;K);</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; K; i++)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">int</span> index, n;</div><div class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;index, &amp;n);</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)</div><div class="line">		&#123;</div><div class="line">			<span class="built_in">scanf</span>(<span class="string">"%s"</span>, buf);</div><div class="line">			<span class="built_in">list</span>[hashName(buf)].insert(index);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">scanf</span>(<span class="string">"%s"</span>, buf);</div><div class="line">		<span class="keyword">int</span> hname = hashName(buf);</div><div class="line">		<span class="keyword">int</span> len = <span class="built_in">list</span>[hname].size();</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"%s %d"</span>, buf, len);</div><div class="line">		<span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;::iterator it = <span class="built_in">list</span>[hname].begin();</div><div class="line">		<span class="keyword">for</span> (; it != <span class="built_in">list</span>[hname].end(); it++)</div><div class="line">		&#123;</div><div class="line">			<span class="built_in">printf</span>(<span class="string">" %d"</span>, *it);</div><div class="line">		&#125;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"\n"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ZacharyJia.github.io/2016/02/23/PAT-1039/" data-id="ciq1klk5k000r8gqoupe8m1fi" class="article-share-link">分享到</a>
+      <a data-url="http://ZacharyJia.github.io/2016/02/23/PAT-1039/" data-id="ciq962zei000ivfs6nzvh6jap" class="article-share-link">分享到</a>
       
         <a href="http://ZacharyJia.github.io/2016/02/23/PAT-1039/#ds-thread" class="article-comment-link">评论</a>
       
@@ -249,6 +249,23 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/07/05/laravel-route-cache/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2016/07/05/laravel-route-cache/" class="title">laravel 路由缓存</a></p>
+              <p class="item-date"><time datetime="2016-07-05T14:00:12.000Z" itemprop="datePublished">2016-07-05</time></p>
+            </div>
+          </li>
         
           <li>
             
@@ -320,23 +337,6 @@
             </div>
           </li>
         
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2016/02/29/PAT-1051/" class="thumbnail">
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"></p>
-              <p class="item-title"><a href="/2016/02/29/PAT-1051/" class="title">PAT 1051 Pop Sequence (25)</a></p>
-              <p class="item-date"><time datetime="2016-02-29T12:55:35.000Z" itemprop="datePublished">2016-02-29</time></p>
-            </div>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -355,7 +355,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSCTF/">NSCTF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAT/">PAT</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日常/">日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/汇编/">汇编</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">7</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSCTF/">NSCTF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAT/">PAT</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/">laravel</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日常/">日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/汇编/">汇编</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">7</span></li></ul>
     </div>
   </div>
 
@@ -414,11 +414,11 @@
 
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
-<script src="/js/script.js" type="text/javascript"></script>
+<script src="/js/script.js"></script>
 
   </div>
 </body>

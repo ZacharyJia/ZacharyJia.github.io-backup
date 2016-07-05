@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://ZacharyJia.github.io/2016/02/22/Core-Java-Volumn-Chapter-4/index.html">
 <meta property="og:site_name" content="CodeLife">
 <meta property="og:description" content="本文为《Java核心技术卷I》的第四章的读书笔记，因为为Java的基础部分，因此大部分知识都已经掌握，主要对需要进一步理解和之前没有掌握的知识进行了摘录总结。">
-<meta property="og:updated_time" content="2016-02-22T06:44:07.980Z">
+<meta property="og:updated_time" content="2016-02-22T06:44:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Java核心技术卷I》笔记——第四章">
 <meta name="twitter:description" content="本文为《Java核心技术卷I》的第四章的读书笔记，因为为Java的基础部分，因此大部分知识都已经掌握，主要对需要进一步理解和之前没有掌握的知识进行了摘录总结。">
@@ -24,8 +24,8 @@
  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
 
 
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
-  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
   
 
   <!--
@@ -91,11 +91,11 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        17
+        18
         <span>文章</span>
       </div>
       <div class="article-info-block">
-        13
+        14
         <span>标签</span>
       </div>
     </div>
@@ -149,7 +149,7 @@
                 
         <p>本文为《Java核心技术卷I》的第四章的读书笔记，因为为Java的基础部分，因此大部分知识都已经掌握，主要对需要<strong>进一步理解</strong>和<strong>之前没有掌握</strong>的知识进行了摘录总结。</p>
 <a id="more"></a>
-<h2 id="一、_对面向对象思想的理解">一、 对面向对象思想的理解</h2><h3 id="对象的三个主要特性：">　对象的三个主要特性：</h3><ol>
+<h2 id="一、-对面向对象思想的理解"><a href="#一、-对面向对象思想的理解" class="headerlink" title="一、 对面向对象思想的理解"></a>一、 对面向对象思想的理解</h2><h3 id="对象的三个主要特性："><a href="#对象的三个主要特性：" class="headerlink" title="　对象的三个主要特性："></a>　对象的三个主要特性：</h3><ol>
 <li>对象的行为（behaviour） —— 能够对对象施加哪些操作</li>
 <li>对象的状态（state） —— 施加方法的时候，对象应该如何响应</li>
 <li>对象的标识（identity） —— 如何辨别具有相同行为和状态的不同对象</li>
@@ -157,20 +157,20 @@
 <p>对象状态的改变必须通过调用方法实现， 如果不经过方法调用就可以改变对象状态，说明封装性遭到了破坏。</p>
 <p>每个对象的标识永远是不同的， 状态常常存在差异。</p>
 <p>对象的这些关键特征彼此相互影响。</p>
-<h2 id="二、_日期的处理">二、 日期的处理</h2><p>不推荐使用Date类，而推荐使用GregorianCalendar类。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> GregorianCalendar(<span class="number">1991</span>, Calendar.DECEMBER, <span class="number">31</span>, <span class="number">23</span>, <span class="number">29</span>, <span class="number">29</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="二、-日期的处理"><a href="#二、-日期的处理" class="headerlink" title="二、 日期的处理"></a>二、 日期的处理</h2><p>不推荐使用Date类，而推荐使用GregorianCalendar类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> GregorianCalendar(<span class="number">1991</span>, Calendar.DECEMBER, <span class="number">31</span>, <span class="number">23</span>, <span class="number">29</span>, <span class="number">29</span>);</div></pre></td></tr></table></figure>
 <p>之前不知道有GregorianCalendar这个类，在处理日期的时候，用的一直是Date类，因此用了很多被标记为已经过期的API，如<code>getYear()</code>, <code>getMonth()</code>等。这次学习之后，了解到，<strong>当用到记录时间点的时候，使用Date类</strong>， 而<strong>处理日期的时候，使用GregorianCalendar类</strong>。</p>
-<h2 id="三、getter的返回值">三、getter的返回值</h2><p>在返回可变对象的引用的时候，不能直接返回，因为其引用的对象是同一个，这样做会破坏其封装性。应该返回其克隆对象。</p>
+<h2 id="三、getter的返回值"><a href="#三、getter的返回值" class="headerlink" title="三、getter的返回值"></a>三、getter的返回值</h2><p>在返回可变对象的引用的时候，不能直接返回，因为其引用的对象是同一个，这样做会破坏其封装性。应该返回其克隆对象。</p>
 <p>eg：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> date.clone();</span><br></pre></td></tr></table></figure>
-<h2 id="四、Java的函数传递使用值传递">四、Java的函数传递使用值传递</h2><p><strong>Java中只有值传递</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">return</span> date.clone();</div></pre></td></tr></table></figure>
+<h2 id="四、Java的函数传递使用值传递"><a href="#四、Java的函数传递使用值传递" class="headerlink" title="四、Java的函数传递使用值传递"></a>四、Java的函数传递使用值传递</h2><p><strong>Java中只有值传递</strong></p>
 <p>方法参数的使用情况：</p>
 <ul>
 <li>一个方法不能修改一个基本数据类型的参数（数值型和布尔型）</li>
 <li>一个方法可以改变一个对象参数的状态</li>
 <li>一个方法不能让对象参数引用给一个新的对象</li>
 </ul>
-<h2 id="五、类的初始化步骤">五、类的初始化步骤</h2><ol>
+<h2 id="五、类的初始化步骤"><a href="#五、类的初始化步骤" class="headerlink" title="五、类的初始化步骤"></a>五、类的初始化步骤</h2><ol>
 <li>所有数据域被初始化为默认值（0， false，null）</li>
 <li>按照在类生命中出现的次序，依次执行所有域初始化语句和初始化块</li>
 <li>如果构造器第一行调用了第二个构造器，则执行第二个构造器主体</li>
@@ -178,15 +178,15 @@
 </ol>
 <p>也就是说，如果一个数据域（成员变量）的初始化语句（直接写在变量定义之后的）调用了一个类的方法的话，这个方法可以先于构造器执行。</p>
 <p>一个简单的例子如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"This is a initial block of Foo!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> a = assign();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Foo</span><span class="params">()</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"This is the construction method of Foo!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">assign</span><span class="params">()</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"this is the assign method of Foo!"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">5</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</div><div class="line"></div><div class="line">    &#123;</div><div class="line">        System.out.println(<span class="string">"This is a initial block of Foo!"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">int</span> a = assign();</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Foo</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        System.out.println(<span class="string">"This is the construction method of Foo!"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">assign</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        System.out.println(<span class="string">"this is the assign method of Foo!"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="number">5</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这个类在创建新的实例的过程中，打印出的语句如下：</p>
-<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">This</span> <span class="keyword">is</span> a initial <span class="keyword">block</span> <span class="keyword">of</span> <span class="type">Foo</span>!</span><br><span class="line">this <span class="keyword">is</span> the assign <span class="keyword">method</span> <span class="keyword">of</span> <span class="type">Foo</span>!</span><br><span class="line"><span class="type">This</span> <span class="keyword">is</span> the construction <span class="keyword">method</span> <span class="keyword">of</span> <span class="type">Foo</span>!</span><br></pre></td></tr></table></figure>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">This <span class="keyword">is</span> a initial <span class="keyword">block</span> <span class="keyword">of</span> Foo!</div><div class="line">this <span class="keyword">is</span> the assign <span class="function"><span class="keyword">method</span> <span class="title">of</span> <span class="title">Foo</span>!</span></div><div class="line"><span class="title">This</span> <span class="title">is</span> <span class="title">the</span> <span class="title">construction</span> <span class="title">method</span> <span class="title">of</span> <span class="title">Foo</span>!</div></pre></td></tr></table></figure>
 <p>其中，第一句和第二句的顺序，与初始化语句块和成员变量a的定义顺序相对应。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ZacharyJia.github.io/2016/02/22/Core-Java-Volumn-Chapter-4/" data-id="ciq1klk5q000u8gqowndq83dq" class="article-share-link">分享到</a>
+      <a data-url="http://ZacharyJia.github.io/2016/02/22/Core-Java-Volumn-Chapter-4/" data-id="ciq962zec000cvfs6j7v7ahtj" class="article-share-link">分享到</a>
       
         <a href="http://ZacharyJia.github.io/2016/02/22/Core-Java-Volumn-Chapter-4/#ds-thread" class="article-comment-link">评论</a>
       
@@ -250,6 +250,23 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/07/05/laravel-route-cache/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2016/07/05/laravel-route-cache/" class="title">laravel 路由缓存</a></p>
+              <p class="item-date"><time datetime="2016-07-05T14:00:12.000Z" itemprop="datePublished">2016-07-05</time></p>
+            </div>
+          </li>
         
           <li>
             
@@ -321,23 +338,6 @@
             </div>
           </li>
         
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2016/02/29/PAT-1051/" class="thumbnail">
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"></p>
-              <p class="item-title"><a href="/2016/02/29/PAT-1051/" class="title">PAT 1051 Pop Sequence (25)</a></p>
-              <p class="item-date"><time datetime="2016-02-29T12:55:35.000Z" itemprop="datePublished">2016-02-29</time></p>
-            </div>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -356,7 +356,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSCTF/">NSCTF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAT/">PAT</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日常/">日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/汇编/">汇编</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">7</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSCTF/">NSCTF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAT/">PAT</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/">laravel</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日常/">日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/汇编/">汇编</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">7</span></li></ul>
     </div>
   </div>
 
@@ -415,11 +415,11 @@
 
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
-<script src="/js/script.js" type="text/javascript"></script>
+<script src="/js/script.js"></script>
 
   </div>
 </body>

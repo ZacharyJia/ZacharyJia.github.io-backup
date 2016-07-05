@@ -3,14 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2016 | CodeLife</title>
+  <title>laravel 路由缓存 | CodeLife</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="CodeLife">
-<meta property="og:url" content="http://ZacharyJia.github.io/archives/2016/page/2/index.html">
+  <meta name="description" content="今天在调试Laravel时，发现Routes.php中定义的路由不起作用了！不管怎么修改，甚至删除，新修改的路由都不生效。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="laravel 路由缓存">
+<meta property="og:url" content="http://ZacharyJia.github.io/2016/07/05/laravel-route-cache/index.html">
 <meta property="og:site_name" content="CodeLife">
+<meta property="og:description" content="今天在调试Laravel时，发现Routes.php中定义的路由不起作用了！不管怎么修改，甚至删除，新修改的路由都不生效。">
+<meta property="og:updated_time" content="2016-07-05T08:54:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CodeLife">
+<meta name="twitter:title" content="laravel 路由缓存">
+<meta name="twitter:description" content="今天在调试Laravel时，发现Routes.php中定义的路由不起作用了！不管怎么修改，甚至删除，新修改的路由都不生效。">
   
   
     <link rel="icon" href="css/images/favicon.ico">
@@ -113,122 +117,96 @@
 </aside>
 
       
-      <section id="main">
-      <div class="archive-year-wrap">
-        <a href="/archives/2016" class="archive-year">2016</a>
-      </div>
-      <section class="archives-wrap">
-        <div class="archives">
+      <section id="main"><article id="post-laravel-route-cache" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
     
-    <div class="archive-article-thumbnail">
-      <a href="/2016/02/22/Core-Java-Volumn-Chapter-4/" class="thumbnail">
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
-    </div>
     
-    <header class="archive-article-header">
-      
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/22/Core-Java-Volumn-Chapter-4/">《Java核心技术卷I》笔记——第四章</a>
+    <h1 class="article-title" itemprop="name">
+      laravel 路由缓存
     </h1>
   
 
-      
-        
-  <div class="archive-article-date">
+        <div class="article-meta">
+          
+  <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2016/02/22/Core-Java-Volumn-Chapter-4/">
-      <time datetime="2016-02-22T06:10:33.000Z" itemprop="datePublished">2月 22</time>
+    <a href="/2016/07/05/laravel-route-cache/">
+      <time datetime="2016-07-05T14:00:12.000Z" itemprop="datePublished">2016-07-05</time>
     </a>
   </div>
 
 
-      
-    </header>
-  </div>
-</article>
-  
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
+          
+        </div>
+      </header>
     
-    <div class="archive-article-thumbnail">
-      <a href="/2016/01/14/2015-conclusion/" class="thumbnail">
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p>今天在调试Laravel时，发现Routes.php中定义的路由不起作用了！不管怎么修改，甚至删除，新修改的路由都不生效。</p>
+<a id="more"></a>
+<p>使用命令行运行<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan route:<span class="built_in">list</span></div></pre></td></tr></table></figure></p>
+<p>查看路由时，也发现不管怎么修改都没有变动。</p>
+<p>在经过多次查找时候，突然想到了路由缓存。于是赶紧查了一下Laravel的路由缓存的用法及其设置。最后发现确实是由于Laravel中的路由缓存造成的问题。</p>
+<p>Laravel中的路由缓存是为了提高系统的运行效率，防止在大项目中每次都查询Routes.php文件查找路由列表。而路由缓存的使用方法也非常简单，一共就涉及以下两个命令：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//创建及更新路由缓存</span></div><div class="line">php artisan <span class="string">route:</span>cache</div><div class="line"></div><div class="line"><span class="comment">//清除路由缓存</span></div><div class="line">php artisan <span class="string">route:</span>clear</div></pre></td></tr></table></figure>
+<p>当要创建路由缓存时，就使用第一个命令，然后不管你再修改routes.php文件，都不会起作用。如果更新了routes.php文件中的路由，想要让其生效，那么再次执行以下第一条命令就可以了。</p>
+<p>如果想要不再使用路由缓存，则直接执行第二条命令即可。</p>
+
+      
     </div>
-    
-    <header class="archive-article-header">
+    <footer class="article-footer">
+      <a data-url="http://ZacharyJia.github.io/2016/07/05/laravel-route-cache/" data-id="ciq962zfa001jvfs60kkeqrlx" class="article-share-link">分享到</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/01/14/2015-conclusion/">2015の总结&amp;&amp;2016の计划</a>
-    </h1>
-  
+        <a href="http://ZacharyJia.github.io/2016/07/05/laravel-route-cache/#ds-thread" class="article-comment-link">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/laravel/">laravel</a></li></ul>
 
-      
-        
-  <div class="archive-article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2016/01/14/2015-conclusion/">
-      <time datetime="2016-01-14T12:12:21.000Z" itemprop="datePublished">1月 14</time>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/06/30/new-start/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">本科的期末考试结束了</div>
     </a>
-  </div>
+  
+</nav>
 
 
-      
-    </header>
-  </div>
+  
 </article>
+
   
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    
-    <div class="archive-article-thumbnail">
-      <a href="/2016/01/09/mail-sender-security/" class="thumbnail">
-  
-    <span style="background-image:url(http://7xn2d3.com1.z0.glb.clouddn.com/imgSMTP1.png
-)" alt="你真的知道谁给你发的邮件吗？——邮件发件人伪造" class="thumbnail-image"></span>
-  
-</a>
-    </div>
-    
-    <header class="archive-article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/01/09/mail-sender-security/">你真的知道谁给你发的邮件吗？——邮件发件人伪造</a>
-    </h1>
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-laravel-route-cache" data-title="laravel 路由缓存" data-url="http://ZacharyJia.github.io/2016/07/05/laravel-route-cache/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'zacharyjia'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
   
 
-      
-        
-  <div class="archive-article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2016/01/09/mail-sender-security/">
-      <time datetime="2016-01-09T05:15:52.000Z" itemprop="datePublished">1月 9</time>
-    </a>
-  </div>
-
-
-      
-    </header>
-  </div>
-</article>
-  
-    </div></section>
-  
-      <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/archives/2016/">&laquo; 上一页</a><a class="page-number" href="/archives/2016/">1</a><span class="page-number current">2</span>
-      </nav>
-    </section>
+</section>
       
         <aside id="sidebar">
   

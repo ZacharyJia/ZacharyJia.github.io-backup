@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://ZacharyJia.github.io/2016/03/01/PAT-1052/index.html">
 <meta property="og:site_name" content="CodeLife">
 <meta property="og:description" content="题目要求A linked list consists of a series of structures, which are not necessarily adjacent in memory. We assume that each structure contains an integer key and a Next pointer to the next structure. Now">
-<meta property="og:updated_time" content="2016-03-01T15:57:43.995Z">
+<meta property="og:updated_time" content="2016-03-01T15:57:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PAT 1052 Linked List Sorting (25)">
 <meta name="twitter:description" content="题目要求A linked list consists of a series of structures, which are not necessarily adjacent in memory. We assume that each structure contains an integer key and a Next pointer to the next structure. Now">
@@ -24,8 +24,8 @@
  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
 
 
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
-  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
   
 
   <!--
@@ -91,11 +91,11 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        17
+        18
         <span>文章</span>
       </div>
       <div class="article-info-block">
-        13
+        14
         <span>标签</span>
       </div>
     </div>
@@ -147,34 +147,34 @@
     <div class="article-entry" itemprop="articleBody">
       
                 
-        <h2 id="题目要求">题目要求</h2><p>A linked list consists of a series of structures, which are not necessarily adjacent in memory. We assume that each structure contains an integer key and a Next pointer to the next structure. Now given a linked list, you are supposed to sort the structures according to their key values in increasing order.</p>
+        <h2 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h2><p>A linked list consists of a series of structures, which are not necessarily adjacent in memory. We assume that each structure contains an integer key and a Next pointer to the next structure. Now given a linked list, you are supposed to sort the structures according to their key values in increasing order.</p>
 <a id="more"></a>
-<h4 id="Input_Specification:">Input Specification:</h4><p>Each input file contains one test case. For each case, the first line contains a positive N (&lt; 105) and an address of the head node, where N is the total number of nodes in memory and the address of a node is a 5-digit positive integer. NULL is represented by -1.</p>
+<h4 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h4><p>Each input file contains one test case. For each case, the first line contains a positive N (&lt; 105) and an address of the head node, where N is the total number of nodes in memory and the address of a node is a 5-digit positive integer. NULL is represented by -1.</p>
 <p>Then N lines follow, each describes a node in the format:</p>
 <p>Address Key Next</p>
 <p>where Address is the address of the node in memory, Key is an integer in [-105, 105], and Next is the address of the next node. It is guaranteed that all the keys are distinct and there is no cycle in the linked list starting from the head node.</p>
-<h4 id="Output_Specification:">Output Specification:</h4><p>For each test case, the output format is the same as that of the input, where N is the total number of nodes in the list and all the nodes must be sorted order.</p>
-<h4 id="Sample_Input:">Sample Input:</h4><p>5 00001</p>
+<h4 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h4><p>For each test case, the output format is the same as that of the input, where N is the total number of nodes in the list and all the nodes must be sorted order.</p>
+<h4 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h4><p>5 00001</p>
 <p>11111 100 -1</p>
 <p>00001 0 22222</p>
 <p>33333 100000 11111</p>
 <p>12345 -1 33333</p>
 <p>22222 1000 12345</p>
-<h4 id="Sample_Output:">Sample Output:</h4><p>5 12345</p>
+<h4 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h4><p>5 12345</p>
 <p>12345 -1 00001</p>
 <p>00001 0 11111</p>
 <p>11111 100 22222</p>
 <p>22222 1000 33333</p>
 <p>33333 100000 -1</p>
-<h2 id="解题思路">解题思路</h2><p>首先想到的是通过按照key对所有的node进行排序，然后在输出的时候确定其next地址。</p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>首先想到的是通过按照key对所有的node进行排序，然后在输出的时候确定其next地址。</p>
 <p>编写完成之后，发现只通过了两组数据，还有三组数据没有通过。再结合之前做过的相关问题，想到不是所有的node都在该Linked List上。于是开辟另一个数组，用于存储在该Linked List上的所有的节点，再排序输出。</p>
 <p>继续提交后发现，最后一组数据没有通过，而且时间只有1ms。遂想到，有可能是最后一组数据可能是Linked List长度为0的数据。于是对其进行特殊的处理，其head node的地址是-1.</p>
-<h2 id="代码">代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> Node</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int</span> addr, key, next;</span><br><span class="line">&#125;Node;</span><br><span class="line"></span><br><span class="line">Node node[<span class="number">100000</span> + <span class="number">10</span>];</span><br><span class="line">Node nodes[<span class="number">100000</span> + <span class="number">10</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">const</span> Node &amp;a, <span class="keyword">const</span> Node &amp;b)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a.key &lt; b.key;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n = <span class="number">0</span>, start;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;start);</span><br><span class="line">	<span class="keyword">int</span> addr, key, next;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;addr, &amp;key, &amp;next);</span><br><span class="line">		node[addr].addr = addr;</span><br><span class="line">		node[addr].key = key;</span><br><span class="line">		node[addr].next = next;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> cur = start;</span><br><span class="line">	<span class="keyword">while</span> (cur != -<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		nodes[cnt] = node[cur];</span><br><span class="line">		cur = node[cur].next;</span><br><span class="line">		cnt++;</span><br><span class="line">	&#125;</span><br><span class="line">	n = cnt;</span><br><span class="line">	sort(nodes, nodes + n, cmp);</span><br><span class="line">	<span class="keyword">if</span> (cnt == <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d -1\n"</span>, n);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d %05d\n"</span>, n, nodes[<span class="number">0</span>].addr);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%05d %d %05d\n"</span>, nodes[i].addr, nodes[i].key, nodes[i + <span class="number">1</span>].addr);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%05d %d -1\n"</span>, nodes[n - <span class="number">1</span>].addr, nodes[n - <span class="number">1</span>].key);</span><br><span class="line">	</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> Node</div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> addr, key, next;</div><div class="line">&#125;Node;</div><div class="line"></div><div class="line">Node node[<span class="number">100000</span> + <span class="number">10</span>];</div><div class="line">Node nodes[<span class="number">100000</span> + <span class="number">10</span>];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">const</span> Node &amp;a, <span class="keyword">const</span> Node &amp;b)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span> a.key &lt; b.key;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> n = <span class="number">0</span>, start;</div><div class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;start);</div><div class="line">	<span class="keyword">int</span> addr, key, next;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;addr, &amp;key, &amp;next);</div><div class="line">		node[addr].addr = addr;</div><div class="line">		node[addr].key = key;</div><div class="line">		node[addr].next = next;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">int</span> cnt = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> cur = start;</div><div class="line">	<span class="keyword">while</span> (cur != <span class="number">-1</span>)</div><div class="line">	&#123;</div><div class="line">		nodes[cnt] = node[cur];</div><div class="line">		cur = node[cur].next;</div><div class="line">		cnt++;</div><div class="line">	&#125;</div><div class="line">	n = cnt;</div><div class="line">	sort(nodes, nodes + n, cmp);</div><div class="line">	<span class="keyword">if</span> (cnt == <span class="number">0</span>)</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"%d -1\n"</span>, n);</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%d %05d\n"</span>, n, nodes[<span class="number">0</span>].addr);</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++)</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"%05d %d %05d\n"</span>, nodes[i].addr, nodes[i].key, nodes[i + <span class="number">1</span>].addr);</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%05d %d -1\n"</span>, nodes[n - <span class="number">1</span>].addr, nodes[n - <span class="number">1</span>].key);</div><div class="line">	</div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ZacharyJia.github.io/2016/03/01/PAT-1052/" data-id="ciq1klk4y000a8gqokejltrml" class="article-share-link">分享到</a>
+      <a data-url="http://ZacharyJia.github.io/2016/03/01/PAT-1052/" data-id="ciq962zf7001hvfs6g9powb8s" class="article-share-link">分享到</a>
       
         <a href="http://ZacharyJia.github.io/2016/03/01/PAT-1052/#ds-thread" class="article-comment-link">评论</a>
       
@@ -238,6 +238,23 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/07/05/laravel-route-cache/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2016/07/05/laravel-route-cache/" class="title">laravel 路由缓存</a></p>
+              <p class="item-date"><time datetime="2016-07-05T14:00:12.000Z" itemprop="datePublished">2016-07-05</time></p>
+            </div>
+          </li>
         
           <li>
             
@@ -309,23 +326,6 @@
             </div>
           </li>
         
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2016/02/29/PAT-1051/" class="thumbnail">
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"></p>
-              <p class="item-title"><a href="/2016/02/29/PAT-1051/" class="title">PAT 1051 Pop Sequence (25)</a></p>
-              <p class="item-date"><time datetime="2016-02-29T12:55:35.000Z" itemprop="datePublished">2016-02-29</time></p>
-            </div>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -344,7 +344,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSCTF/">NSCTF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAT/">PAT</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日常/">日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/汇编/">汇编</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">7</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSCTF/">NSCTF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAT/">PAT</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/">laravel</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日常/">日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/汇编/">汇编</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">7</span></li></ul>
     </div>
   </div>
 
@@ -403,11 +403,11 @@
 
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
-<script src="/js/script.js" type="text/javascript"></script>
+<script src="/js/script.js"></script>
 
   </div>
 </body>

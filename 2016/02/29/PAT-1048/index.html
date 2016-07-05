@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://ZacharyJia.github.io/2016/02/29/PAT-1048/index.html">
 <meta property="og:site_name" content="CodeLife">
 <meta property="og:description" content="题目要求Eva loves to collect coins from all over the universe, including some other planets like Mars. One day she visited a universal shopping mall which could accept all kinds of coins as payments. Howe">
-<meta property="og:updated_time" content="2016-02-29T12:33:59.843Z">
+<meta property="og:updated_time" content="2016-02-29T12:34:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PAT 1048 Find Coins (25)">
 <meta name="twitter:description" content="题目要求Eva loves to collect coins from all over the universe, including some other planets like Mars. One day she visited a universal shopping mall which could accept all kinds of coins as payments. Howe">
@@ -24,8 +24,8 @@
  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
 
 
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
-  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
   
 
   <!--
@@ -91,11 +91,11 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        17
+        18
         <span>文章</span>
       </div>
       <div class="article-info-block">
-        13
+        14
         <span>标签</span>
       </div>
     </div>
@@ -147,21 +147,21 @@
     <div class="article-entry" itemprop="articleBody">
       
                 
-        <h2 id="题目要求">题目要求</h2><p>Eva loves to collect coins from all over the universe, including some other planets like Mars. One day she visited a universal shopping mall which could accept all kinds of coins as payments. However, there was a special requirement of the payment: for each bill, she could only use exactly two coins to pay the exact amount. Since she has as many as 105 coins with her, she definitely needs your help. You are supposed to tell her, for any given amount of money, whether or not she can find two coins to pay for it.</p>
+        <h2 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h2><p>Eva loves to collect coins from all over the universe, including some other planets like Mars. One day she visited a universal shopping mall which could accept all kinds of coins as payments. However, there was a special requirement of the payment: for each bill, she could only use exactly two coins to pay the exact amount. Since she has as many as 105 coins with her, she definitely needs your help. You are supposed to tell her, for any given amount of money, whether or not she can find two coins to pay for it.</p>
 <a id="more"></a>
-<h4 id="Input_Specification:">Input Specification:</h4><p>Each input file contains one test case. For each case, the first line contains 2 positive numbers: N (&lt;=105, the total number of coins) and M(&lt;=103, the amount of money Eva has to pay). The second line contains N face values of the coins, which are all positive numbers no more than 500. All the numbers in a line are separated by a space.</p>
-<h4 id="Output_Specification:">Output Specification:</h4><p>For each test case, print in one line the two face values V1 and V2 (separated by a space) such that V1 + V2 = M and V1 &lt;= V2. If such a solution is not unique, output the one with the smallest V1. If there is no solution, output “No Solution” instead.</p>
-<h4 id="Sample_Input_1:">Sample Input 1:</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">8</span> <span class="number">15</span></span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">8</span> <span class="number">7</span> <span class="number">2</span> <span class="number">4</span> <span class="number">11</span> <span class="number">15</span></span><br></pre></td></tr></table></figure>
-<h4 id="Sample_Output_1:">Sample Output 1:</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4</span> <span class="number">11</span></span><br></pre></td></tr></table></figure>
-<h4 id="Sample_Input_2:">Sample Input 2:</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">7</span> <span class="number">14</span></span><br><span class="line"><span class="number">1</span> <span class="number">8</span> <span class="number">7</span> <span class="number">2</span> <span class="number">4</span> <span class="number">11</span> <span class="number">15</span></span><br></pre></td></tr></table></figure>
-<h4 id="Sample_Output_2:">Sample Output 2:</h4><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">No</span> Solution</span><br></pre></td></tr></table></figure>
-<h2 id="解题思路">解题思路</h2><p>读完题目之后，首先想到的解法就是先对整个的coin数组进行排序，然后开始遍历整个数组，以当前元素为V1，与后面的元素相加，比较与M的大小，直到找到第一个结果。这样做的时间复杂度是O(N^2)，但是看到题目的时间要求是50ms，我就觉得应该会卡时间，直接用O(n^2)的算法肯定会超时。</p>
+<h4 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h4><p>Each input file contains one test case. For each case, the first line contains 2 positive numbers: N (&lt;=105, the total number of coins) and M(&lt;=103, the amount of money Eva has to pay). The second line contains N face values of the coins, which are all positive numbers no more than 500. All the numbers in a line are separated by a space.</p>
+<h4 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h4><p>For each test case, print in one line the two face values V1 and V2 (separated by a space) such that V1 + V2 = M and V1 &lt;= V2. If such a solution is not unique, output the one with the smallest V1. If there is no solution, output “No Solution” instead.</p>
+<h4 id="Sample-Input-1"><a href="#Sample-Input-1" class="headerlink" title="Sample Input 1:"></a>Sample Input 1:</h4><figure class="highlight basic"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">8 </span><span class="number">15</span></div><div class="line"><span class="symbol">1 </span><span class="number">2</span> <span class="number">8</span> <span class="number">7</span> <span class="number">2</span> <span class="number">4</span> <span class="number">11</span> <span class="number">15</span></div></pre></td></tr></table></figure>
+<h4 id="Sample-Output-1"><a href="#Sample-Output-1" class="headerlink" title="Sample Output 1:"></a>Sample Output 1:</h4><figure class="highlight basic"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">4 </span><span class="number">11</span></div></pre></td></tr></table></figure>
+<h4 id="Sample-Input-2"><a href="#Sample-Input-2" class="headerlink" title="Sample Input 2:"></a>Sample Input 2:</h4><figure class="highlight basic"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">7 </span><span class="number">14</span></div><div class="line"><span class="symbol">1 </span><span class="number">8</span> <span class="number">7</span> <span class="number">2</span> <span class="number">4</span> <span class="number">11</span> <span class="number">15</span></div></pre></td></tr></table></figure>
+<h4 id="Sample-Output-2"><a href="#Sample-Output-2" class="headerlink" title="Sample Output 2:"></a>Sample Output 2:</h4><figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">No</span> Solution</div></pre></td></tr></table></figure>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>读完题目之后，首先想到的解法就是先对整个的coin数组进行排序，然后开始遍历整个数组，以当前元素为V1，与后面的元素相加，比较与M的大小，直到找到第一个结果。这样做的时间复杂度是O(N^2)，但是看到题目的时间要求是50ms，我就觉得应该会卡时间，直接用O(n^2)的算法肯定会超时。</p>
 <p>接着，我就想到前几天看网上1044的题解的时候，有人用来降低复杂度的方法是二分法，而这道题用二分法也非常合适！所以只保留之前的外循环，内层循环使用二分法实现，最终一遍通过！</p>
-<h2 id="代码">代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> coins[<span class="number">100000</span> + <span class="number">10</span>];</span><br><span class="line"><span class="keyword">int</span> m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, coins + i);</span><br><span class="line">	&#125;</span><br><span class="line">	sort(coins, coins + n);</span><br><span class="line">	<span class="keyword">int</span> start, end, mid;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		start = i + <span class="number">1</span>;</span><br><span class="line">		end = n - <span class="number">1</span>;</span><br><span class="line">		mid = (start + end) / <span class="number">2</span>;</span><br><span class="line">		<span class="keyword">while</span> (coins[i] + coins[mid] != m &amp;&amp; end &gt;= start &amp;&amp; start &gt;= i + <span class="number">1</span> &amp;&amp; end &lt;= n - <span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (coins[i] + coins[mid] &lt; m)</span><br><span class="line">			&#123;</span><br><span class="line">				start = mid + <span class="number">1</span>;</span><br><span class="line">				mid = (start + end) / <span class="number">2</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				end = mid - <span class="number">1</span>;</span><br><span class="line">				mid = (start + end) / <span class="number">2</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (coins[i] + coins[mid] == m &amp;&amp; mid &gt; i &amp;&amp; mid &lt; n)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>, coins[i], coins[mid]);</span><br><span class="line">			system(<span class="string">"pause"</span>);</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"No Solution\n"</span>);</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> coins[<span class="number">100000</span> + <span class="number">10</span>];</div><div class="line"><span class="keyword">int</span> m;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> n;</div><div class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m);</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, coins + i);</div><div class="line">	&#125;</div><div class="line">	sort(coins, coins + n);</div><div class="line">	<span class="keyword">int</span> start, end, mid;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++)</div><div class="line">	&#123;</div><div class="line">		start = i + <span class="number">1</span>;</div><div class="line">		end = n - <span class="number">1</span>;</div><div class="line">		mid = (start + end) / <span class="number">2</span>;</div><div class="line">		<span class="keyword">while</span> (coins[i] + coins[mid] != m &amp;&amp; end &gt;= start &amp;&amp; start &gt;= i + <span class="number">1</span> &amp;&amp; end &lt;= n - <span class="number">1</span>)</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">if</span> (coins[i] + coins[mid] &lt; m)</div><div class="line">			&#123;</div><div class="line">				start = mid + <span class="number">1</span>;</div><div class="line">				mid = (start + end) / <span class="number">2</span>;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">else</span></div><div class="line">			&#123;</div><div class="line">				end = mid - <span class="number">1</span>;</div><div class="line">				mid = (start + end) / <span class="number">2</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (coins[i] + coins[mid] == m &amp;&amp; mid &gt; i &amp;&amp; mid &lt; n)</div><div class="line">		&#123;</div><div class="line">			<span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>, coins[i], coins[mid]);</div><div class="line">			system(<span class="string">"pause"</span>);</div><div class="line">			<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="built_in">printf</span>(<span class="string">"No Solution\n"</span>);</div><div class="line">	system(<span class="string">"pause"</span>);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ZacharyJia.github.io/2016/02/29/PAT-1048/" data-id="ciq1klk59000i8gqo79fa0cq3" class="article-share-link">分享到</a>
+      <a data-url="http://ZacharyJia.github.io/2016/02/29/PAT-1048/" data-id="ciq962zek000kvfs6r00pwv8p" class="article-share-link">分享到</a>
       
         <a href="http://ZacharyJia.github.io/2016/02/29/PAT-1048/#ds-thread" class="article-comment-link">评论</a>
       
@@ -225,6 +225,23 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/07/05/laravel-route-cache/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2016/07/05/laravel-route-cache/" class="title">laravel 路由缓存</a></p>
+              <p class="item-date"><time datetime="2016-07-05T14:00:12.000Z" itemprop="datePublished">2016-07-05</time></p>
+            </div>
+          </li>
         
           <li>
             
@@ -296,23 +313,6 @@
             </div>
           </li>
         
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2016/02/29/PAT-1051/" class="thumbnail">
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"></p>
-              <p class="item-title"><a href="/2016/02/29/PAT-1051/" class="title">PAT 1051 Pop Sequence (25)</a></p>
-              <p class="item-date"><time datetime="2016-02-29T12:55:35.000Z" itemprop="datePublished">2016-02-29</time></p>
-            </div>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -331,7 +331,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSCTF/">NSCTF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAT/">PAT</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日常/">日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/汇编/">汇编</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">7</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSCTF/">NSCTF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAT/">PAT</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/">laravel</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日常/">日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/汇编/">汇编</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">7</span></li></ul>
     </div>
   </div>
 
@@ -390,11 +390,11 @@
 
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
-<script src="/js/script.js" type="text/javascript"></script>
+<script src="/js/script.js"></script>
 
   </div>
 </body>

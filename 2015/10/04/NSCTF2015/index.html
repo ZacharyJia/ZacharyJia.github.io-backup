@@ -19,10 +19,11 @@
 <meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/imgcard2.png">
 <meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/imgscore2.png">
 <meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/imgscore.png">
-<meta property="og:updated_time" content="2015-10-04T10:14:53.810Z">
+<meta property="og:updated_time" content="2015-10-04T10:14:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NSCTF2015部分题目解析">
 <meta name="twitter:description" content="前段时间做了NSCTF的比赛，做出了其中的几道题目，下面对几道题目的解题过程进行简单的分析。">
+<meta name="twitter:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/imgcrypto50.png">
   
   
     <link rel="icon" href="css/images/favicon.ico">
@@ -32,8 +33,8 @@
  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
 
 
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
-  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
   
 
   <!--
@@ -99,11 +100,11 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        17
+        18
         <span>文章</span>
       </div>
       <div class="article-info-block">
-        13
+        14
         <span>标签</span>
       </div>
     </div>
@@ -162,21 +163,21 @@
                 
         <p>前段时间做了NSCTF的比赛，做出了其中的几道题目，下面对几道题目的解题过程进行简单的分析。</p>
 <a id="more"></a>
-<h2 id="1-_Crypto50_神奇的字符串">1. Crypto50 神奇的字符串</h2><h3 id="题目：">题目：</h3><p><img src="http://7xn2d3.com1.z0.glb.clouddn.com/imgcrypto50.png" alt="crypto50"></p>
-<h3 id="解题过程：">解题过程：</h3><p>观察题目中的字符串，应该是进行了加密之后得到的字符串。利用网上的解密工具进行Base64解密，AES解密等解密工具以后发现，是使用了AES进行了加密。解密后的密文为：</p>
+<h2 id="1-Crypto50-神奇的字符串"><a href="#1-Crypto50-神奇的字符串" class="headerlink" title="1. Crypto50 神奇的字符串"></a>1. Crypto50 神奇的字符串</h2><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p><img src="http://7xn2d3.com1.z0.glb.clouddn.com/imgcrypto50.png" alt="crypto50"></p>
+<h3 id="解题过程："><a href="#解题过程：" class="headerlink" title="解题过程："></a>解题过程：</h3><p>观察题目中的字符串，应该是进行了加密之后得到的字符串。利用网上的解密工具进行Base64解密，AES解密等解密工具以后发现，是使用了AES进行了加密。解密后的密文为：</p>
 <blockquote>
 <p>flag{DISJV_Hej_UdShofjyed}</p>
 </blockquote>
-<p>根据NSCTF的flag规则，flag应该是以<strong>“NSCTF_”</strong>开头的，而解密后得到的结果的前几位是<strong>“DISJV”</strong>,<br>猜测是否使用了最常见的移位方法进行了加密。<br>于是进行一下验证，首先将DISJV几个字母与NSCTF对应<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">原：ABCDEFGHIJKLMNOPQRSTUVWXYZ</span><br><span class="line"></span><br><span class="line">移：  S  V       <span class="keyword">D</span>    IJ</span><br></pre></td></tr></table></figure></p>
-<p>进行补全后如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">原：ABCDEFGHIJKLMNOPQRSTUVWXYZ</span><br><span class="line"></span><br><span class="line">移：QRSTUVWXYZABCDEFGHIJKLMNOP</span><br></pre></td></tr></table></figure></p>
+<p>根据NSCTF的flag规则，flag应该是以<strong>“NSCTF_”</strong>开头的，而解密后得到的结果的前几位是<strong>“DISJV”</strong>,<br>猜测是否使用了最常见的移位方法进行了加密。<br>于是进行一下验证，首先将DISJV几个字母与NSCTF对应<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">原：ABCDEFGHIJKLMNOPQRSTUVWXYZ</div><div class="line"></div><div class="line">移：  S  V       <span class="keyword">D</span>    IJ</div></pre></td></tr></table></figure></p>
+<p>进行补全后如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">原：ABCDEFGHIJKLMNOPQRSTUVWXYZ</div><div class="line"></div><div class="line">移：QRSTUVWXYZABCDEFGHIJKLMNOP</div></pre></td></tr></table></figure></p>
 <p>发现能够完全对应。于是将flag中剩下的字母按照大小写进行对应，最终得到最后的flag：</p>
 <blockquote>
 <p>NSCTF_Rot_EnCryption</p>
 </blockquote>
-<h2 id="2-_Web200_Decode">2. Web200 Decode</h2><h3 id="题目要求：">题目要求：</h3><p><img src="http://7xn2d3.com1.z0.glb.clouddn.com/imgweb200Decode.png" alt="web200Decode"><br>本题目的要求比较简单，是针对一个已经给出源代码的PHP加密函数，解密加密后的密文。</p>
-<h3 id="解题过程：-1">解题过程：</h3><p>根据题目要求，只需要弄懂加密代码中的使用的几种加密方法即可。</p>
+<h2 id="2-Web200-Decode"><a href="#2-Web200-Decode" class="headerlink" title="2. Web200 Decode"></a>2. Web200 Decode</h2><h3 id="题目要求："><a href="#题目要求：" class="headerlink" title="题目要求："></a>题目要求：</h3><p><img src="http://7xn2d3.com1.z0.glb.clouddn.com/imgweb200Decode.png" alt="web200Decode"><br>本题目的要求比较简单，是针对一个已经给出源代码的PHP加密函数，解密加密后的密文。</p>
+<h3 id="解题过程：-1"><a href="#解题过程：-1" class="headerlink" title="解题过程："></a>解题过程：</h3><p>根据题目要求，只需要弄懂加密代码中的使用的几种加密方法即可。</p>
 <p>要解密文，只需要按照与加密顺序相反的顺序进行解密即可。</p>
-<p>首先分析源代码，我们可以看到最后进行的操作是<code>str_rot13</code>这个函数。我们查看这个函数的介绍：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">str_rot13</span><span class="params">()</span></span> 函数对字符串执行 ROT13 编码。</span><br><span class="line"></span><br><span class="line">ROT-<span class="number">13</span> 编码是一种每一个字母被另一个字母代替的方法。这个代替字母是由原来的字母向前移动 <span class="number">13</span> 个字母而得到的。数字和非字母字符保持不变。</span><br><span class="line"></span><br><span class="line">提示：编码和解码都是由相同的函数完成的。如果您把一个已编码的字符串作为参数，那么将返回原始字符串。</span><br></pre></td></tr></table></figure></p>
+<p>首先分析源代码，我们可以看到最后进行的操作是<code>str_rot13</code>这个函数。我们查看这个函数的介绍：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">str_rot13</span><span class="params">()</span></span> 函数对字符串执行 ROT13 编码。</div><div class="line"></div><div class="line">ROT-<span class="number">13</span> 编码是一种每一个字母被另一个字母代替的方法。这个代替字母是由原来的字母向前移动 <span class="number">13</span> 个字母而得到的。数字和非字母字符保持不变。</div><div class="line"></div><div class="line">提示：编码和解码都是由相同的函数完成的。如果您把一个已编码的字符串作为参数，那么将返回原始字符串。</div></pre></td></tr></table></figure></p>
 <p>从这里我们可以清楚地知道，rot13编码的加密和解密函数其实是同一个函数，只要对密文再进行一遍rot13编码即可解密。因此我们的第一步就是再次调用<code>str_rot13</code>函数，处理密文。</p>
 <p>然后，我们可以看到倒数第二步进行的操作是<code>strrev</code>函数，这个函数是对字符串进行反转，也就是倒序输出。很明显，要还原密文，只需要再次调用<code>strrev</code>函数对上一步的密文进行处理即可。</p>
 <p>接着，我们发现加密算法还对密文进行了base64加密，只需要调用<code>base64_decode</code>函数就可以解密。</p>
@@ -184,10 +185,10 @@
 <p>第一步是看循环的次数，我们可以清楚的看出是循环了<code>strlen($_o)</code>次，也就是与$_o的长度等长。<br>然后<code>$_c = substr($_o, $_O, 1)</code>这个是从字符串的第$_O个位置截取1个字符出来，赋值给$_c。<br>接着<code>$__ = ord($_c) + 1</code>和<code>$_c = chr($__)</code>两句的意思是，先将刚才的字符转换为ascii码，加1以后再转回字符。<br>最后再把这个新的字符挨个连接起来生成$_这个变量。</p>
 <p>综合来看，其实就是将原文中所有的字符都加1。那我们要解密的话也可以使用类似的方法，对密文中所有的字符循环减1。这样就得到了$_o中的内容。</p>
 <p>然后我们说过,$_o和$str中的数据是相互逆序的关系，我们只需要再对$_o进行一遍逆序，就可以得到原文了！</p>
-<p>以下是解密函数的代码：<br><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"><span class="variable">$sec</span> = <span class="string">"a1zLbgQsCESEIqRLwuQAyMwLyq2L5VwBxqGA3RQAyumZ0tmMvSGM2ZwB4tws"</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$sec</span> = str_rot13(<span class="variable">$sec</span>);</span><br><span class="line"><span class="variable">$sec</span> = strrev(<span class="variable">$sec</span>);</span><br><span class="line"><span class="variable">$sec</span> = base64_decode(<span class="variable">$sec</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="variable">$i</span> = strlen(<span class="variable">$sec</span>) - <span class="number">1</span>; <span class="variable">$i</span> &gt;= <span class="number">0</span>; <span class="variable">$i--</span>) </span><br><span class="line">&#123;</span><br><span class="line">	<span class="variable">$c</span> = substr(<span class="variable">$sec</span>, <span class="variable">$i</span>, <span class="number">1</span>);</span><br><span class="line">	$_<span class="number">_</span> = ord(<span class="variable">$c</span>) - <span class="number">1</span>;</span><br><span class="line">	<span class="variable">$c</span> = chr($_<span class="number">_</span>);</span><br><span class="line">	$<span class="number">_</span> = <span class="variable">$c</span>.$<span class="number">_</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">echo strrev($<span class="number">_</span>);</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
+<p>以下是解密函数的代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?php</span></span></div><div class="line">$sec = <span class="string">"a1zLbgQsCESEIqRLwuQAyMwLyq2L5VwBxqGA3RQAyumZ0tmMvSGM2ZwB4tws"</span>;</div><div class="line"></div><div class="line">$sec = str_rot13($sec);</div><div class="line">$sec = strrev($sec);</div><div class="line">$sec = base64_decode($sec);</div><div class="line"></div><div class="line"><span class="keyword">for</span>($i = strlen($sec) - <span class="number">1</span>; $i &gt;= <span class="number">0</span>; $i--) </div><div class="line">&#123;</div><div class="line">	$c = substr($sec, $i, <span class="number">1</span>);</div><div class="line">	$__ = ord($c) - <span class="number">1</span>;</div><div class="line">	$c = chr($__);</div><div class="line">	$_ = $c.$_;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> strrev($_);</div><div class="line"></div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
 <p>在php服务器上执行以上代码，就可以得到原文。</p>
-<h2 id="3-MISC250_WireShark">3.MISC250 WireShark</h2><h3 id="题目要求：-1">题目要求：</h3><p><img src="http://7xn2d3.com1.z0.glb.clouddn.com/imgwireshark.png" alt="wireshark"></p>
-<h3 id="解题思路：">解题思路：</h3><p>首先根据题目的描述，使用wireshark打开下载到的文件。题目中描述，这里面有室友下载的小东东。<br>既然是下载的内容，首先考虑的就是HTTP协议和FTP协议，然后在记录中查找可以找到下面的记录。</p>
+<h2 id="3-MISC250-WireShark"><a href="#3-MISC250-WireShark" class="headerlink" title="3.MISC250 WireShark"></a>3.MISC250 WireShark</h2><h3 id="题目要求：-1"><a href="#题目要求：-1" class="headerlink" title="题目要求："></a>题目要求：</h3><p><img src="http://7xn2d3.com1.z0.glb.clouddn.com/imgwireshark.png" alt="wireshark"></p>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>首先根据题目的描述，使用wireshark打开下载到的文件。题目中描述，这里面有室友下载的小东东。<br>既然是下载的内容，首先考虑的就是HTTP协议和FTP协议，然后在记录中查找可以找到下面的记录。</p>
 <p><img src="http://7xn2d3.com1.z0.glb.clouddn.com/imgwireshark2.png" alt="wireshark2"></p>
 <p>划红线的部分可以看到，用户下载了一个key.rar的文件。然后我们找到下面一个从服务器发来的包，就可以找到key.rar的文件的内容。<br>将数据dump到文件中发现，是一个加密的rar文件。</p>
 <p>继续在抓到的包中寻找发现，在rar之前的http包中发现，用户还浏览过一个html文件，使用相同的方式将html文件保存下来，打开后发现文件内容大概是这样：</p>
@@ -195,23 +196,23 @@
 <p>密码是nsfocus+5位数字</p>
 </blockquote>
 <p>接下来就只能使用暴力破解了，这里我使用的是ARCHPR 4.54这个软件，但是由于密码规则比较特殊，前几位是固定的字母，而最后五位是数字，使用其默认的规则有些困难。<br>因此，我手动编写了一个小程序，将所有nsfocus+5位数字的可能性全部输出到了一个文件里，将这个文件作为字典文件，使用字典类型的破解，最终获取了密码，然后得到了该文件中的flag。</p>
-<h2 id="4-MISC400_小绿的女神">4.MISC400 小绿的女神</h2><h3 id="题目要求：-2">题目要求：</h3><p><img src="http://7xn2d3.com1.z0.glb.clouddn.com/imgcard.png" alt="card"></p>
+<h2 id="4-MISC400-小绿的女神"><a href="#4-MISC400-小绿的女神" class="headerlink" title="4.MISC400 小绿的女神"></a>4.MISC400 小绿的女神</h2><h3 id="题目要求：-2"><a href="#题目要求：-2" class="headerlink" title="题目要求："></a>题目要求：</h3><p><img src="http://7xn2d3.com1.z0.glb.clouddn.com/imgcard.png" alt="card"></p>
 <p>这个题目有点特殊，是上传一个card文件，模拟刷卡，然后可以在网页上模拟消费和查询余额两个操作。</p>
-<h3 id="解题过程：-2">解题过程：</h3><p>拿到这个题目，首先上传card文件上去，然后点击查询余额，发现显示了余额，并且页面中显示了card文件的16进制内容，然后再次进行刷卡操作，提示消费了**元，并且更新了显示的card的内容。<br>注意到操作前后显示的内容是不同的， 因此可以猜测，变化的部分就是存储卡的余额的相关部分。<br>使用文件对比工具，比较一下变化的内容：</p>
+<h3 id="解题过程：-2"><a href="#解题过程：-2" class="headerlink" title="解题过程："></a>解题过程：</h3><p>拿到这个题目，首先上传card文件上去，然后点击查询余额，发现显示了余额，并且页面中显示了card文件的16进制内容，然后再次进行刷卡操作，提示消费了**元，并且更新了显示的card的内容。<br>注意到操作前后显示的内容是不同的， 因此可以猜测，变化的部分就是存储卡的余额的相关部分。<br>使用文件对比工具，比较一下变化的内容：</p>
 <p><img src="http://7xn2d3.com1.z0.glb.clouddn.com/imgcard2.png" alt="card2"></p>
 <p>可以看到0x40和0xC0那两行有变化。再次仔细对比可以发现，0xC0~0xC3部分表示的是当前余额：</p>
 <p>余额为 96.41， 0xC0~0xC3部分内容为 A9 25 00 00。应该是按照内存中数据的存储方式，高位数据在内存地址大的位置。也就是说其值应该为00 00 25 A9,即9641。</p>
 <p>而0xC4~0xC7部分是0xFFFFFFFF减去余额。<br>直接修改该部分和其后相同的部分发现，系统提示不通过，也就是卡片内容修改之后不能通过系统的验证了。继续观察发现：<br>继续观察发现，另一部分发生变化的0x40~0x43与0xC0~0xC3部分的和是不变的！</p>
 <p>将两部分对应好之后修改发现，卡片的余额确实发生了变化，但是不能达到预期的数字。因为即使把0x40~0x43部分改成0，也不能余额达到208那么大的数字。也就是说这两部分的总和根本就不到208，只修改这两部分肯定不能达到要求。</p>
 <p>这是我们继续观察发现，0x80那一行的数据也与其他为00的数据不同，肯定与其他数据有关联。经过计算发现，0x80那一行的数据就是0x40和0xC0的和，0x80的数据就是卡片的总和！<br>这样就很简单了，只需要将0x80那一行的数据改成足够大，然后把0xC0部分修改为 40 51 00 00 (其他部分相应修改)就可以查询到208的余额了！然后就能看到弹出的flag了。</p>
-<h2 id="总结">总结</h2><p><img src="http://7xn2d3.com1.z0.glb.clouddn.com/imgscore2.png" alt="score2"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="http://7xn2d3.com1.z0.glb.clouddn.com/imgscore2.png" alt="score2"></p>
 <p><img src="http://7xn2d3.com1.z0.glb.clouddn.com/imgscore.png" alt="score"></p>
 <p>本次比赛中我共得到了1200分，虽然做出了一部分的题。但是感觉做起来比较艰难，在Web、逆向等方面的经验和能力明显不足，希望以后能够不断积累经验提高自己的水平。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ZacharyJia.github.io/2015/10/04/NSCTF2015/" data-id="ciq1klk6d001g8gqopugo5ptq" class="article-share-link">分享到</a>
+      <a data-url="http://ZacharyJia.github.io/2015/10/04/NSCTF2015/" data-id="ciq962ze30004vfs6h9dg0w98" class="article-share-link">分享到</a>
       
         <a href="http://ZacharyJia.github.io/2015/10/04/NSCTF2015/#ds-thread" class="article-comment-link">评论</a>
       
@@ -275,6 +276,23 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/07/05/laravel-route-cache/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2016/07/05/laravel-route-cache/" class="title">laravel 路由缓存</a></p>
+              <p class="item-date"><time datetime="2016-07-05T14:00:12.000Z" itemprop="datePublished">2016-07-05</time></p>
+            </div>
+          </li>
         
           <li>
             
@@ -346,23 +364,6 @@
             </div>
           </li>
         
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2016/02/29/PAT-1051/" class="thumbnail">
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"></p>
-              <p class="item-title"><a href="/2016/02/29/PAT-1051/" class="title">PAT 1051 Pop Sequence (25)</a></p>
-              <p class="item-date"><time datetime="2016-02-29T12:55:35.000Z" itemprop="datePublished">2016-02-29</time></p>
-            </div>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -381,7 +382,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSCTF/">NSCTF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAT/">PAT</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日常/">日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/汇编/">汇编</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">7</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSCTF/">NSCTF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAT/">PAT</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/">laravel</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日常/">日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/汇编/">汇编</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">7</span></li></ul>
     </div>
   </div>
 
@@ -440,11 +441,11 @@
 
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
-<script src="/js/script.js" type="text/javascript"></script>
+<script src="/js/script.js"></script>
 
   </div>
 </body>
