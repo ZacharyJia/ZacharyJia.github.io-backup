@@ -3,14 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Category: 安全 | CodeLife</title>
+  <title>修改Laravel自带的认证系统的User类的命名空间 | CodeLife</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="CodeLife">
-<meta property="og:url" content="http://zacharyjia.me/categories/安全/index.html">
+  <meta name="description" content="刚创建了一个新的Laravel 5.3项目，想要使用Laravel自带的认证功能。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="修改Laravel自带的认证系统的User类的命名空间">
+<meta property="og:url" content="http://zacharyjia.me/2016/09/19/change-laravel-auth-user-namespace/index.html">
 <meta property="og:site_name" content="CodeLife">
+<meta property="og:description" content="刚创建了一个新的Laravel 5.3项目，想要使用Laravel自带的认证功能。">
+<meta property="og:updated_time" content="2016-09-19T15:24:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CodeLife">
+<meta name="twitter:title" content="修改Laravel自带的认证系统的User类的命名空间">
+<meta name="twitter:description" content="刚创建了一个新的Laravel 5.3项目，想要使用Laravel自带的认证功能。">
   
   
     <link rel="icon" href="css/images/favicon.ico">
@@ -113,50 +117,105 @@
 </aside>
 
       
-      <section id="main">
-    <section class="archives-wrap">
-    <div class="archive-category-wrap">
-      <span class="archive-category">安全</span>
-    </div>
-    <div class="archives">
+      <section id="main"><article id="post-change-laravel-auth-user-namespace" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
     
-    <div class="archive-article-thumbnail">
-      <a href="/2015/10/04/NSCTF2015/" class="thumbnail">
-  
-    <span style="background-image:url(http://7xn2d3.com1.z0.glb.clouddn.com/imgcrypto50.png
-)" alt="NSCTF2015部分题目解析" class="thumbnail-image"></span>
-  
-</a>
-    </div>
     
-    <header class="archive-article-header">
-      
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/10/04/NSCTF2015/">NSCTF2015部分题目解析</a>
+    <h1 class="article-title" itemprop="name">
+      修改Laravel自带的认证系统的User类的命名空间
     </h1>
   
 
-      
-        
-  <div class="archive-article-date">
+        <div class="article-meta">
+          
+  <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/10/04/NSCTF2015/">
-      <time datetime="2015-10-04T10:07:50.000Z" itemprop="datePublished">2015 10月 4</time>
+    <a href="/2016/09/19/change-laravel-auth-user-namespace/">
+      <time datetime="2016-09-19T15:21:58.000Z" itemprop="datePublished">2016-09-19</time>
     </a>
   </div>
 
 
-      
-    </header>
-  </div>
-</article>
+          
+        </div>
+      </header>
     
-    </div></section>
-    </section>
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p>刚创建了一个新的Laravel 5.3项目，想要使用Laravel自带的认证功能。  </p>
+<a id="more"></a>
+<p>但是我们都知道，Laravel默认情况下的Model都是放在app目录下的，也就是说其命名空间是<code>App</code>.但是有时候我们希望app目录能够更加整洁一点，所以想要把各个Model都统一放在Model目录下。<br>由于Laravel的app目录遵循了psr-4标准，也就是说会是用composer按照psr-4标准对各个类进行自动加载。如果我们直接修改目录，而不修改对应的命名空间的话，是无法正常加载这些Model类的。</p>
+<p>所以，将User.php文件移动到了新的Model文件夹下的时候，需要同时将User类的namespace修改为<code>App\Model</code>。然后，需要执行<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">composer</span> dumpautoload</div></pre></td></tr></table></figure></p>
+<p>命令，将修改后的类自动加载进来。</p>
+<p>接着继续进行认证系统的创建。<br>在执行了<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">php</span> <span class="selector-tag">artisan</span> <span class="selector-tag">make</span><span class="selector-pseudo">:auth</span></div></pre></td></tr></table></figure></p>
+<p>命令之后，在正常情况下，已经可以实现正常的注册、登录等功能了。</p>
+<p>但是在修改完User的命名空间后，会发现出现了找不到User类的错误。我们刚才已经重新加载了User类，为什么还会出现找不到的问题？</p>
+<p>仔细想想我们就会发现，由于登录、注册用到的代码都是Laravel框架自带的，默认情况下，它们会认为User类还在App命名空间下，所以登录的时候，会出现错误。</p>
+<p>如何解决呢？<br>在<code>config/auth.php</code>文件里，可以找到providers，在其中driver是eloquent的那一组中，可以看到model选项，默认为<code>App\User::class</code>，将其修改为<code>App\Model\User::class</code>即可。</p>
+<p>这样应该就可以正常登录了。</p>
+<p>所以总结一下，如果想要修改User的命名空间的话，需要以下几步：</p>
+<ol>
+<li>新建Model文件夹，移动User.php到该文件夹下</li>
+<li>修改User.php的namespace为<code>App\Model</code></li>
+<li>执行<code>composer dumpautoload</code>，重新加载类</li>
+<li>将<code>config/auth.php</code>文件中的providers部分的model对应的类，修改为<code>App\Model\User::class</code></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zacharyjia.me/2016/09/19/change-laravel-auth-user-namespace/" data-id="cita7c7gc000ybv2ysrbe953f" class="article-share-link">分享到</a>
+      
+        <a href="http://zacharyjia.me/2016/09/19/change-laravel-auth-user-namespace/#ds-thread" class="article-comment-link">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/">php</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/05/laravel-route-cache/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">laravel 路由缓存</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+  
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-change-laravel-auth-user-namespace" data-title="修改Laravel自带的认证系统的User类的命名空间" data-url="http://zacharyjia.me/2016/09/19/change-laravel-auth-user-namespace/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'zacharyjia'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  
+
+</section>
       
         <aside id="sidebar">
   
