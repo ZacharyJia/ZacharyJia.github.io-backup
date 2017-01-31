@@ -11,13 +11,13 @@
 <meta property="og:url" content="http://zacharyjia.me/2016/04/10/peterson-solution-turn-variable/index.html">
 <meta property="og:site_name" content="CodeLife">
 <meta property="og:description" content="最近在操作系统上学习了Peterson算法，其使用了3个变量就实现了纯软件的线程同步，即两个线程的标记变量c1, c2以及一个turn变量。但是对于其为什么要使用第三个变量还不是很了解，今天特意研究了一下，终于发现了第三个变量的作用。">
-<meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/no_turn.png">
-<meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/with_turn.png">
-<meta property="og:updated_time" content="2016-04-10T16:20:08.000Z">
+<meta property="og:image" content="https://cdn.zacharyjia.me/no_turn.png">
+<meta property="og:image" content="https://cdn.zacharyjia.me/with_turn.png">
+<meta property="og:updated_time" content="2017-01-31T00:34:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Peterson算法中turn(will_wait)变量的作用">
 <meta name="twitter:description" content="最近在操作系统上学习了Peterson算法，其使用了3个变量就实现了纯软件的线程同步，即两个线程的标记变量c1, c2以及一个turn变量。但是对于其为什么要使用第三个变量还不是很了解，今天特意研究了一下，终于发现了第三个变量的作用。">
-<meta name="twitter:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/no_turn.png">
+<meta name="twitter:image" content="https://cdn.zacharyjia.me/no_turn.png">
   
   
     <link rel="icon" href="css/images/favicon.ico">
@@ -172,15 +172,15 @@
 <li>在任务管理器中找到该程序，点右键（win10下需要转到详细信息页点右键），选择<code>设置相关性</code>，然后只选中一个CPU核心。</li>
 <li>回到编写的程序，按任意键继续运行。</li>
 </ol>
-<p>程序运行结果如下：<br><img src="http://7xn2d3.com1.z0.glb.clouddn.com/no_turn.png" alt="no_turn"></p>
-<p>而添加will_wait变量之后，程序的运行结果如下：<br><img src="http://7xn2d3.com1.z0.glb.clouddn.com/with_turn.png" alt="with_turn"></p>
+<p>程序运行结果如下：<br><img src="https://cdn.zacharyjia.me/no_turn.png" alt="no_turn"></p>
+<p>而添加will_wait变量之后，程序的运行结果如下：<br><img src="https://cdn.zacharyjia.me/with_turn.png" alt="with_turn"></p>
 <p>可以看出，在没有加turn变量时，线程1执行了两次之后，就进入了相互阻塞状态，两个线程都不继续运行。而加了turn变量之后，程序则会持续运行下去，不断输出，同时也没有出现同步问题导致进程被终止的情况。</p>
 <h1 id="0x4"><a href="#0x4" class="headerlink" title="0x4"></a>0x4</h1><p>由此证明，turn变量在Peterson算法中是为了保证程序不会出现相互阻塞而产生的，不可缺少。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zacharyjia.me/2016/04/10/peterson-solution-turn-variable/" data-id="cita7fefc000tds2yfzyuaisk" class="article-share-link">分享到</a>
+      <a data-url="http://zacharyjia.me/2016/04/10/peterson-solution-turn-variable/" data-id="ciucpkdws000wxl8snyxpumdm" class="article-share-link">分享到</a>
       
         <a href="http://zacharyjia.me/2016/04/10/peterson-solution-turn-variable/#ds-thread" class="article-comment-link">评论</a>
       
@@ -301,7 +301,7 @@
             <div class="item-thumbnail">
               <a href="/2016/05/17/mysql-new-user-cannot-login/" class="thumbnail">
   
-    <span style="background-image:url(http://7xn2d3.com1.z0.glb.clouddn.com/mysql01.png
+    <span style="background-image:url(https://cdn.zacharyjia.me/mysql01.png
 )" alt="解决MySQL新建用户后无法登录问题" class="thumbnail-image"></span>
   
 </a>
@@ -319,7 +319,7 @@
             <div class="item-thumbnail">
               <a href="/2016/04/10/peterson-solution-turn-variable/" class="thumbnail">
   
-    <span style="background-image:url(http://7xn2d3.com1.z0.glb.clouddn.com/no_turn.png
+    <span style="background-image:url(https://cdn.zacharyjia.me/no_turn.png
 )" alt="Peterson算法中turn(will_wait)变量的作用" class="thumbnail-image"></span>
   
 </a>
@@ -383,7 +383,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2015 - 2016 Zachary Jia<br>
+      &copy; 2015 - 2017 Zachary Jia<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
     </div>
   </div>

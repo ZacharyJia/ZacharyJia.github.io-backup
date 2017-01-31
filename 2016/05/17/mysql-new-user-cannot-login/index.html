@@ -11,14 +11,14 @@
 <meta property="og:url" content="http://zacharyjia.me/2016/05/17/mysql-new-user-cannot-login/index.html">
 <meta property="og:site_name" content="CodeLife">
 <meta property="og:description" content="今天在给一台电脑配置XAMPP的时候，在上面的PHPMyAdmin里创建了一个新的用户，并且创建了密码，但是却一直无法使用这个账户登录到MySQL里。">
-<meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/mysql01.png">
-<meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/mysql02.png">
-<meta property="og:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/mysql03.png">
-<meta property="og:updated_time" content="2016-06-04T12:41:06.000Z">
+<meta property="og:image" content="https://cdn.zacharyjia.me/mysql01.png">
+<meta property="og:image" content="https://cdn.zacharyjia.me/mysql02.png">
+<meta property="og:image" content="https://cdn.zacharyjia.me/mysql03.png">
+<meta property="og:updated_time" content="2017-01-31T00:34:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="解决MySQL新建用户后无法登录问题">
 <meta name="twitter:description" content="今天在给一台电脑配置XAMPP的时候，在上面的PHPMyAdmin里创建了一个新的用户，并且创建了密码，但是却一直无法使用这个账户登录到MySQL里。">
-<meta name="twitter:image" content="http://7xn2d3.com1.z0.glb.clouddn.com/mysql01.png">
+<meta name="twitter:image" content="https://cdn.zacharyjia.me/mysql01.png">
   
   
     <link rel="icon" href="css/images/favicon.ico">
@@ -154,18 +154,18 @@
         <p>今天在给一台电脑配置XAMPP的时候，在上面的PHPMyAdmin里创建了一个新的用户，并且创建了密码，但是却一直无法使用这个账户登录到MySQL里。</p>
 <a id="more"></a>
 <p>使用PHPMyAdmin的话，会提示登录失败。而直接在命令行登录的话，会提示<code>ERROR 1045 (28000): Access denied for user &#39;laravel&#39;@&#39;localhost&#39; (using password: YES)</code>。如下图：</p>
-<p><img src="http://7xn2d3.com1.z0.glb.clouddn.com/mysql01.png" alt="使用命令行登录错误"></p>
+<p><img src="https://cdn.zacharyjia.me/mysql01.png" alt="使用命令行登录错误"></p>
 <p>按照网上说的解决方案，我尝试了使用root账户这个laravel账户进行授权，直接把all privileges授权给它，但是还是登录不成功。</p>
 <p>最后，经过多次尝试后，我终于发现了问题所在：MySQL中默认存在一个用户名为空的账户，只要在本地，可以不用输入账号密码即可登录到MySQL中。而因为这个账户的存在，导致了使用密码登录无法正确登录。</p>
-<p><img src="http://7xn2d3.com1.z0.glb.clouddn.com/mysql02.png" alt="不用任何账号密码即可在本机登录进MySQL"></p>
+<p><img src="https://cdn.zacharyjia.me/mysql02.png" alt="不用任何账号密码即可在本机登录进MySQL"></p>
 <p>解决方案：<br>只要通过root账户登录，然后将该账户删除即可：<br><figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">mysql -u root   <span class="comment"># 以root账户登录MySQL</span></div><div class="line"></div><div class="line"><span class="keyword">use</span> mysql   <span class="comment">#选择mysql库</span></div><div class="line"></div><div class="line"><span class="keyword">delete</span> from user where User=<span class="string">''</span>;  <span class="comment">#删除账号为空的行</span></div><div class="line">flush privileges;  <span class="comment">#刷新权限</span></div><div class="line"><span class="keyword">exit</span>  <span class="comment">#退出mysql</span></div></pre></td></tr></table></figure></p>
 <p>现在，就可以使用刚才创建的账户和密码登录了：</p>
-<p><img src="http://7xn2d3.com1.z0.glb.clouddn.com/mysql03.png" alt="登录成功"></p>
+<p><img src="https://cdn.zacharyjia.me/mysql03.png" alt="登录成功"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zacharyjia.me/2016/05/17/mysql-new-user-cannot-login/" data-id="cita7fefi000yds2yq4hr8og5" class="article-share-link">分享到</a>
+      <a data-url="http://zacharyjia.me/2016/05/17/mysql-new-user-cannot-login/" data-id="ciucpkdwt000xxl8szc51fdt9" class="article-share-link">分享到</a>
       
         <a href="http://zacharyjia.me/2016/05/17/mysql-new-user-cannot-login/#ds-thread" class="article-comment-link">评论</a>
       
@@ -286,7 +286,7 @@
             <div class="item-thumbnail">
               <a href="/2016/05/17/mysql-new-user-cannot-login/" class="thumbnail">
   
-    <span style="background-image:url(http://7xn2d3.com1.z0.glb.clouddn.com/mysql01.png
+    <span style="background-image:url(https://cdn.zacharyjia.me/mysql01.png
 )" alt="解决MySQL新建用户后无法登录问题" class="thumbnail-image"></span>
   
 </a>
@@ -304,7 +304,7 @@
             <div class="item-thumbnail">
               <a href="/2016/04/10/peterson-solution-turn-variable/" class="thumbnail">
   
-    <span style="background-image:url(http://7xn2d3.com1.z0.glb.clouddn.com/no_turn.png
+    <span style="background-image:url(https://cdn.zacharyjia.me/no_turn.png
 )" alt="Peterson算法中turn(will_wait)变量的作用" class="thumbnail-image"></span>
   
 </a>
@@ -368,7 +368,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2015 - 2016 Zachary Jia<br>
+      &copy; 2015 - 2017 Zachary Jia<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
     </div>
   </div>

@@ -11,13 +11,13 @@
 <meta property="og:url" content="http://zacharyjia.me/2015/12/27/ml-week1/index.html">
 <meta property="og:site_name" content="CodeLife">
 <meta property="og:description" content="最近准备跟进Coursera上Andrew Ng的Machine Learning课程，为自己打点Machine Learning的基础。课程时间是在2015-12-28~2016-3-21，正好在假期期间可以拿出时间静下心来学习。学习的一些笔记和心得体会就放在这里了。">
-<meta property="og:image" content="http://latex.codecogs.com/gif.download?h_%7B%5Ctheta%7D%28x%29%20%3D%20%5Ctheta_0%20+%20%5Ctheta_1%20%5Ctimes%20x">
-<meta property="og:image" content="http://latex.codecogs.com/gif.download?%5Ctheta_j%20%3A%3D%20%5Ctheta_j%20-%20%5Calpha%20%5Cfrac%7B%5Cpartial%7D%7B%5Cpartial%20%5Ctheta_j%7D%20J%28%5Ctheta_0%2C%20%5Ctheta_1%29">
-<meta property="og:updated_time" content="2016-02-22T06:46:30.000Z">
+<meta property="og:image" content="https://latex.codecogs.com/gif.download?h_%7B%5Ctheta%7D%28x%29%20%3D%20%5Ctheta_0%20+%20%5Ctheta_1%20%5Ctimes%20x">
+<meta property="og:image" content="https://latex.codecogs.com/gif.download?%5Ctheta_j%20%3A%3D%20%5Ctheta_j%20-%20%5Calpha%20%5Cfrac%7B%5Cpartial%7D%7B%5Cpartial%20%5Ctheta_j%7D%20J%28%5Ctheta_0%2C%20%5Ctheta_1%29">
+<meta property="og:updated_time" content="2017-01-31T00:32:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习笔记Coursera——Week 1">
 <meta name="twitter:description" content="最近准备跟进Coursera上Andrew Ng的Machine Learning课程，为自己打点Machine Learning的基础。课程时间是在2015-12-28~2016-3-21，正好在假期期间可以拿出时间静下心来学习。学习的一些笔记和心得体会就放在这里了。">
-<meta name="twitter:image" content="http://latex.codecogs.com/gif.download?h_%7B%5Ctheta%7D%28x%29%20%3D%20%5Ctheta_0%20+%20%5Ctheta_1%20%5Ctimes%20x">
+<meta name="twitter:image" content="https://latex.codecogs.com/gif.download?h_%7B%5Ctheta%7D%28x%29%20%3D%20%5Ctheta_0%20+%20%5Ctheta_1%20%5Ctimes%20x">
   
   
     <link rel="icon" href="css/images/favicon.ico">
@@ -159,12 +159,12 @@
 <li>代价函数(Cost Function)</li>
 <li>梯度下降算法(Gradient Descent)</li>
 </ol>
-<h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><p>线性回归是监督学习（Supervised Learning）的一种方式，通过对数据集的计算，得到最优的线性回归函数。<br>其基本的单变量线性回归公式为：<br><img src="http://latex.codecogs.com/gif.download?h_%7B%5Ctheta%7D%28x%29%20%3D%20%5Ctheta_0%20+%20%5Ctheta_1%20%5Ctimes%20x" alt="公式"></p>
+<h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><p>线性回归是监督学习（Supervised Learning）的一种方式，通过对数据集的计算，得到最优的线性回归函数。<br>其基本的单变量线性回归公式为：<br><img src="https://latex.codecogs.com/gif.download?h_%7B%5Ctheta%7D%28x%29%20%3D%20%5Ctheta_0%20+%20%5Ctheta_1%20%5Ctimes%20x" alt="公式"></p>
 <p>通过对数据集的拟合，得到θ0和θ1。</p>
 <h2 id="代价函数"><a href="#代价函数" class="headerlink" title="代价函数"></a>代价函数</h2><p>代价函数的公式为<br><code>J(θ) = （方差） / 2m</code><br>其中， 方差是线性回归函数的预期值与实际值之间的方差，m为数据集的个数。<br>代价函数代表了回归函数与数据集的拟合程度。代价函数的值越接近0， 则表示当前的θ0和θ1所对应的你和函数与数据集的拟合程度越好。</p>
 <h2 id="梯度下降算法"><a href="#梯度下降算法" class="headerlink" title="梯度下降算法"></a>梯度下降算法</h2><p>梯度下降算法的基本思想是从一个初始点出发，通过梯度，寻找J(θ)下降最快的方向，然后不断进行迭代，知道找到一个局部最优解或全局最优解。</p>
 <h3 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h3><p>梯度下降算法的特点是，从不同的初始点出发，可能会沿着不同的下降路径，得到不同的局部最优解。</p>
-<h3 id="定义公式："><a href="#定义公式：" class="headerlink" title="定义公式："></a>定义公式：</h3><p><img src="http://latex.codecogs.com/gif.download?%5Ctheta_j%20%3A%3D%20%5Ctheta_j%20-%20%5Calpha%20%5Cfrac%7B%5Cpartial%7D%7B%5Cpartial%20%5Ctheta_j%7D%20J%28%5Ctheta_0%2C%20%5Ctheta_1%29" alt="公式"></p>
+<h3 id="定义公式："><a href="#定义公式：" class="headerlink" title="定义公式："></a>定义公式：</h3><p><img src="https://latex.codecogs.com/gif.download?%5Ctheta_j%20%3A%3D%20%5Ctheta_j%20-%20%5Calpha%20%5Cfrac%7B%5Cpartial%7D%7B%5Cpartial%20%5Ctheta_j%7D%20J%28%5Ctheta_0%2C%20%5Ctheta_1%29" alt="公式"></p>
 <p>其中，<code>:=</code>符号为赋值符号，<code>α</code>为学习速率（Learning rate）。</p>
 <p>当α过小时，需要迭代很多次才能够找到局部最优解。<br>当α过大时，可能会跳过局部最优解，甚至会无法收敛。</p>
 <p>但是，当α 固定时，梯度下降算法会自动减小迭代的步幅（因为导数值在减小），使其逐步接近局部最优解，因此不用特意减小α 的值。</p>
@@ -172,7 +172,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zacharyjia.me/2015/12/27/ml-week1/" data-id="cita7feer0005ds2yxllev67l" class="article-share-link">分享到</a>
+      <a data-url="http://zacharyjia.me/2015/12/27/ml-week1/" data-id="ciucpkdw30008xl8sslugtssn" class="article-share-link">分享到</a>
       
         <a href="http://zacharyjia.me/2015/12/27/ml-week1/#ds-thread" class="article-comment-link">评论</a>
       
@@ -293,7 +293,7 @@
             <div class="item-thumbnail">
               <a href="/2016/05/17/mysql-new-user-cannot-login/" class="thumbnail">
   
-    <span style="background-image:url(http://7xn2d3.com1.z0.glb.clouddn.com/mysql01.png
+    <span style="background-image:url(https://cdn.zacharyjia.me/mysql01.png
 )" alt="解决MySQL新建用户后无法登录问题" class="thumbnail-image"></span>
   
 </a>
@@ -311,7 +311,7 @@
             <div class="item-thumbnail">
               <a href="/2016/04/10/peterson-solution-turn-variable/" class="thumbnail">
   
-    <span style="background-image:url(http://7xn2d3.com1.z0.glb.clouddn.com/no_turn.png
+    <span style="background-image:url(https://cdn.zacharyjia.me/no_turn.png
 )" alt="Peterson算法中turn(will_wait)变量的作用" class="thumbnail-image"></span>
   
 </a>
@@ -375,7 +375,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2015 - 2016 Zachary Jia<br>
+      &copy; 2015 - 2017 Zachary Jia<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
     </div>
   </div>
