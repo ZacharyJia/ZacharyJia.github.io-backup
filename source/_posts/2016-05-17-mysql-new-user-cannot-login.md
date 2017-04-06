@@ -7,13 +7,13 @@ tags: MySQL
 <!-- more -->
 使用PHPMyAdmin的话，会提示登录失败。而直接在命令行登录的话，会提示`ERROR 1045 (28000): Access denied for user 'laravel'@'localhost' (using password: YES)`。如下图：
 
-![使用命令行登录错误](http://7xn2d3.com1.z0.glb.clouddn.com/mysql01.png)
+![使用命令行登录错误](https://cdn.zacharyjia.me/mysql01.png)
 
 按照网上说的解决方案，我尝试了使用root账户这个laravel账户进行授权，直接把all privileges授权给它，但是还是登录不成功。
 
 最后，经过多次尝试后，我终于发现了问题所在：MySQL中默认存在一个用户名为空的账户，只要在本地，可以不用输入账号密码即可登录到MySQL中。而因为这个账户的存在，导致了使用密码登录无法正确登录。
 
-![不用任何账号密码即可在本机登录进MySQL](http://7xn2d3.com1.z0.glb.clouddn.com/mysql02.png)
+![不用任何账号密码即可在本机登录进MySQL](https://cdn.zacharyjia.me/mysql02.png)
 
 解决方案：
 只要通过root账户登录，然后将该账户删除即可：
@@ -29,4 +29,4 @@ exit  #退出mysql
 
 现在，就可以使用刚才创建的账户和密码登录了：
 
-![登录成功](http://7xn2d3.com1.z0.glb.clouddn.com/mysql03.png)
+![登录成功](https://cdn.zacharyjia.me/mysql03.png)
