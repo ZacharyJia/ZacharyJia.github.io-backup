@@ -21,7 +21,7 @@ tags: [汇编]
 ### 0x0. Dos模拟器DosBox的安装和本地文件夹的挂载
 从上面的压缩包中找到DosBox的安装文件，安装即可。安装完成后可以桌面或者开始菜单的图标打开DosBox.如下图：
 
-![DosBox](https://cdn.zacharyjia.me/imgDosBox.png)
+![DosBox](http://7xn2d3.com1.z0.glb.clouddn.com/imgDosBox.png)
 
 可以看到它默认的系统盘是Z盘。
 下面我们可以通过以下命令将本地电脑的一个文件夹挂载到DosBox中：
@@ -48,18 +48,18 @@ setup 回车
 ```
 这时你就可以看到上古时代的软件安装界面了^_^
 
-![安装](https://cdn.zacharyjia.me/img安装.png)
+![安装](http://7xn2d3.com1.z0.glb.clouddn.com/img安装.png)
 
 按照提示首先按回车继续，然后选择`Install the Macro Assembler using defaults`：
 
-![安装2](https://cdn.zacharyjia.me/img安装2.png)
+![安装2](http://7xn2d3.com1.z0.glb.clouddn.com/img安装2.png)
 
 然后选择安装位置，我们选择刚刚挂载的C盘。
 
 
 然后确认我们的选择。我们选择`NO CHANGES`继续安装即可。
 
-![安装3](https://cdn.zacharyjia.me/img安装3.png)
+![安装3](http://7xn2d3.com1.z0.glb.clouddn.com/img安装3.png)
 
 最后等待一会儿之后就可以安装完成了。（确实要等*一会儿*）
 
@@ -75,7 +75,7 @@ rescan
 
 最后，你的文件夹里应该是这样的：
 
-![bin](https://cdn.zacharyjia.me/imgbin.png)
+![bin](http://7xn2d3.com1.z0.glb.clouddn.com/imgbin.png)
 
 
 ### 0x2. 环境变量的配置
@@ -91,7 +91,7 @@ masm
 ```
 来运行masm程序了。like this:
 
-![masm](https://cdn.zacharyjia.me/imgmasm.png)
+![masm](http://7xn2d3.com1.z0.glb.clouddn.com/imgmasm.png)
 
 这样这一步也成功完成了。
 
@@ -107,7 +107,7 @@ masm
 
 在打开DosBox的时候，你应该会看到除了DosBox的窗口之外，还启动了另一个命令行窗口。
 
-![config](https://cdn.zacharyjia.me/imgconfig.png)
+![config](http://7xn2d3.com1.z0.glb.clouddn.com/imgconfig.png)
 
 然后我画红线的位置就是配置文件所在的地方，使用文本(ji)编(shi)辑(ben)器打开这个文件，然后找到最后的[autoexec]部分，在后面追加以下命令：
 ```

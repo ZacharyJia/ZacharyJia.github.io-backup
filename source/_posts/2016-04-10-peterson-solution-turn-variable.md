@@ -143,10 +143,10 @@ DWORD WINAPI p1(LPVOID p)
 4. 回到编写的程序，按任意键继续运行。
 
 程序运行结果如下：
-![no_turn](https://cdn.zacharyjia.me/no_turn.png)
+![no_turn](http://7xn2d3.com1.z0.glb.clouddn.com/no_turn.png)
 
 而添加will_wait变量之后，程序的运行结果如下：
-![with_turn](https://cdn.zacharyjia.me/with_turn.png)
+![with_turn](http://7xn2d3.com1.z0.glb.clouddn.com/with_turn.png)
 
 可以看出，在没有加turn变量时，线程1执行了两次之后，就进入了相互阻塞状态，两个线程都不继续运行。而加了turn变量之后，程序则会持续运行下去，不断输出，同时也没有出现同步问题导致进程被终止的情况。
 
