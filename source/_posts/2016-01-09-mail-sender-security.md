@@ -9,7 +9,7 @@ tags: [安全]
 <!-- more -->
 ## 0x00 邮件发送流程
 在谈论问题之前，我们首先要了解邮件到底是怎么发送给对方的。下面这幅图是一个简单的发件流程：
-![发件流程](http://7xn2d3.com1.z0.glb.clouddn.com/imgSMTP1.png)
+![发件流程](https://cdn.zacharyjia.me/imgSMTP1.png)
 其中的Local Mail Server就是发件人的邮箱服务器，Remote Mail Server就是收件人的邮箱服务器。
 发件人从Sender Main Client（可以是本地客户端程序, 比如foxmail、outlook，也可以是邮箱网页版）发送邮件之后，会首先通过SMTP协议到达Local Mail Server，然后由Local Mail Server同样通过SMTP协议将邮件投递到Remote Mail Server，之后收件人就可以在任意时间从自己的邮件服务器上收到邮件了。
 
@@ -69,25 +69,25 @@ C：Subject: This is a test mail!
 
 
 当过给一个有验证的服务器发送邮件的时候，结果是这样的(我交的服务器还不错)：
-![bjtu](http://7xn2d3.com1.z0.glb.clouddn.com/imgbjtu.png)
+![bjtu](https://cdn.zacharyjia.me/imgbjtu.png)
 
 而如果我给一个没有验证的服务器发送邮件的时候，结果是这样的（没错，黑的就是你，QQ邮箱！）：
-![qq邮箱](http://7xn2d3.com1.z0.glb.clouddn.com/imgQQ.png)
+![qq邮箱](https://cdn.zacharyjia.me/imgQQ.png)
 
 然后我就会收到这样的邮件：
-![QQ](http://7xn2d3.com1.z0.glb.clouddn.com/imgQQ2.png)
+![QQ](https://cdn.zacharyjia.me/imgQQ2.png)
 
 嗯，如果把内容好好改一改，一封钓鱼邮件是不是就成功了呢^_^
 
 当然，我是一个公平的人，怎么能只黑QQ邮箱呢，于是我把国内外几个常用的邮箱都试了一下，然后：
-![126](http://7xn2d3.com1.z0.glb.clouddn.com/img126.png)
-![163](http://7xn2d3.com1.z0.glb.clouddn.com/img163.png)
-![sina](http://7xn2d3.com1.z0.glb.clouddn.com/imgsina.png)
-![outlook](http://7xn2d3.com1.z0.glb.clouddn.com/imgoutlook.png)
+![126](https://cdn.zacharyjia.me/img126.png)
+![163](https://cdn.zacharyjia.me/img163.png)
+![sina](https://cdn.zacharyjia.me/imgsina.png)
+![outlook](https://cdn.zacharyjia.me/imgoutlook.png)
 嗯，看来不光是国内的问题，outlook也沦陷了。虽然有的被放到了垃圾邮件里，但是全部都收到了，而且并没有提示发件人有什么问题哦。
 
 当然，还有一个没沦陷的，Gmail
-![Gmail](http://7xn2d3.com1.z0.glb.clouddn.com/imggmail.png)
+![Gmail](https://cdn.zacharyjia.me/imggmail.png)
 这里提示的错误好像跟IPV6有关，但是我关闭IPV6之后，好像也被anti-spam系统拦下了，不知道有没有别的办法能突破，但是起码不是一下子就被突破了啊喂！
 
 在我的测试中，只有我交的邮件服务器和Gmail没有发送成功，其他几个邮箱都收到了，其他还有多少邮箱存在这个问题我也不知道。
