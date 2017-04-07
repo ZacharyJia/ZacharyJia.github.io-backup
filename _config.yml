@@ -17,7 +17,7 @@ since: 2015
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://zacharyjia.me
+url: http://www.zacharyjia.me
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -80,5 +80,7 @@ deploy:
   branch: master
   
 #多说
-duoshuo_shortname: zacharyjia
+#duoshuo_shortname: zacharyjia
 
+# 网易云跟帖
+netease_shortname: zacharyjia
