@@ -3,14 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: git | CodeLife</title>
+  <title>gitlab-ci中pip缓存的配置 | CodeLife</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="CodeLife">
-<meta property="og:url" content="http://www.zacharyjia.me/tags/git/index.html">
+  <meta name="description" content="最近给实验室的Gitlab服务器开启了CI功能，采用的是docker模式，每次都启动一个全新的镜像进行构建。 为了对Python代码进行风格检查，每次在构建的时候，都需要先在启动的容器中使用pip安装flake8。由于每次构建之间的环境相互隔离，所以pip的缓存也就完全没有作用，每次都需要直接联网下载相关的包来安装。国内的网络大家都懂，下载新包的速度时好时坏，严重影响了构建的速度。在配置CI的时候">
+<meta name="keywords" content="gitlab,docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gitlab-ci中pip缓存的配置">
+<meta property="og:url" content="http://www.zacharyjia.me/2017/04/06/gitlab-ci-docker-pip-cache/index.html">
 <meta property="og:site_name" content="CodeLife">
+<meta property="og:description" content="最近给实验室的Gitlab服务器开启了CI功能，采用的是docker模式，每次都启动一个全新的镜像进行构建。 为了对Python代码进行风格检查，每次在构建的时候，都需要先在启动的容器中使用pip安装flake8。由于每次构建之间的环境相互隔离，所以pip的缓存也就完全没有作用，每次都需要直接联网下载相关的包来安装。国内的网络大家都懂，下载新包的速度时好时坏，严重影响了构建的速度。在配置CI的时候">
+<meta property="og:updated_time" content="2017-04-06T15:06:38.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CodeLife">
+<meta name="twitter:title" content="gitlab-ci中pip缓存的配置">
+<meta name="twitter:description" content="最近给实验室的Gitlab服务器开启了CI功能，采用的是docker模式，每次都启动一个全新的镜像进行构建。 为了对Python代码进行风格检查，每次在构建的时候，都需要先在启动的容器中使用pip安装flake8。由于每次构建之间的环境相互隔离，所以pip的缓存也就完全没有作用，每次都需要直接联网下载相关的包来安装。国内的网络大家都懂，下载新包的速度时好时坏，严重影响了构建的速度。在配置CI的时候">
   
   
     <link rel="icon" href="css/images/favicon.ico">
@@ -113,49 +118,85 @@
 </aside>
 
       
-      <section id="main">
-    <section class="archives-wrap">
-    <div class="archive-tag-wrap">
-      <span class="archive-tag">#git</span>
-    </div>
-    <div class="archives">
+      <section id="main"><article id="post-gitlab-ci-docker-pip-cache" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
     
-    <div class="archive-article-thumbnail">
-      <a href="/2015/10/11/git-fork-update/" class="thumbnail">
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
-    </div>
     
-    <header class="archive-article-header">
-      
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/10/11/git-fork-update/">【转载】Git 怎样保证fork出来的project和原project（上游项目）同步更新</a>
+    <h1 class="article-title" itemprop="name">
+      gitlab-ci中pip缓存的配置
     </h1>
   
 
-      
-        
-  <div class="archive-article-date">
+        <div class="article-meta">
+          
+  <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/10/11/git-fork-update/">
-      <time datetime="2015-10-11T05:43:10.000Z" itemprop="datePublished">2015 10月 11</time>
+    <a href="/2017/04/06/gitlab-ci-docker-pip-cache/">
+      <time datetime="2017-04-06T14:56:48.000Z" itemprop="datePublished">2017-04-06</time>
     </a>
   </div>
 
 
-      
-    </header>
-  </div>
-</article>
+          
+        </div>
+      </header>
     
-    </div></section>
-    </section>
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p>最近给实验室的Gitlab服务器开启了CI功能，采用的是docker模式，每次都启动一个全新的镜像进行构建。</p>
+<p>为了对Python代码进行风格检查，每次在构建的时候，都需要先在启动的容器中使用pip安装flake8。由于每次构建之间的环境相互隔离，所以pip的缓存也就完全没有作用，每次都需要直接联网下载相关的包来安装。<br>国内的网络大家都懂，下载新包的速度时好时坏，严重影响了构建的速度。在配置CI的时候，正好看到了有cache的选项，遂决定启用cache，不必每次都从网络下载。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.zacharyjia.me/2017/04/06/gitlab-ci-docker-pip-cache/" data-id="cj17i55b60013648sqmvigh2w" class="article-share-link">分享到</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gitlab/">gitlab</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/09/19/change-laravel-auth-user-namespace/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          修改Laravel自带的认证系统的User类的命名空间
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+
+  
+</article>
+
+  
+  <section id="comments">
+    <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "17a2ee105a374b31ad1415b66f8171fb",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  </section>
+  
+
+</section>
       
         <aside id="sidebar">
   

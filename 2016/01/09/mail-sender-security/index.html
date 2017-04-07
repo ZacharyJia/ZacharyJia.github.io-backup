@@ -6,9 +6,10 @@
   <title>你真的知道谁给你发的邮件吗？——邮件发件人伪造 | CodeLife</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="一般来说，我们收到一封邮件之后，都会首先看发件人。有些重要的邮件，比如Apple给你发的重置密码邮件，手机丢失邮件等等，我们都会反复查验发件人，确认是真的来自Apple的官方，而不是钓鱼邮件。然而，如果这个发件人信息是可以伪造的，你还能知道是谁给你发的邮件吗？前一段时间，学习SMTP邮件协议的时候，写了个简单的发件程序，却发现了一个很多邮箱都存在的发件人伪造问题。想看伪造结果的，请直接拉到最下面看">
+<meta name="keywords" content="安全">
 <meta property="og:type" content="article">
 <meta property="og:title" content="你真的知道谁给你发的邮件吗？——邮件发件人伪造">
-<meta property="og:url" content="http://zacharyjia.me/2016/01/09/mail-sender-security/index.html">
+<meta property="og:url" content="http://www.zacharyjia.me/2016/01/09/mail-sender-security/index.html">
 <meta property="og:site_name" content="CodeLife">
 <meta property="og:description" content="一般来说，我们收到一封邮件之后，都会首先看发件人。有些重要的邮件，比如Apple给你发的重置密码邮件，手机丢失邮件等等，我们都会反复查验发件人，确认是真的来自Apple的官方，而不是钓鱼邮件。然而，如果这个发件人信息是可以伪造的，你还能知道是谁给你发的邮件吗？前一段时间，学习SMTP邮件协议的时候，写了个简单的发件程序，却发现了一个很多邮箱都存在的发件人伪造问题。想看伪造结果的，请直接拉到最下面看">
 <meta property="og:image" content="https://cdn.zacharyjia.me/imgSMTP1.png">
@@ -20,7 +21,7 @@
 <meta property="og:image" content="https://cdn.zacharyjia.me/imgsina.png">
 <meta property="og:image" content="https://cdn.zacharyjia.me/imgoutlook.png">
 <meta property="og:image" content="https://cdn.zacharyjia.me/imggmail.png">
-<meta property="og:updated_time" content="2017-01-31T00:33:13.000Z">
+<meta property="og:updated_time" content="2017-04-06T14:52:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="你真的知道谁给你发的邮件吗？——邮件发件人伪造">
 <meta name="twitter:description" content="一般来说，我们收到一封邮件之后，都会首先看发件人。有些重要的邮件，比如Apple给你发的重置密码邮件，手机丢失邮件等等，我们都会反复查验发件人，确认是真的来自Apple的官方，而不是钓鱼邮件。然而，如果这个发件人信息是可以伪造的，你还能知道是谁给你发的邮件吗？前一段时间，学习SMTP邮件协议的时候，写了个简单的发件程序，却发现了一个很多邮箱都存在的发件人伪造问题。想看伪造结果的，请直接拉到最下面看">
@@ -66,7 +67,7 @@
         </nav>
       
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="http://zacharyjia.me"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="http://www.zacharyjia.me"></form>
       </div>
     </div>
   </div>
@@ -81,7 +82,7 @@
           <td><a class="main-nav-link" href="/about">About</a></td>
         
         <td>
-          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://zacharyjia.me"></form>
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://www.zacharyjia.me"></form>
         </td>
       </tr>
     </table>
@@ -101,11 +102,11 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        19
+        20
         <span>文章</span>
       </div>
       <div class="article-info-block">
-        15
+        17
         <span>标签</span>
       </div>
     </div>
@@ -163,7 +164,7 @@
 <p>以上就是一个发送邮件的简单的例子,其中<code>***</code>之间的部分是从client到Local Mail Server这一步需要的，从Local Mail Server到Remote Mail Server是不需要的。</p>
 <p>经过了上面的步骤，就可以将一封邮件发送到对方的邮箱了。</p>
 <h2 id="0x02-发件人伪造"><a href="#0x02-发件人伪造" class="headerlink" title="0x02 发件人伪造"></a>0x02 发件人伪造</h2><p>知道了原理，我们就可以从这中间找破绽了。从上面的这段数据中，我们可以发现，关于发件人的部分一共有两个部分，一部分是<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">C</span>：<span class="selector-tag">MAIL</span> <span class="selector-tag">FROM</span>: &lt;<span class="selector-tag">xxx</span>@<span class="keyword">163</span>.<span class="keyword">com</span>&gt;</div></pre></td></tr></table></figure></p>
-<p>还有一部分在：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">C：<span class="attribute">From</span>: xxx<span class="variable">@163</span>.com</div><div class="line">C：<span class="attribute">To</span>: xx<span class="variable">@163</span>.com</div><div class="line">C：<span class="attribute">Subject</span>: This is a test mail!</div></pre></td></tr></table></figure></p>
+<p>还有一部分在：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">C：From: xxx@<span class="number">163</span><span class="selector-class">.com</span></div><div class="line">C：To: xx@<span class="number">163</span><span class="selector-class">.com</span></div><div class="line">C：Subject: This is <span class="selector-tag">a</span> test mail!</div></pre></td></tr></table></figure></p>
 <p>其中，第一部分是通知邮件服务器发件人信息的，第二部分是邮件的具体内容，主要是在邮件的显示过程中，显示给用户看的，这部分可以随意修改，不会有影响。<br>真正有影响的是第一部分。这一部分是真正指示邮件发件人姓名的。有时候，修改了第二部分，邮箱会提示你，<code>该邮件由XXX代发</code>，其中的XXX就是真正的发件人。这说明有的邮箱会验证这两部分是否相同，如果不相同，就会提示用户。<br>而如果修改了第一部分会怎么样呢？</p>
 <h2 id="0x03-邮箱服务商的漏洞"><a href="#0x03-邮箱服务商的漏洞" class="headerlink" title="0x03 邮箱服务商的漏洞"></a>0x03 邮箱服务商的漏洞</h2><p>为了能够伪造第一部分的收件人信息，我们采用的方法是，编写程序，模拟Local Mail Server，直接向对方的邮件服务器发送邮件。<br>这时，你可能会问，我们伪造的话，不会被对方发现吗？这就是部分邮箱服务商的漏洞所在！他们对于邮件的发送服务器并没有进行验证，而是无条件地信任了！也就是说，我说我是苹果的服务器，他就认为我是苹果的服务器！<br>正常来说，我们认为Remote Mail Server 收到邮件时，会进行反向验证，也就是你提供的发件人的邮件域名（@后面的部分）对应的MX记录与发件服务器的IP地址是否匹配，如果匹配的话，那么就认为没有问题，接收邮件；如果不匹配的话，就会拒收邮件。<br>而如果不进行认证的话，就可以随意进行伪造了。<br>我使用的程序是在计算机网络原理课上编写的一个小程序（伪造成本如此之低！）。</p>
 <p>当过给一个有验证的服务器发送邮件的时候，结果是这样的(我交的服务器还不错)：<br><img src="https://cdn.zacharyjia.me/imgbjtu.png" alt="bjtu"></p>
@@ -178,9 +179,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zacharyjia.me/2016/01/09/mail-sender-security/" data-id="ciucpkdw5000bxl8svnxa4frn" class="article-share-link">分享到</a>
-      
-        <a href="http://zacharyjia.me/2016/01/09/mail-sender-security/#ds-thread" class="article-comment-link">评论</a>
+      <a data-url="http://www.zacharyjia.me/2016/01/09/mail-sender-security/" data-id="cj17i55aq000g648svh668b19" class="article-share-link">分享到</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/安全/">安全</a></li></ul>
@@ -191,19 +190,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/01/14/2015-conclusion/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/12/27/ml-week1/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          2015の总结&amp;&amp;2016の计划
+          机器学习笔记Coursera——Week 1
         
       </div>
     </a>
   
   
-    <a href="/2015/12/27/ml-week1/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/01/14/2015-conclusion/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">机器学习笔记Coursera——Week 1</div>
+      <div class="article-nav-title">2015の总结&amp;&amp;2016の计划</div>
     </a>
   
 </nav>
@@ -214,22 +213,16 @@
 
   
   <section id="comments">
-    <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="post-mail-sender-security" data-title="你真的知道谁给你发的邮件吗？——邮件发件人伪造" data-url="http://zacharyjia.me/2016/01/09/mail-sender-security/"></div>
-    <!-- 多说评论框 end -->
-    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-    <script type="text/javascript">
-    var duoshuoQuery = {short_name:'zacharyjia'};
-      (function() {
-        var ds = document.createElement('script');
-        ds.type = 'text/javascript';ds.async = true;
-        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-        ds.charset = 'UTF-8';
-        (document.getElementsByTagName('head')[0] 
-         || document.getElementsByTagName('body')[0]).appendChild(ds);
-      })();
-      </script>
-    <!-- 多说公共JS代码 end -->
+    <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "17a2ee105a374b31ad1415b66f8171fb",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   </section>
   
 
@@ -242,6 +235,23 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2017/04/06/gitlab-ci-docker-pip-cache/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2017/04/06/gitlab-ci-docker-pip-cache/" class="title">gitlab-ci中pip缓存的配置</a></p>
+              <p class="item-date"><time datetime="2017-04-06T14:56:48.000Z" itemprop="datePublished">2017-04-06</time></p>
+            </div>
+          </li>
         
           <li>
             
@@ -312,24 +322,6 @@
             </div>
           </li>
         
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2016/04/10/peterson-solution-turn-variable/" class="thumbnail">
-  
-    <span style="background-image:url(https://cdn.zacharyjia.me/no_turn.png
-)" alt="Peterson算法中turn(will_wait)变量的作用" class="thumbnail-image"></span>
-  
-</a>
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"></p>
-              <p class="item-title"><a href="/2016/04/10/peterson-solution-turn-variable/" class="title">Peterson算法中turn(will_wait)变量的作用</a></p>
-              <p class="item-date"><time datetime="2016-04-09T16:00:00.000Z" itemprop="datePublished">2016-04-10</time></p>
-            </div>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -348,7 +340,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSCTF/">NSCTF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAT/">PAT</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/">laravel</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日常/">日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/汇编/">汇编</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">7</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NSCTF/">NSCTF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAT/">PAT</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitlab/">gitlab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/">laravel</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/总结/">总结</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日常/">日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/汇编/">汇编</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">7</span></li></ul>
     </div>
   </div>
 
@@ -388,17 +380,6 @@
 </footer>
     
 
-<script type="text/javascript">
-  var duoshuoQuery = {short_name:"zacharyjia"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-     || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-</script>
 
 
 
