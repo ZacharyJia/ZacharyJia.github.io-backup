@@ -5,17 +5,17 @@
   
   <title>gitlab-ci中pip缓存的配置 | CodeLife</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近给实验室的Gitlab服务器开启了CI功能，采用的是docker模式，每次都启动一个全新的镜像进行构建。 为了对Python代码进行风格检查，每次在构建的时候，都需要先在启动的容器中使用pip安装flake8。由于每次构建之间的环境相互隔离，所以pip的缓存也就完全没有作用，每次都需要直接联网下载相关的包来安装。国内的网络大家都懂，下载新包的速度时好时坏，严重影响了构建的速度。在配置CI的时候">
+  <meta name="description" content="最近给实验室的Gitlab服务器开启了CI功能，采用的是docker模式，每次都启动一个全新的镜像进行构建。">
 <meta name="keywords" content="gitlab,docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="gitlab-ci中pip缓存的配置">
 <meta property="og:url" content="http://www.zacharyjia.me/2017/04/06/gitlab-ci-docker-pip-cache/index.html">
 <meta property="og:site_name" content="CodeLife">
-<meta property="og:description" content="最近给实验室的Gitlab服务器开启了CI功能，采用的是docker模式，每次都启动一个全新的镜像进行构建。 为了对Python代码进行风格检查，每次在构建的时候，都需要先在启动的容器中使用pip安装flake8。由于每次构建之间的环境相互隔离，所以pip的缓存也就完全没有作用，每次都需要直接联网下载相关的包来安装。国内的网络大家都懂，下载新包的速度时好时坏，严重影响了构建的速度。在配置CI的时候">
-<meta property="og:updated_time" content="2017-04-06T15:06:38.000Z">
+<meta property="og:description" content="最近给实验室的Gitlab服务器开启了CI功能，采用的是docker模式，每次都启动一个全新的镜像进行构建。">
+<meta property="og:updated_time" content="2017-04-07T07:42:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gitlab-ci中pip缓存的配置">
-<meta name="twitter:description" content="最近给实验室的Gitlab服务器开启了CI功能，采用的是docker模式，每次都启动一个全新的镜像进行构建。 为了对Python代码进行风格检查，每次在构建的时候，都需要先在启动的容器中使用pip安装flake8。由于每次构建之间的环境相互隔离，所以pip的缓存也就完全没有作用，每次都需要直接联网下载相关的包来安装。国内的网络大家都懂，下载新包的速度时好时坏，严重影响了构建的速度。在配置CI的时候">
+<meta name="twitter:description" content="最近给实验室的Gitlab服务器开启了CI功能，采用的是docker模式，每次都启动一个全新的镜像进行构建。">
   
   
     <link rel="icon" href="css/images/favicon.ico">
@@ -149,12 +149,26 @@
       
                 
         <p>最近给实验室的Gitlab服务器开启了CI功能，采用的是docker模式，每次都启动一个全新的镜像进行构建。</p>
+<a id="more"></a>
 <p>为了对Python代码进行风格检查，每次在构建的时候，都需要先在启动的容器中使用pip安装flake8。由于每次构建之间的环境相互隔离，所以pip的缓存也就完全没有作用，每次都需要直接联网下载相关的包来安装。<br>国内的网络大家都懂，下载新包的速度时好时坏，严重影响了构建的速度。在配置CI的时候，正好看到了有cache的选项，遂决定启用cache，不必每次都从网络下载。</p>
+<p>首先根据网上查阅的资料，在.gitlab-ci.yml中配置如下：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">image: python:3.6</div><div class="line">cache:</div><div class="line">  paths:</div><div class="line">    -<span class="ruby"> pip-cache</span></div><div class="line">  key: $CI_PROJECT_ID</div><div class="line"># This is a basic example for a gem or script which doesn't use</div><div class="line"># services such as redis or postgres</div><div class="line">before_script:</div><div class="line">  -<span class="ruby"> python -V <span class="comment"># Print out python version for debugging</span></span></div><div class="line">  -<span class="ruby"> export PIP_CACHE_DIR=<span class="string">"pip-cache"</span></span></div><div class="line">  -<span class="ruby"> mkdir -p pip-cache</span></div><div class="line">  -<span class="ruby"> ls pip-cache</span></div><div class="line">  -<span class="ruby"> pip install flake8</span></div><div class="line">lint:</div><div class="line">  script:</div><div class="line">  -<span class="ruby"> flake8 .</span></div></pre></td></tr></table></figure>
+<p>其中重点是cache部分，该部分paths置顶了要缓存的目录，key指定了缓存的key（即只有key匹配时，才会启用缓存）。</p>
+<p>在这里，我使用了当前目录下的pip-cache目录作为pip的缓存目录，项目id作为key，也就是本项目的所有构建都会共享这个目录。</p>
+<p>另一个重点是<code>export PIP_CACHE_DIR=&quot;pip-cache&quot;</code>这条命令。这条命令设置了一个PIP_CACHE_DIR的环境变量，pip会根据这个环境变量，将缓存放在我们指定的pip-cache目录下。</p>
+<p>配置完成后，启动pipeline运行，发现还是每次都会从网络上下载Python的包。</p>
+<p>经过多次搜索后发现，还需要对gitlab-ci-multi-runner进行配置。</p>
+<p>我是根据系统帮助，直接在Ubuntu仓库里安装的，因此配置文件在<code>/etc/gitlab-runner/config.toml</code>当中。</p>
+<p>打开该文件，可以看到[runners.docker]部分中的<code>volumes = [&quot;/cache&quot;]</code>这一条配置。根据我们对docker的了解，如果要进行持久化，需要将外部的一个目录挂载到容器内部，但是这里明显没有指定外部的目录。</p>
+<p>修改这一行为：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">volumes</span> = [<span class="string">"/root/build_cache:/cache:rw"</span>]</div></pre></td></tr></table></figure>
+<p>也就是把外部的/root/build_cache目录挂载到容器中的/cache目录中，并且给予读写权限。这样gitlab-runner每次创建缓存的时候，都会在/cache中(默认配置，可以按照官网文档修改)，也就是存到了宿主机的/root/build_cache目录中。当启动一个新的容器的时候，也会从宿主机的/root/build_cache中加载缓存文件。</p>
+<p>最后，重新启动pipeline，发现pip已经可以成功使用缓存安装需要的包了。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.zacharyjia.me/2017/04/06/gitlab-ci-docker-pip-cache/" data-id="cj17i55b60013648sqmvigh2w" class="article-share-link">分享到</a>
+      <a data-url="http://www.zacharyjia.me/2017/04/06/gitlab-ci-docker-pip-cache/" data-id="cj17iwe95000x9e8ss9pbuaqn" class="article-share-link">分享到</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gitlab/">gitlab</a></li></ul>
